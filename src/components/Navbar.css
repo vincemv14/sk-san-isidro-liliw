@@ -1,0 +1,94 @@
+/* Navbar.css */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background-color: #023500; /* Dark Navy for that professional look */
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(0, 255, 195, 0.1);
+}
+
+.nav-logo {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 25px;
+  margin: 0;
+}
+
+.nav-links a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 2cqb;
+  text-transform: uppercase;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #949494; /* Teal highlight similar to student publications */
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 5%;
+  background: linear-gradient(90deg, #002c02 0%, #538b56 100%);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border-bottom: 4px solid #ffd000;
+}
+
+/* This is the magic for horizontal alignment */
+.logo-container {
+  display: flex;
+  align-items: center; /* Centers logo and text vertically */
+  gap: 15px;           /* Space between logo and text */
+  text-decoration: none;
+}
+
+.logo-img {
+  height: 50px;        /* Adjust height to your liking */
+  width: auto;
+  border-radius: 100px;  /* Optional: slightly rounded corners for the .jpg */
+}
+
+.logo-container span {
+  color: #ffffff;      /* Accent Yellow */
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #c7c547;      /* Yellow on hover */
+}

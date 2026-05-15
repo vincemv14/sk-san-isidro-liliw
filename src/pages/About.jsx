@@ -1,0 +1,165 @@
+import React from 'react';
+
+const About = () => {
+  // --- Shared Styles (From Home Page) ---
+  const sectionStyle = { padding: '80px 10%', backgroundColor: '#ffffff' };
+  const darkSectionStyle = { ...sectionStyle, backgroundColor: '#002c02', color: 'white' };
+  
+  const headingStyle = {
+    fontSize: '2.5rem',
+    fontWeight: 'bold',
+    marginBottom: '25px',
+    display: 'inline-block',
+    borderBottom: '4px solid #ffd000'
+  };
+
+  return (
+    <main style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <div style={{ flex: 1 }}>
+        {/* 1. INTRODUCTION */}
+        <section style={darkSectionStyle}>
+          <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+            <h2 style={headingStyle}>INTRODUCTION</h2>
+            <p style={{ fontSize: '1.2rem', lineHeight: '1.8', opacity: 0.9 }}>
+              Welcome to the heart of Liliw, Laguna. Barangay San Isidro stands as a 
+              beacon of heritage and progress. As a key player in the Tsinelas Capital, 
+              our community is built on a foundation of unity, transparency, and a 
+              drive toward digital innovation.
+            </p>
+          </div>
+        </section>
+
+        {/* 2. GEOGRAPHY */}
+        <section style={sectionStyle}>
+          <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', gap: '50px', flexWrap: 'wrap', alignItems: 'center' }}>
+            <div style={{ flex: '1 1 400px' }}>
+              <h2 style={{ ...headingStyle, color: '#003f0e', borderBottomColor: '#538b56' }}>GEOGRAPHY</h2>
+              <p style={{ color: '#334155', fontSize: '1.1rem', lineHeight: '1.7' }}>
+                Barangay San Isidro is situated in the scenic municipality of Liliw, Laguna. 
+                Known for its cool climate and proximity to Mt. Banahaw, our geography provides 
+                a lush, green environment that supports both our traditional tsinelas industry 
+                and local agriculture.
+              </p>
+            </div>
+
+            {/* GOOGLE MAPS EMBED */}
+            <div style={{ flex: '1 1 450px', height: '400px', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.1)', border: '1px solid #e2e8f0' }}>
+              <iframe
+                title="Barangay San Isidro Map"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15469.761427503468!2d121.42875185!3d14.1249767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd5ba0f488663d%3A0x6b865586616e0331!2sSan%20Isidro%2C%20Liliw%2C%20Laguna!5e0!3m2!1sen!2sph!4v1715690000000!5m2!1sen!2sph"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+          </div>
+        </section>
+
+        {/* 3. POPULATION */}
+        <section style={{ ...darkSectionStyle, backgroundColor: '#001a01' }}>
+          <div style={{ maxWidth: '1100px', margin: '0 auto', textAlign: 'center' }}>
+            <h2 style={headingStyle}>POPULATION</h2>
+            <p style={{ fontSize: '1.1rem', marginBottom: '40px', maxWidth: '800px', margin: '0 auto 40px' }}>
+              San Isidro is home to a vibrant community. Our population 
+              is composed of dedicated professionals, skilled artisans, and a 
+              dynamic youth sector committed to service.
+            </p>
+            
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '30px', flexWrap: 'wrap' }}>
+              <StatCard number="531+" label="Total Residents" />
+              <StatCard number="120+" label="Households" />
+              <StatCard number="45%" label="Youth Population" />
+            </div>
+          </div>
+        </section>
+      </div>
+
+      {/* --- THE FOOTER (Applied from Home Page) --- */}
+      <Footer />
+    </main>
+  );
+};
+
+// --- Sub-components (StatCard) ---
+const StatCard = ({ number, label }) => (
+  <div style={{ 
+    background: 'rgba(255,255,255,0.05)', 
+    padding: '30px', 
+    borderRadius: '15px', 
+    minWidth: '200px',
+    border: '1px solid rgba(255,255,255,0.1)' 
+  }}>
+    <h3 style={{ color: '#ffd000', fontSize: '2.5rem', margin: '0 0 10px 0' }}>{number}</h3>
+    <span style={{ fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '1px' }}>{label}</span>
+  </div>
+);
+
+// --- Footer Component (Exact Mirror of Home Page) ---
+const Footer = () => (
+  <footer style={{ 
+    backgroundColor: '#002c02', 
+    padding: '60px 10%', 
+    borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+    color: '#ffffff' 
+  }}>
+    <div style={{ 
+      maxWidth: '1100px', 
+      margin: '0 auto', 
+      display: 'flex', 
+      flexWrap: 'wrap', 
+      justifyContent: 'space-between', 
+      gap: '40px' 
+    }}>
+      <div style={{ flex: '1 1 300px' }}>
+        <h2 style={{ color: '#ffd000', margin: '0 0 15px 0', fontSize: '1.5rem', fontWeight: 'bold' }}>
+          BARANGAY SAN ISIDRO
+        </h2>
+        <p style={{ fontSize: '0.9rem', color: '#cbd5e1', lineHeight: '1.5', maxWidth: '400px' }}>
+          Official Community Portal for a progressive and transparent San Isidro Liliw, Laguna. 
+          Dedicated to digital innovation and youth-led service.
+        </p>
+      </div>
+
+      <div style={{ flex: '1 1 150px' }}>
+        <h4 style={{ color: '#ffd000', marginBottom: '20px', fontSize: '1rem' }}>Quick Links</h4>
+        <ul style={{ listStyle: 'none', padding: 0, fontSize: '0.9rem', lineHeight: '2' }}>
+          <li><a href="/" style={footerLinkStyle}>Home</a></li>
+          <li><a href="/about" style={footerLinkStyle}>About Us</a></li>
+          <li><a href="/#calendar" style={footerLinkStyle}>Events</a></li>
+          <li><a href="/#quick-links" style={footerLinkStyle}>Transparency</a></li>
+        </ul>
+      </div>
+
+      <div style={{ flex: '1 1 200px' }}>
+        <h4 style={{ color: '#ffd000', marginBottom: '20px', fontSize: '1rem' }}>Contact Us</h4>
+        <p style={{ fontSize: '0.85rem', color: '#cbd5e1', margin: '5px 0' }}>📍 Brgy. Hall, San Isidro, Liliw, Laguna</p>
+        <p style={{ fontSize: '0.85rem', color: '#cbd5e1', margin: '5px 0' }}>📧 contact@sangguniangkabataanngsanisidro@gmail.com</p>
+        <p style={{ fontSize: '0.85rem', color: '#cbd5e1', margin: '5px 0' }}>📞 (049) XXX-XXXX</p>
+      </div>
+    </div>
+
+    <div style={{ 
+      maxWidth: '1100px', 
+      margin: '40px auto 0', 
+      paddingTop: '20px', 
+      borderTop: '1px solid rgba(255, 255, 255, 0.05)', 
+      textAlign: 'center',
+      fontSize: '0.8rem',
+      color: 'rgba(255,255,255,0.5)'
+    }}>
+      © 2026 Barangay San Isidro. Designed by SK Vince M. Villanueva. All Rights Reserved.
+    </div>
+  </footer>
+);
+
+const footerLinkStyle = {
+  color: '#cbd5e1',
+  textDecoration: 'none',
+  transition: 'color 0.2s ease',
+  cursor: 'pointer'
+};
+
+export default About;
