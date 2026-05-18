@@ -119,13 +119,48 @@ const About = () => {
               gap: '20px',
               flexWrap: 'wrap'
             }}>
-              <StatCard number="531+" label="Total Residents" />
-              <StatCard number="120+" label="Households" />
-              <StatCard number="45%" label="Youth Population" />
+              <StatCard value="531+" label="Total Residents" isDarkSection={true} />
+              <StatCard value="120+" label="Households" isDarkSection={true} />
+              <StatCard value="45%" label="Youth Population" isDarkSection={true} />
             </div>
           </div>
         </section>
 
+        {/* 4. AREA */}
+        <section style={{
+          backgroundColor: '#ffffff',
+          color: '#334155',
+          padding: 'clamp(50px, 8vh, 80px) 5%',
+          width: '100%',
+          boxSizing: 'border-box',
+        }}>
+          <div style={{ maxWidth: '1100px', margin: '0 auto', textAlign: 'center' }}>
+            <h2 style={{ ...headingStyle, color: '#003f0e', borderBottomColor: '#538b56' }}>AREA</h2>
+            <p style={{
+              fontSize: 'clamp(0.9rem, 2.5vw, 1.1rem)',
+              maxWidth: '800px',
+              margin: '10px auto 40px',
+              color: '#334155',
+              lineHeight: '1.7',
+              opacity: 0.9
+            }}>
+              The geographical area encompasses distinct agricultural lands and residential zones 
+              that form the cornerstone of local development plans and community layout maps.
+            </p>
+
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '20px',
+              flexWrap: 'wrap'
+            }}>
+              <StatCard value="75.37 ha" label="Area" isDarkSection={false} />
+              <div style={{ display: 'none' }}><StatCard value="120+" label="Households" isDarkSection={false} /></div> {/* Preserved layout structure safely */}
+              <StatCard value="92.17%" label="Agricultural Area" isDarkSection={false} />
+              <StatCard value="5.89 ha" label="Residential" isDarkSection={false} />
+            </div>
+          </div>
+        </section>
       </div>
 
       <Footer />
@@ -134,26 +169,36 @@ const About = () => {
 };
 
 // --- Sub-components ---
-const StatCard = ({ number, label }) => (
+// Fixed the tag nesting compilation error and simplified into a clean, reusable component
+const StatCard = ({ value, label, isDarkSection }) => (
   <div style={{
-    background: 'rgba(255,255,255,0.05)',
+    background: isDarkSection ? 'rgba(255,255,255,0.05)' : '#f8fafc',
     padding: 'clamp(20px, 4vw, 30px)',
     borderRadius: '15px',
     flex: '1 1 140px',
-    maxWidth: '220px',
-    border: '1px solid rgba(255,255,255,0.1)',
+    maxWidth: '250px',
+    border: isDarkSection ? '1px solid rgba(255,255,255,0.1)' : '1px solid #e2e8f0',
     boxSizing: 'border-box',
+    textAlign: 'center'
   }}>
     <h3 style={{
-      color: '#ffd000',
+      color: isDarkSection ? '#ffd000' : '#003f0e',
       fontSize: 'clamp(1.8rem, 5vw, 2.5rem)',
-      margin: '0 0 10px 0'
-    }}>{number}</h3>
+      margin: '0 0 10px 0',
+      fontWeight: 'bold'
+    }}>
+      {value}
+    </h3>
     <span style={{
-      fontSize: 'clamp(0.75rem, 2vw, 1rem)',
+      fontSize: 'clamp(0.75rem, 2vw, 0.9rem)',
       textTransform: 'uppercase',
-      letterSpacing: '1px'
-    }}>{label}</span>
+      letterSpacing: '1px',
+      color: isDarkSection ? '#cbd5e1' : '#64748b',
+      fontWeight: '600',
+      display: 'block'
+    }}>
+      {label}
+    </span>
   </div>
 );
 
@@ -178,13 +223,5 @@ const Footer = () => (
     </div>
   </footer>
 );
-
-
-const footerLinkStyle = {
-  color: '#cbd5e1',
-  textDecoration: 'none',
-  transition: 'color 0.2s ease',
-  cursor: 'pointer'
-};
 
 export default About;

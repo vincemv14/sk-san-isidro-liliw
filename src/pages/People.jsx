@@ -68,9 +68,9 @@ const People = () => {
   ];
 
   const pastSB = [
-    { name: "HON. FELINO MERCADO", years: "2023 - PRESENT" },
-    { name: "HON. FELINO MERCADO", years: "2018 - 2023" },
-    { name: "HON. [NAME HERE]", years: "2013 - 2018" },
+    { name: "HON. FELINO C. MERCADO", years: "2023 - PRESENT" },
+    { name: "HON. FELINO C. MERCADO", years: "2018 - 2023" },
+    { name: "HON. FELINO C. MERCADO", years: "2013 - 2018" },
     { name: "HON. [NAME HERE]", years: "2013 - 2018" },
     { name: "HON. [NAME HERE]", years: "2013 - 2018" },
     { name: "HON. [NAME HERE]", years: "2013 - 2018" },
@@ -80,7 +80,7 @@ const People = () => {
   const pastSK = [
     { name: "HON. GIAN LORBEN M. LAGRISOLA", years: "2023 - PRESENT" },
     { name: "HON. MEZZA LUNA BRUL", years: "2018 - 2023" },
-    { name: "HON. [NAME HERE]", years: "2013 - 2018" },
+    { name: "HON. MA. RICA S. GRINDULO", years: "2013 - 2018" },
     { name: "HON. [NAME HERE]", years: "2013 - 2018" },
     { name: "HON. [NAME HERE]", years: "2013 - 2018" },
     { name: "HON. [NAME HERE]", years: "2013 - 2018" },
