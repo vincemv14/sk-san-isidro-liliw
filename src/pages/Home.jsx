@@ -303,61 +303,26 @@ const QuickLinkCard = ({ icon, title, desc, link, onClick }) => (
 );
 
 const Footer = () => (
-  <footer style={{ 
-    backgroundColor: '#002c02', 
-    padding: '60px 10%', 
-    borderTop: '1px solid rgba(255, 255, 255, 0.1)',
-    color: '#ffffff' 
-  }}>
-    <div style={{ 
-      maxWidth: '1100px', 
-      margin: '0 auto', 
-      display: 'flex', 
-      flexWrap: 'wrap', 
-      justifyContent: 'space-between', 
-      gap: '40px' 
-    }}>
+  <footer style={{ backgroundColor: '#002c02', padding: '60px 10%', color: '#ffffff' }}>
+    <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: '40px' }}>
       <div style={{ flex: '1 1 300px' }}>
-        <h2 style={{ color: '#ffd000', margin: '0 0 15px 0', fontSize: '1.5rem', fontWeight: 'bold' }}>
-          BARANGAY SAN ISIDRO
-        </h2>
-        <p style={{ fontSize: '0.9rem', color: '#cbd5e1', lineHeight: '1.5', maxWidth: '400px' }}>
+        <h2 style={{ color: '#ffd000', margin: '0 0 15px 0', fontSize: '1.5rem', fontWeight: 'bold' }}>BARANGAY SAN ISIDRO</h2>
+        <p style={{ fontSize: '0.9rem', color: '#cbd5e1', lineHeight: '1.6' }}>
           Official Community Portal for a progressive and transparent San Isidro Liliw, Laguna. 
-          Dedicated to digital innovation and youth-led service.
         </p>
       </div>
-
-      <div style={{ flex: '1 1 150px' }}>
-        <h4 style={{ color: '#ffd000', marginBottom: '20px', fontSize: '1rem' }}>Quick Links</h4>
-        <ul style={{ listStyle: 'none', padding: 0, fontSize: '0.9rem', lineHeight: '2' }}>
-          <li><a href="#hero" style={footerLinkStyle}>Home</a></li>
-          <li><a href="#know-more" style={footerLinkStyle}>About Us</a></li>
-          <li><a href="#calendar" style={footerLinkStyle}>Events</a></li>
-          <li><a href="#quick-links" style={footerLinkStyle}>Transparency</a></li>
-        </ul>
-      </div>
-
       <div style={{ flex: '1 1 200px' }}>
-        <h4 style={{ color: '#ffd000', marginBottom: '20px', fontSize: '1rem' }}>Contact Us</h4>
-        <p style={{ fontSize: '0.85rem', color: '#cbd5e1', margin: '5px 0' }}>📍 Brgy. San Isidro, Liliw, Laguna</p>
-        <p style={{ fontSize: '0.85rem', color: '#cbd5e1', margin: '5px 0' }}>📧 contact@sangguniangkabataanngsanisidro@gmail.com</p>
-        <p style={{ fontSize: '0.85rem', color: '#cbd5e1', margin: '5px 0' }}>📞 (049) XXX-XXXX</p>
+        <h4 style={{ color: '#ffd000', marginBottom: '20px' }}>Contact Us</h4>
+        <p style={{ fontSize: '0.85rem' }}>📍 Brgy. Hall, San Isidro, Liliw, Laguna</p>
+        <p style={{ fontSize: '0.85rem' }}>📧 contact@sangguniangkabataanngsanisidro@gmail.com</p>
       </div>
     </div>
-
-    <div style={{ 
-      maxWidth: '1100px', 
-      margin: '40px auto 0', 
-      paddingTop: '20px', 
-      borderTop: '1px solid rgba(255, 255, 255, 0.05)', 
-      textAlign: 'center',
-      fontSize: '0.8rem',
-      color: 'rgba(255,255,255,0.5)'
-    }}>
-      © 2026 Barangay San Isidro. Designed and Developed by SK Vince M. Villanueva. All Rights Reserved.
+    <div style={{ textAlign: 'center', marginTop: '40px', fontSize: '0.8rem', opacity: 0.6 }}>
+      © 2026 Barangay San Isidro. Designed and Developed by SK Vince M. Villanueva.
     </div>
   </footer>
 );
+
 
 // --- CSS-in-JS Objects ---
 

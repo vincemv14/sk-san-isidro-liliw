@@ -29,7 +29,7 @@ const Contact = () => {
 
   const socialLinks = [
     { platform: "Facebook", name: "SK San Isidro - Liliw", link: "https://facebook.com/sksanisidroliliw", color: "#1877F2" },
-    { platform: "Instagram", name: "@sksanisidro", link: "https://instagram.com", color: "#E4405F" }
+    { platform: "Facebook", name: "Barangay San Isidro", link: "https://www.facebook.com/barangay.sanisidro.7140", color: "#1877F2" }
   ];
 
   return (
@@ -91,7 +91,7 @@ const Contact = () => {
             <div key={index} style={{
               padding: 'clamp(16px, 3vw, 25px)',
               borderRadius: '16px',
-              backgroundColor: '#dddddda6',
+              backgroundColor: '#ffffff',
               border: '1px solid #e2e8f0',
               textAlign: 'center',
               boxSizing: 'border-box',
@@ -282,7 +282,7 @@ const Contact = () => {
               color: '#0f172a',
               margin: 0,
             }}>
-              Contact: (049) XXX-XXXX
+              Contact: Barangay Secretary Lendel F. Almares
             </p>
           </div>
         </div>
@@ -294,37 +294,25 @@ const Contact = () => {
 };
 
 const Footer = () => (
-  <footer style={{
-    backgroundColor: '#002c02',
-    padding: 'clamp(40px, 6vh, 60px) 5%',
-    color: '#ffffff',
-    width: '100%',
-    boxSizing: 'border-box',
-  }}>
-    <div style={{ textAlign: 'center' }}>
-      <h2 style={{
-        color: '#ffd000',
-        fontSize: 'clamp(1.1rem, 3vw, 1.5rem)',
-        margin: '0 0 8px',
-      }}>
-        BARANGAY SAN ISIDRO
-      </h2>
-      <p style={{
-        opacity: 0.6,
-        fontSize: 'clamp(0.8rem, 2vw, 0.9rem)',
-        margin: 0,
-      }}>
-        Liliw, Laguna • Service with Transparency
-      </p>
-      <div style={{
-        marginTop: '30px',
-        fontSize: 'clamp(0.7rem, 1.5vw, 0.8rem)',
-        opacity: 0.3,
-      }}>
-        © 2026 Designed and Developed by SK Vince M. Villanueva.
+  <footer style={{ backgroundColor: '#002c02', padding: '60px 10%', color: '#ffffff' }}>
+    <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: '40px' }}>
+      <div style={{ flex: '1 1 300px' }}>
+        <h2 style={{ color: '#ffd000', margin: '0 0 15px 0', fontSize: '1.5rem', fontWeight: 'bold' }}>BARANGAY SAN ISIDRO</h2>
+        <p style={{ fontSize: '0.9rem', color: '#cbd5e1', lineHeight: '1.6' }}>
+          Official Community Portal for a progressive and transparent San Isidro Liliw, Laguna. 
+        </p>
       </div>
+      <div style={{ flex: '1 1 200px' }}>
+        <h4 style={{ color: '#ffd000', marginBottom: '20px' }}>Contact Us</h4>
+        <p style={{ fontSize: '0.85rem' }}>📍 Brgy. Hall, San Isidro, Liliw, Laguna</p>
+        <p style={{ fontSize: '0.85rem' }}>📧 contact@sangguniangkabataanngsanisidro@gmail.com</p>
+      </div>
+    </div>
+    <div style={{ textAlign: 'center', marginTop: '40px', fontSize: '0.8rem', opacity: 0.6 }}>
+      © 2026 Barangay San Isidro. Designed and Developed by SK Vince M. Villanueva.
     </div>
   </footer>
 );
+
 
 export default Contact;
