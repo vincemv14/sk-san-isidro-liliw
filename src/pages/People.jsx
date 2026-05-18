@@ -35,6 +35,7 @@ const People = () => {
     display: 'inline-block',
     borderBottom: '4px solid #ffd000',
     lineHeight: '1.2'
+    
   };
 
   const tableContainerStyle = {
@@ -93,8 +94,8 @@ const People = () => {
         
         {/* 1. SANGGUNIANG BARANGAY SECTION */}
         <section style={sectionStyle}>
-          <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-            <h2 style={{ ...headingStyle, color: '#002c02', borderBottomColor: '#538b56' }}>
+          <div style={{ textAlign: 'center',maxWidth: '1200px', margin: '0 auto' }}>
+            <h2 style={{ ...headingStyle, color: '#002c02', borderBottomColor: '#538b56'}}>
               SANGGUNIANG BARANGAY NG SAN ISIDRO <br/> LILIW 2023 - 2026
             </h2>
             
@@ -119,8 +120,8 @@ const People = () => {
 
         {/* 2. SANGGUNIANG KABATAAN SECTION */}
         <section style={darkSectionStyle}>
-          <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-            <h2 style={headingStyle}>SANGGUNIANG KABATAAN NG SAN ISIDRO <br/> LILIW 2023 - 2026</h2>
+          <div style={{ textAlign: 'center', maxWidth: '1200px', margin: '0 auto' }}>
+            <h2 style={{...headingStyle, color: '#ffffff'}}>SANGGUNIANG KABATAAN NG SAN ISIDRO <br/> LILIW 2023 - 2026</h2>
             
             <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '50px' }}>
               <OfficialCard 
@@ -243,7 +244,7 @@ const Footer = () => (
       </div>
     </div>
     <div style={{ textAlign: 'center', marginTop: '40px', fontSize: '0.8rem', opacity: 0.6 }}>
-      © 2026 Barangay San Isidro. Designed by SK Vince M. Villanueva.
+      © 2026 Barangay San Isidro. Designed and Developed by SK Vince M. Villanueva.
     </div>
   </footer>
 );

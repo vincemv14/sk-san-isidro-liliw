@@ -1,43 +1,4 @@
-/* Navbar.css */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 40px;
-  background-color: #023500; /* Dark Navy for that professional look */
-  color: white;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  border-bottom: 1px solid rgba(0, 255, 195, 0.1);
-}
-
-.nav-logo {
-  font-size: 2rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-}
-
-.nav-links {
-  display: flex;
-  list-style: none;
-  gap: 25px;
-  margin: 0;
-}
-
-.nav-links a {
-  color: #ffffff;
-  text-decoration: none;
-  font-size: 2cqb;
-  text-transform: uppercase;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-
-.nav-links a:hover {
-  color: #949494; /* Teal highlight similar to student publications */
-}
-
+/* --- Base Desktop Layout (Unchanged) --- */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -51,23 +12,22 @@
   border-bottom: 4px solid #ffd000;
 }
 
-/* This is the magic for horizontal alignment */
 .logo-container {
   display: flex;
-  align-items: center; /* Centers logo and text vertically */
-  gap: 15px;           /* Space between logo and text */
+  align-items: center;
+  gap: 15px;
   text-decoration: none;
 }
 
 .logo-img {
-  height: 50px;        /* Adjust height to your liking */
+  height: 50px;
   width: auto;
-  border-radius: 100px;  /* Optional: slightly rounded corners for the .jpg */
+  border-radius: 100px;
 }
 
 .logo-container span {
-  color: #ffffff;      /* Accent Yellow */
-  font-size: 1.5rem;
+  color: #ffffff;
+  font-size: clamp(1rem, 3vw, 1.5rem);
   font-weight: 700;
   letter-spacing: 1.5px;
   text-transform: uppercase;
@@ -84,11 +44,116 @@
 .nav-links a {
   color: #ffffff;
   text-decoration: none;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 0.9rem;
+  text-transform: uppercase;
   transition: color 0.3s ease;
 }
 
 .nav-links a:hover {
-  color: #c7c547;      /* Yellow on hover */
+  color: #ffd000;
+}
+
+/* Hide desktop chevron elements initially */
+.chevron-icon {
+  display: none;
+}
+
+/* --- Hamburger Icon Button Layout --- */
+.mobile-icon {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  /* Fixed: Kept desktop base layer baseline safe */
+  z-index: 1001; 
+}
+
+.line {
+  width: 30px;
+  height: 3px;
+  background-color: #ffffff;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+}
+
+.line.open:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+.line.open:nth-child(2) { opacity: 0; }
+.line.open:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+
+
+/* --- Mobile View Overrides (Max 768px) --- */
+@media screen and (max-width: 768px) {
+  .mobile-icon {
+    display: flex;
+    /* Fixed: Set higher than the full-screen drawer list container */
+    z-index: 10000 !important; 
+  }
+
+  /* Full Screen Sidedrawer Background Container */
+  .nav-links {
+    position: fixed;
+    left: -100%;
+    top: 0;
+    width: 80%; /* Matches your screenshot's side drawer profile */
+    max-width: 320px;
+    height: 100vh;
+    background-color: #002c02; /* Brand Forest Green background */
+    flex-direction: column;
+    gap: 0;
+    padding-top: 70px; /* Leave breathing room for the header overlay zone */
+    transition: left 0.3s ease-in-out;
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.4);
+    /* Fixed: Forced top layer priority so page elements do not leak through */
+    z-index: 9999 !important; 
+  }
+
+  .nav-links.active {
+    left: 0;
+  }
+
+  .nav-links li {
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Crisp horizontal green-white split lines */
+  }
+
+  /* Flex row config matching item cells */
+  .nav-links a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 18px 25px;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+  }
+
+  /* Active Menu Item Styling from Reference image (Gold Highlight block with Dark Text) */
+  .nav-links a.active-link {
+    background-color: #ffd000 !important;
+    color: #002c02 !important; /* Contrasting dark text for high visibility */
+  }
+
+  /* Make chevrons visible on mobile screen widths */
+  .chevron-icon {
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid rgba(255, 255, 255, 0.7);
+    border-right: 2px solid rgba(255, 255, 255, 0.7);
+    transform: rotate(45deg); /* Generates a geometric arrow shape purely via CSS */
+    margin-right: 5px;
+    transition: border-color 0.2s ease;
+  }
+
+  /* Adjust chevron color when row is active to match dark text */
+  .nav-links a.active-link .chevron-icon {
+    border-top-color: #002c02;
+    border-right-color: #002c02;
+  }
 }

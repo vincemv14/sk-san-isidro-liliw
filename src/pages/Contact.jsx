@@ -4,103 +4,286 @@ const Contact = () => {
   const brandGreen = '#002c02';
   const brandGold = '#ffd000';
 
-  // --- Row 1: Emergency Hotlines ---
   const emergencyNumbers = [
-    { label: "PNP Liliw (Police)", number: "(049) 563-1234", color: "#e11d48" },
-    { label: "BFP Liliw (Fire)", number: "(049) 563-5678", color: "#f59e0b" },
-    { label: "Liliw RHU (Medical)", number: "(049) 563-9000", color: "#10b981" },
-    { label: "MDRRMO Liliw", number: "0912-345-6789", color: "#1d4ed8" }
+    { 
+      label: "Liliw MPS (Police)", 
+      numbers: ["0906 360 4119", "0998 598 5647", "5035-904"]
+    },
+    { 
+      label: "Liliw BFP (Fire)", 
+      numbers: ["0956 769 0379", "503-1756"]
+    },
+    { 
+      label: "Liliw RHU (Medical)", 
+      numbers: ["(049) 5633-055"]
+    },
+    { 
+      label: "Liliw MDRRMO", 
+      numbers: ["0945 135 0537", "(049) 5033-621", "0953 611 0440 (Lowland)"]
+    },
+    { 
+      label: "Mayor's Office", 
+      numbers: ["563-1001 local 103"]
+    },
   ];
 
-  // --- Row 2: Social Media ---
   const socialLinks = [
     { platform: "Facebook", name: "SK San Isidro - Liliw", link: "https://facebook.com/sksanisidroliliw", color: "#1877F2" },
     { platform: "Instagram", name: "@sksanisidro", link: "https://instagram.com", color: "#E4405F" }
   ];
 
   return (
-    <main style={{ minHeight: '100vh', backgroundColor: '#ffffff' }}>
-      
-      {/* HERO SECTION */}
-      <section style={{ backgroundColor: brandGreen, padding: '120px 10% 60px', color: 'white', textAlign: 'center' }}>
-        <h1 style={{ fontSize: '3rem', color: brandGold, fontWeight: '800' }}>GET IN TOUCH</h1>
-        <p style={{ opacity: 0.8, maxWidth: '700px', margin: '20px auto' }}>
+    <main style={{ minHeight: '100vh', backgroundColor: '#ffffff', width: '100%', overflowX: 'hidden' }}>
+
+      {/* HERO */}
+      <section style={{
+        backgroundColor: brandGreen,
+        padding: 'clamp(60px, 10vw, 120px) 5% clamp(40px, 6vw, 60px)',
+        color: 'white',
+        textAlign: 'center',
+        width: '100%',
+        boxSizing: 'border-box',
+      }}>
+        <h1 style={{
+          fontSize: 'clamp(1.6rem, 5vw, 3rem)',
+          color: brandGold,
+          fontWeight: '800',
+          margin: '0 0 15px',
+        }}>
+          GET IN TOUCH
+        </h1>
+        <p style={{
+          opacity: 0.8,
+          maxWidth: '700px',
+          margin: '0 auto',
+          fontSize: 'clamp(0.88rem, 2.5vw, 1rem)',
+          lineHeight: '1.7',
+        }}>
           We are here to serve. Reach out for emergencies, inquiries about youth programs, or community concerns.
         </p>
       </section>
 
-      {/* ROW 1: EMERGENCY HOTLINES (High Priority) */}
-      <section style={{ padding: '80px 10% 40px' }}>
-        <h2 style={sectionTitleStyle}>🚨 Emergency Hotlines</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
+      {/* EMERGENCY HOTLINES */}
+      <section style={{
+        padding: 'clamp(50px, 8vw, 80px) 5% clamp(30px, 5vw, 40px)',
+        width: '100%',
+        boxSizing: 'border-box',
+      }}>
+        <h2 style={{
+          fontSize: 'clamp(1.3rem, 4vw, 2rem)',
+          color: brandGreen,
+          textAlign: 'center',
+          marginBottom: 'clamp(24px, 4vw, 40px)',
+          textTransform: 'uppercase',
+          fontWeight: 'bold',
+        }}>
+          Emergency Hotlines
+        </h2>
+
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))',
+          gap: 'clamp(12px, 2.5vw, 20px)',
+          maxWidth: '1100px',
+          margin: '0 auto',
+        }}>
           {emergencyNumbers.map((item, index) => (
-            <div key={index} style={{ 
-              padding: '25px', 
-              borderRadius: '16px', 
-              backgroundColor: '#fff1f2', 
-              border: `1px solid ${item.color}`,
-              textAlign: 'center'
+            <div key={index} style={{
+              padding: 'clamp(16px, 3vw, 25px)',
+              borderRadius: '16px',
+              backgroundColor: '#dddddda6',
+              border: '1px solid #e2e8f0',
+              textAlign: 'center',
+              boxSizing: 'border-box',
             }}>
-              <h4 style={{ margin: '0 0 10px 0', color: item.color }}>{item.label}</h4>
-              <p style={{ fontSize: '1.4rem', fontWeight: 'bold', color: '#000' }}>{item.number}</p>
+              <h4 style={{
+                margin: '0 0 12px 0',
+                color: brandGreen,
+                fontSize: 'clamp(0.85rem, 2.2vw, 1rem)',
+                fontWeight: '700',
+                textTransform: 'uppercase',
+                letterSpacing: '0.5px',
+              }}>
+                {item.label}
+              </h4>
+              {item.numbers.map((num, i) => (
+                <p key={i} style={{
+                  fontSize: 'clamp(0.9rem, 2.5vw, 1.15rem)',
+                  fontWeight: 'bold',
+                  color: '#0f172a',
+                  margin: '4px 0',
+                  lineHeight: '1.4',
+                }}>
+                  {num}
+                </p>
+              ))}
             </div>
           ))}
         </div>
+
+        <p style={{
+          textAlign: 'center',
+          marginTop: 'clamp(16px, 3vw, 24px)',
+          fontSize: 'clamp(0.75rem, 2vw, 0.85rem)',
+          color: '#94a3b8',
+          fontStyle: 'italic',
+        }}>
+          Please use these numbers for urgent emergencies only.
+        </p>
       </section>
 
-      {/* ROW 2: SOCIAL MEDIA & SK CHANNELS */}
-      <section style={{ padding: '60px 10%', backgroundColor: '#f8fafc' }}>
-        <h2 style={sectionTitleStyle}>📱 Connect with Us</h2>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center' }}>
+      {/* SOCIAL MEDIA */}
+      <section style={{
+        padding: 'clamp(40px, 7vw, 60px) 5%',
+        backgroundColor: '#f8fafc',
+        width: '100%',
+        boxSizing: 'border-box',
+      }}>
+        <h2 style={{
+          fontSize: 'clamp(1.3rem, 4vw, 2rem)',
+          color: brandGreen,
+          textAlign: 'center',
+          marginBottom: 'clamp(24px, 4vw, 40px)',
+          textTransform: 'uppercase',
+          fontWeight: 'bold',
+        }}>
+          Connect with Us
+        </h2>
+        <div style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: 'clamp(12px, 2.5vw, 20px)',
+          justifyContent: 'center',
+        }}>
           {socialLinks.map((soc, index) => (
-            <a key={index} href={soc.link} target="_blank" rel="noreferrer" style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '15px',
-              padding: '20px 40px',
-              backgroundColor: 'white',
-              borderRadius: '50px',
-              textDecoration: 'none',
-              boxShadow: '0 4px 6px rgba(0,0,0,0.05)',
-              border: '1px solid #e2e8f0',
-              transition: '0.3s'
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-5px)'}
-            onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+            <a
+              key={index}
+              href={soc.link}
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px',
+                padding: 'clamp(14px, 2.5vw, 20px) clamp(20px, 4vw, 40px)',
+                backgroundColor: 'white',
+                borderRadius: '50px',
+                textDecoration: 'none',
+                boxShadow: '0 4px 6px rgba(0,0,0,0.05)',
+                border: '1px solid #e2e8f0',
+                transition: '0.3s',
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-5px)'}
+              onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
             >
-              <span style={{ fontWeight: 'bold', color: soc.color }}>{soc.platform}</span>
-              <span style={{ color: '#475569' }}>{soc.name}</span>
+              <span style={{
+                fontWeight: 'bold',
+                color: soc.color,
+                fontSize: 'clamp(0.85rem, 2vw, 1rem)',
+              }}>
+                {soc.platform}
+              </span>
+              <span style={{
+                color: '#475569',
+                fontSize: 'clamp(0.82rem, 2vw, 0.95rem)',
+              }}>
+                {soc.name}
+              </span>
             </a>
           ))}
         </div>
       </section>
 
-      {/* ROW 3: PHYSICAL OFFICE & SB SAN ISIDRO */}
-      <section style={{ padding: '80px 10% 120px' }}>
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', 
-          gap: '40px' 
+      {/* OFFICES */}
+      <section style={{
+        padding: 'clamp(50px, 8vw, 80px) 5% clamp(60px, 10vw, 120px)',
+        width: '100%',
+        boxSizing: 'border-box',
+      }}>
+        <h2 style={{
+          fontSize: 'clamp(1.3rem, 4vw, 2rem)',
+          color: brandGreen,
+          textAlign: 'center',
+          marginBottom: 'clamp(24px, 4vw, 40px)',
+          textTransform: 'uppercase',
+          fontWeight: 'bold',
         }}>
-          {/* SK Office */}
-          <div style={officeCardStyle}>
-            <h3 style={{ color: brandGreen }}>SK San Isidro Office</h3>
-            <p style={{ color: '#64748b', lineHeight: '1.6' }}>
+          Our Offices
+        </h2>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
+          gap: 'clamp(16px, 3vw, 40px)',
+          maxWidth: '1100px',
+          margin: '0 auto',
+        }}>
+          <div style={{
+            padding: 'clamp(24px, 4vw, 40px)',
+            borderRadius: '24px',
+            border: '1px solid #e2e8f0',
+            backgroundColor: "#dddddda6'",
+            boxShadow: '0 10px 15px -3px rgba(0,0,0,0.05)',
+            boxSizing: 'border-box',
+          }}>
+            <h3 style={{
+              color: brandGreen,
+              fontSize: 'clamp(1rem, 2.5vw, 1.2rem)',
+              marginBottom: '12px',
+            }}>
+              SK San Isidro Office
+            </h3>
+            <p style={{
+              color: '#64748b',
+              lineHeight: '1.7',
+              fontSize: 'clamp(0.85rem, 2vw, 0.95rem)',
+              margin: '0 0 12px',
+            }}>
               📍 2nd Floor, Barangay Hall Building<br />
               San Isidro, Liliw, Laguna<br />
               Philippines, 4004
             </p>
-            <p style={{ fontWeight: 'bold' }}>Office Hours: Mon-Fri (8:00 AM - 5:00 PM)</p>
+            <p style={{
+              fontWeight: 'bold',
+              fontSize: 'clamp(0.82rem, 2vw, 0.9rem)',
+              color: '#0f172a',
+              margin: 0,
+            }}>
+              Office Hours: Mon–Fri (8:00 AM – 5:00 PM)
+            </p>
           </div>
 
-          {/* Sangguniang Barangay */}
-          <div style={officeCardStyle}>
-            <h3 style={{ color: brandGreen }}>Sangguniang Barangay</h3>
-            <p style={{ color: '#64748b', lineHeight: '1.6' }}>
-              For Barangay Clearances, Indigency, and Blotter concerns, 
+          <div style={{
+            padding: 'clamp(24px, 4vw, 40px)',
+            borderRadius: '24px',
+            border: '1px solid #e2e8f0',
+            backgroundColor: 'white',
+            boxShadow: '0 10px 15px -3px rgba(0,0,0,0.05)',
+            boxSizing: 'border-box',
+          }}>
+            <h3 style={{
+              color: brandGreen,
+              fontSize: 'clamp(1rem, 2.5vw, 1.2rem)',
+              marginBottom: '12px',
+            }}>
+              Sangguniang Barangay
+            </h3>
+            <p style={{
+              color: '#64748b',
+              lineHeight: '1.7',
+              fontSize: 'clamp(0.85rem, 2vw, 0.95rem)',
+              margin: '0 0 12px',
+            }}>
+              For Barangay Clearances, Indigency, and Blotter concerns,
               please visit the main Barangay Hall Ground Floor.
             </p>
-            <p style={{ fontWeight: 'bold' }}>Contact: (049) XXX-XXXX</p>
+            <p style={{
+              fontWeight: 'bold',
+              fontSize: 'clamp(0.82rem, 2vw, 0.9rem)',
+              color: '#0f172a',
+              margin: 0,
+            }}>
+              Contact: (049) XXX-XXXX
+            </p>
           </div>
         </div>
       </section>
@@ -110,31 +293,35 @@ const Contact = () => {
   );
 };
 
-// --- Styles & Components ---
-
-const sectionTitleStyle = {
-  fontSize: '2rem',
-  color: '#002c02',
-  textAlign: 'center',
-  marginBottom: '40px',
-  textTransform: 'uppercase'
-};
-
-const officeCardStyle = {
-  padding: '40px',
-  borderRadius: '24px',
-  border: '1px solid #e2e8f0',
-  backgroundColor: 'white',
-  boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.05)'
-};
-
 const Footer = () => (
-  <footer style={{ backgroundColor: '#002c02', padding: '60px 10%', color: '#ffffff' }}>
+  <footer style={{
+    backgroundColor: '#002c02',
+    padding: 'clamp(40px, 6vh, 60px) 5%',
+    color: '#ffffff',
+    width: '100%',
+    boxSizing: 'border-box',
+  }}>
     <div style={{ textAlign: 'center' }}>
-      <h2 style={{ color: '#ffd000' }}>BARANGAY SAN ISIDRO</h2>
-      <p style={{ opacity: 0.6, fontSize: '0.9rem' }}>Liliw, Laguna • Service with Transparency</p>
-      <div style={{ marginTop: '30px', fontSize: '0.8rem', opacity: 0.3 }}>
-        © 2026 Designed by SK Vince M. Villanueva.
+      <h2 style={{
+        color: '#ffd000',
+        fontSize: 'clamp(1.1rem, 3vw, 1.5rem)',
+        margin: '0 0 8px',
+      }}>
+        BARANGAY SAN ISIDRO
+      </h2>
+      <p style={{
+        opacity: 0.6,
+        fontSize: 'clamp(0.8rem, 2vw, 0.9rem)',
+        margin: 0,
+      }}>
+        Liliw, Laguna • Service with Transparency
+      </p>
+      <div style={{
+        marginTop: '30px',
+        fontSize: 'clamp(0.7rem, 1.5vw, 0.8rem)',
+        opacity: 0.3,
+      }}>
+        © 2026 Designed and Developed by SK Vince M. Villanueva.
       </div>
     </div>
   </footer>

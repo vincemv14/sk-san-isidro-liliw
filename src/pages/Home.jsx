@@ -3,7 +3,8 @@ import heroBg from '../assets/home/san-isidro.jpg';
 
 const Home = () => {
   const [showHotlines, setShowHotlines] = useState(false);
-  const heroHeight = "60vh"; 
+  const [showHealth, setShowHealth] = useState(false); // FIXED: Corrected state setter assignment
+  const heroHeight = "80vh"; 
 
   // --- Styles ---
   const sectionHeadingStyle1 = {
@@ -98,7 +99,7 @@ const Home = () => {
 
       {/* 2. CONTENT SECTION: KNOW MORE */}
       <section id="know-more" style={{ backgroundColor: '#002c02', padding: '100px 10%' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+        <div style={{ textAlign: 'center', maxWidth: '1100px', margin: '0 auto' }}>
           <h2 style={sectionHeadingStyle1}>KNOW MORE</h2>
           <p style={{ color: '#ffffff', fontSize: '1.15rem', lineHeight: '1.8', marginTop: '20px' }}>
             Barangay San Isidro is a community built on the pillars of 
@@ -123,7 +124,7 @@ const Home = () => {
           
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '25px' }}>
             <EventCard date="April 29 - May 03, 2026" title="22nd Tsinelas Festival" desc="Join us as we celebrate the 22nd Liliw Tsinelas Festival with local art exhibits." />
-           <EventCard date="May 14, 2026 | 7:00 PM" title="Sayawan sa San Isidro 2026" desc="Quarterly meeting to discuss local projects and budget transparency." />
+            <EventCard date="May 14, 2026 | 7:00 PM" title="Sayawan sa San Isidro 2026" desc="Quarterly meeting to discuss local projects and budget transparency." />
             <EventCard date="MAY 15, 2026 | 4:00 PM" title="Sagala 2026" desc="A workshop for young developers to sharpen their technical skills." />
             <EventCard date="May 16, 2026 | 2:00 PM" title="Sangguniang Kabataan Assembly" desc="Quarterly meeting to discuss local projects and budget transparency." />
           </div>
@@ -132,7 +133,7 @@ const Home = () => {
 
       {/* 4. QUICK LINKS GUIDE */}
       <section id="quick-links" style={{ backgroundColor: '#001a01', padding: '100px 10%', position: 'relative' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+        <div style={{ textAlign: 'center', maxWidth: '1100px', margin: '0 auto' }}>
           <h2 style={{ ...sectionHeadingStyle1, borderBottomColor: '#fdd835' }}>QUICK LINKS GUIDE</h2>
           
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px', marginTop: '40px' }}>
@@ -146,24 +147,18 @@ const Home = () => {
               icon="📋" 
               title="Disclosure Board" 
               desc="View Barangay budgets, projects, and transparency reports." 
-              link="/disclosures" 
+              link="/disclosure" 
             />
             <QuickLinkCard 
               icon="🏥" 
               title="Health Services" 
               desc="Information on health centers and emergency ID solutions." 
-              link="/health" 
-            />
-            <QuickLinkCard 
-              icon="🆔" 
-              title="Resident Portal" 
-              desc="Downloadable forms and clearance application guides." 
-              link="/portal" 
+              onClick={() => setShowHealth(true)}  
             />
           </div>
         </div>
 
-        {/* MODAL OVERLAY */}
+        {/* --- EMERGENCY HOTLINES MODAL --- */}
         {showHotlines && (
           <div style={modalOverlayStyle} onClick={() => setShowHotlines(false)}>
             <div style={hotlineBoxStyle} onClick={(e) => e.stopPropagation()}>
@@ -171,28 +166,76 @@ const Home = () => {
               <h3 style={{ color: '#fdd835', marginBottom: '20px', fontSize: '1.5rem' }}>🚨 EMERGENCY HOTLINES</h3>
               
               <div style={hotlineItemStyle}>
-                <strong>BFP Liliw:</strong> <span> (049) 503-1756/0956-769-0379 </span> 
-                <a href="https://www.facebook.com/liliw.lagunabfp" target="_blank" rel="noreferrer" style={linkStyle}>
-                  BFP FB Page
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                  <strong>Office of the Municipal Mayor:</strong>
+                  <span style={{ color: '#ffffff', fontSize: '1rem', marginTop: '4px' }}>563-1001 local 103</span>
+                </div>
+                <a href="https://www.facebook.com/MunicipalityofLiliw" target="_blank" rel="noreferrer" style={linkStyle}>
+                  Visit Page
                 </a>
               </div>
               
               <div style={hotlineItemStyle}>
-                <strong>PNP Liliw:</strong> <span>0998-598-5647</span>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                  <strong>BFP Liliw:</strong>
+                  <span style={{ color: '#ffffff', fontSize: '1rem', marginTop: '4px' }}>(049) 503-1756 / 0956-769-0379</span>
+                </div>
+                <a href="https://www.facebook.com/liliw.lagunabfp" target="_blank" rel="noreferrer" style={linkStyle}>
+                  Visit Page
+                </a>
+              </div>
+              
+              <div style={hotlineItemStyle}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                  <strong>Liliw Municipal Police Station:</strong>
+                  <span style={{ color: '#ffffff', fontSize: '1rem', marginTop: '4px' }}>0906-360-4119 / 0998-598-5647</span>
+                </div>
                 <a href="https://www.facebook.com/liliwmps232" target="_blank" rel="noreferrer" style={linkStyle}>
-                  PNP FB Page
+                  Visit Page
                 </a>
               </div>
 
               <div style={hotlineItemStyle}>
-                <strong>MDRRMO:</strong> <span>0917-182-3776</span>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                  <strong>Liliw MDRRMO:</strong>
+                  <span style={{ color: '#ffffff', fontSize: '1rem', marginTop: '4px' }}>0945-135-0537 / (049) 5033-621</span>
+                </div>
                 <a href="https://www.facebook.com/LiliwMdrrmoOfficialPage" target="_blank" rel="noreferrer" style={linkStyle}>
-                  Liliw MDRRMO FB Page
+                  Visit Page
                 </a>
               </div>
 
-              <p style={{ fontSize: '0.8rem', marginTop: '20px', color: 'rgba(255,255,255,0.6)', fontStyle: 'italic' }}>
+              <p style={{ fontSize: '0.8rem', marginTop: '20px', color: 'rgba(255,255,255,0.6)', fontStyle: 'italic', textAlign: 'center' }}>
                 Please use these numbers for urgent emergencies only.
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* --- HEALTH SERVICES MODAL --- */}
+        {showHealth && (
+          <div style={modalOverlayStyle} onClick={() => setShowHealth(false)}>
+            <div style={hotlineBoxStyle} onClick={(e) => e.stopPropagation()}>
+              <button onClick={() => setShowHealth(false)} style={closeButtonStyle}>×</button>
+              <h3 style={{ color: '#fdd835', marginBottom: '20px', fontSize: '1.5rem' }}>🏥 HEALTH SERVICES</h3>
+              
+              <div style={hotlineItemStyle}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                  <strong>Liliw Rural Health Unit (RHU):</strong>
+                  <span style={{ color: '#ffffff', fontSize: '1rem', marginTop: '4px' }}>(049) 563-3655</span>
+                </div>
+                
+              </div>
+
+              <div style={{ padding: '15px 0', fontSize: '0.95rem', lineHeight: '1.5', color: '#e2e8f0' }}>
+                <strong>Barangay Health Workers (BHW):</strong>
+                <p style={{ margin: '5px 0 0', color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem' }}>
+                  For local checkups, basic medicine distribution, and maternal care schedules, please drop by or coordinate with our text updates directly through the San Isidro Barangay Hall health deck.
+                </p>
+              </div>
+
+              <p style={{ fontSize: '0.8rem', marginTop: '20px', color: 'rgba(255,255,255,0.6)', fontStyle: 'italic', textAlign: 'center' }}>
+                Our health response team operates regular checkups daily from 8:00 AM to 5:00 PM.
               </p>
             </div>
           </div>
@@ -201,7 +244,7 @@ const Home = () => {
 
       {/* 5. VISION RE-EMPHASIS / INFO */}
       <section style={{ backgroundColor: '#ffffff', padding: '100px 10%' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+        <div style={{ textAlign: 'center', maxWidth: '1100px', margin: '0 auto' }}>
           <h2 style={sectionHeadingStyle2}>COMMUNITY VALUES</h2>
           <p style={{ color: '#000000', fontSize: '1.15rem', lineHeight: '1.8', marginTop: '20px' }}>
             Barangay San Isidro is a community built on the pillars of 
@@ -350,7 +393,7 @@ const modalOverlayStyle = {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  zIndex: 1000,
+  zIndex: 11000, /* Fixed layering value to stay over sticky page panels safely */
   backdropFilter: 'blur(4px)'
 };
 
