@@ -405,7 +405,7 @@ const Footer = () => (
       <div style={{ flex: '1 1 200px' }}>
         <h4 style={{ color: '#ffd000', marginBottom: '20px' }}>Contact Us</h4>
         <p style={{ fontSize: '0.85rem' }}>📍 Brgy. Hall, San Isidro, Liliw, Laguna</p>
-        <p style={{ fontSize: '0.85rem' }}>📧 contact@sangguniangkabataanngsanisidro@gmail.com</p>
+        <p style={{ fontSize: '0.85rem' }}>📧 @sangguniangkabataanngsanisidro@gmail.com</p>
       </div>
     </div>
     <div style={{ textAlign: 'center', marginTop: '40px', fontSize: '0.8rem', opacity: 0.6 }}>
