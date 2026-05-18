@@ -1,4 +1,4 @@
-/* --- Base Desktop Layout (Unchanged) --- */
+/* --- Base Desktop Layout --- */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -41,7 +41,8 @@
   padding: 0;
 }
 
-.nav-links a {
+/* Base class for NavLink anchor tags */
+.nav-item {
   color: #ffffff;
   text-decoration: none;
   font-weight: 500;
@@ -50,8 +51,14 @@
   transition: color 0.3s ease;
 }
 
-.nav-links a:hover {
+.nav-item:hover {
   color: #ffd000;
+}
+
+/* DESKTOP FIXED ACTIVE LINK: Fixes text color to gold when active */
+.nav-item.active-link {
+  color: #ffd000;
+  font-weight: 700;
 }
 
 /* Hide desktop chevron elements initially */
@@ -65,7 +72,6 @@
   flex-direction: column;
   gap: 6px;
   cursor: pointer;
-  /* Fixed: Kept desktop base layer baseline safe */
   z-index: 1001; 
 }
 
@@ -86,7 +92,6 @@
 @media screen and (max-width: 768px) {
   .mobile-icon {
     display: flex;
-    /* Fixed: Set higher than the full-screen drawer list container */
     z-index: 10000 !important; 
   }
 
@@ -95,16 +100,15 @@
     position: fixed;
     left: -100%;
     top: 0;
-    width: 80%; /* Matches your screenshot's side drawer profile */
+    width: 80%; 
     max-width: 320px;
     height: 100vh;
     background-color: #002c02; /* Brand Forest Green background */
     flex-direction: column;
     gap: 0;
-    padding-top: 70px; /* Leave breathing room for the header overlay zone */
+    padding-top: 70px; 
     transition: left 0.3s ease-in-out;
     box-shadow: 5px 0 15px rgba(0, 0, 0, 0.4);
-    /* Fixed: Forced top layer priority so page elements do not leak through */
     z-index: 9999 !important; 
   }
 
@@ -114,11 +118,11 @@
 
   .nav-links li {
     width: 100%;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Crisp horizontal green-white split lines */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08); 
   }
 
-  /* Flex row config matching item cells */
-  .nav-links a {
+  /* Mobile link item blocks */
+  .nav-links .nav-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -133,8 +137,8 @@
     box-sizing: border-box;
   }
 
-  /* Active Menu Item Styling from Reference image (Gold Highlight block with Dark Text) */
-  .nav-links a.active-link {
+  /* MOBILE FIXED ACTIVE LINK: Gold Highlight block with Dark Text */
+  .nav-links .nav-item.active-link {
     background-color: #ffd000 !important;
     color: #002c02 !important; /* Contrasting dark text for high visibility */
   }
@@ -146,13 +150,13 @@
     height: 8px;
     border-top: 2px solid rgba(255, 255, 255, 0.7);
     border-right: 2px solid rgba(255, 255, 255, 0.7);
-    transform: rotate(45deg); /* Generates a geometric arrow shape purely via CSS */
+    transform: rotate(45deg); 
     margin-right: 5px;
     transition: border-color 0.2s ease;
   }
 
   /* Adjust chevron color when row is active to match dark text */
-  .nav-links a.active-link .chevron-icon {
+  .nav-links .nav-item.active-link .chevron-icon {
     border-top-color: #002c02;
     border-right-color: #002c02;
   }

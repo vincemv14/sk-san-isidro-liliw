@@ -64,7 +64,7 @@ const Home = () => {
       >
         <div style={{ padding: '0 10%', width: '100%' }}>
           <div style={{ color: 'white', textAlign: 'left' }}>
-            <h1 style={{ fontSize: '4rem', margin: '0 0 10px 0', lineHeight: '1', fontWeight: "650" }}>
+            <h1 style={{ fontSize: '3.5rem', margin: '0 0 10px 0', lineHeight: '1', fontWeight: "650" }}>
               Welcome to <br /> Barangay San Isidro
             </h1>
             <h1 style={{ fontSize: '3.5rem', margin: '0 0 20px 0', lineHeight: '1', fontWeight: "650" }}>

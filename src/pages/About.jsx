@@ -22,7 +22,7 @@ const About = () => {
           width: '100%',
           boxSizing: 'border-box',
         }}>
-          <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          <div style={{ maxWidth: '1100px', margin: '0 auto', textAlign: 'center' }}>
             <h2 style={{ ...headingStyle, color: '#ffffff' }}>INTRODUCTION</h2>
             <p style={{
               fontSize: 'clamp(0.95rem, 2.5vw, 1.2rem)',
@@ -53,7 +53,7 @@ const About = () => {
             flexWrap: 'wrap',
             alignItems: 'center'
           }}>
-            <div style={{ flex: '1 1 280px' }}>
+            <div style={{ flex: '1 1 280px', textAlign: 'center'}}>
               <h2 style={{ ...headingStyle, color: '#003f0e', borderBottomColor: '#538b56' }}>GEOGRAPHY</h2>
               <p style={{
                 color: '#334155',

@@ -1,11 +1,12 @@
 import React from 'react';
+import skBudget2025 from '../assets/disclosureboard/sksanisidrobudget2025.pdf';
 
 const DisclosureBoard = () => {
   const brandGreen = '#002c02';
   const brandGold = '#ffd000';
 
   const localDocuments = [
-    { id: 1, title: "ABYIP 2026 - Official Budget", category: "Finances", date: "Jan 2026", fileUrl: "LINK_TO_YOUR_GOOGLE_DRIVE_PDF" },
+    { id: 1, title: "SK San Isidro - Official Budget Expenses 2025", category: "Expenses", date: "1st - 4th Quarter 2025", fileUrl: skBudget2025 },
     { id: 2, title: "SK Resolution No. 05 - Youth Portal", category: "Resolutions", date: "May 2026", fileUrl: "LINK_TO_YOUR_GOOGLE_DRIVE_PDF" },
   ];
 
