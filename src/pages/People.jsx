@@ -21,6 +21,8 @@ import garryPhoto from '../assets/sb/garry.png';
 import jrPhoto from '../assets/sb/jr.png';
 import jaimePhoto from '../assets/sb/jaime.png';
 import angelPhoto1 from '../assets/sb/angel.png';
+import lendelPhoto from '../assets/sb/lendel1.png';
+import jhommelPhoto from '../assets/sb/jhommel1.png';
 
 const People = () => {
 
@@ -41,8 +43,8 @@ const People = () => {
     { name: "HON. REGIDOR A. PINEDA JR.",  position: "Barangay Kagawad", image: jrPhoto },
     { name: "HON. JAIME B. SALAZAR",       position: "Barangay Kagawad", image: jaimePhoto },
     { name: "HON. ANGELITO M. MATIC",      position: "Barangay Kagawad", image: angelPhoto1 },
-    { name: "HON. LENDEL F. ALMARES",      position: "Barangay Secretary", image: "path/to/sec.jpg" },
-    { name: "HON. JHOMMEL M. MONTEVIRGEN", position: "Barangay Treasurer", image: "path/to/tres.jpg" },
+    { name: "HON. LENDEL F. ALMARES",      position: "Barangay Secretary", image: lendelPhoto },
+    { name: "HON. JHOMMEL M. MONTEVIRGEN", position: "Barangay Treasurer", image: jhommelPhoto },
   ];
 
   const skMembers = [

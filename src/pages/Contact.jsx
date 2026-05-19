@@ -6,23 +6,23 @@ const Contact = () => {
 
   const emergencyNumbers = [
     { 
-      label: "Liliw MPS (Police)", 
+      label: "Liliw Municipal Police Station", 
       numbers: ["0906 360 4119", "0998 598 5647", "5035-904"]
     },
     { 
-      label: "Liliw BFP (Fire)", 
+      label: "Liliw Bureau of Fire Protection", 
       numbers: ["0956 769 0379", "503-1756"]
     },
     { 
-      label: "Liliw RHU (Medical)", 
+      label: "Liliw Rural Health Unit", 
       numbers: ["(049) 5633-055"]
     },
     { 
-      label: "Liliw MDRRMO", 
+      label: "Liliw Municipal Disaster Risk Reduction & Management Office", 
       numbers: ["0945 135 0537", "(049) 5033-621", "0953 611 0440 (Lowland)"]
     },
     { 
-      label: "Mayor's Office", 
+      label: "Liliw Mayor's Office", 
       numbers: ["563-1001 local 103"]
     },
   ];
@@ -230,7 +230,7 @@ const Contact = () => {
               fontSize: 'clamp(1rem, 2.5vw, 1.2rem)',
               marginBottom: '12px',
             }}>
-              SK San Isidro Office
+              SK and SB of San Isidro Office
             </h3>
             <p style={{
               color: '#64748b',
@@ -273,7 +273,7 @@ const Contact = () => {
               fontSize: 'clamp(0.85rem, 2vw, 0.95rem)',
               margin: '0 0 12px',
             }}>
-              For Barangay Clearances, Indigency, and Blotter concerns,
+              For Barangay Clearances, Indigency, and other concerns,
               please visit the main Barangay Hall Ground Floor.
             </p>
             <p style={{
@@ -282,7 +282,7 @@ const Contact = () => {
               color: '#0f172a',
               margin: 0,
             }}>
-              Contact: Barangay Secretary Lendel F. Almares
+              Look for Barangay Secretary Lendel F. Almares
             </p>
           </div>
         </div>

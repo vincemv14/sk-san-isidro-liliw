@@ -154,3 +154,22 @@ h2 {
   padding: 0 5%;
   width: 100%;
 }
+
+/* Add this instead */
+.member-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .member-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+/* Add this to your events/projects card CSS if the spacing doesn't show up */
+.your-description-class-name {
+  white-space: pre-line;
+}

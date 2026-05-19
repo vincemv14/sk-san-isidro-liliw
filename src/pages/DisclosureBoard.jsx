@@ -27,8 +27,8 @@ const DisclosureBoard = () => {
     },
     { 
       id: 'n3', 
-      title: "National Youth Philippine Development Plan (NYDP)", 
-      agency: "NYC", 
+      title: "Philippine Youth Development Plan (PYDP)", 
+      agency: "National Youth Commission", 
       year: "2023-2028", 
       fileUrl: "https://drive.google.com/file/d/1dcIQfgzZWYWhL6usBFAF6Xo1xLEyuw7f/view" 
     },
@@ -69,8 +69,25 @@ const DisclosureBoard = () => {
   ];
 
   const openLink = (url) => {
-    if (url !== "#") window.open(url, "_blank", "noopener,noreferrer");
-    else alert("File link coming soon!");
+    if (url && url !== "#" && url !== "LINK_TO_YOUR_GOOGLE_DRIVE_PDF") {
+      window.open(url, "_blank", "noopener,noreferrer");
+    } else {
+      alert("File link coming soon!");
+    }
+  };
+
+  const handleDownload = (url, filename) => {
+    if (!url || url === "#" || url === "LINK_TO_YOUR_GOOGLE_DRIVE_PDF") {
+      alert("Download file coming soon!");
+      return;
+    }
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', filename || 'document.pdf');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -124,6 +141,7 @@ const DisclosureBoard = () => {
                 sub={doc.category}
                 date={doc.date}
                 onView={() => openLink(doc.fileUrl)}
+                onDownload={() => handleDownload(doc.fileUrl, `${doc.title}.pdf`)}
               />
             ))}
           </div>
@@ -196,7 +214,7 @@ const DisclosureBoard = () => {
                     textAlign: 'left',
                   }}
                 >
-                  Open PDF ↗
+                  View ↗
                 </button>
               </div>
             ))}
@@ -281,7 +299,7 @@ const DisclosureBoard = () => {
 
 // --- Atomic Components ---
 
-const DocRow = ({ title, sub, date, onView }) => (
+const DocRow = ({ title, sub, date, onView, onDownload }) => (
   <div style={{
     backgroundColor: 'white',
     padding: 'clamp(14px, 3vw, 20px) clamp(16px, 4vw, 30px)',
@@ -321,7 +339,7 @@ const DocRow = ({ title, sub, date, onView }) => (
       }}>
         View
       </button>
-      <button onClick={onView} style={{
+      <button onClick={onDownload} style={{
         padding: 'clamp(6px, 1.5vw, 8px) clamp(12px, 2.5vw, 16px)',
         borderRadius: '8px',
         border: 'none',
@@ -397,6 +415,5 @@ const Footer = () => (
     </div>
   </footer>
 );
-
 
 export default DisclosureBoard;

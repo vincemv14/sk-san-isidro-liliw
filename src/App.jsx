@@ -8,6 +8,7 @@ import Activities from './pages/Activities.jsx';
 import DisclosureBoard from './pages/DisclosureBoard.jsx'; // Updated to lowercase
 import Contact from './pages/Contact.jsx';
 import './App.css';
+import CommunityChatbot from './components/CommunityChatbot';
 
 // --- Helper: Scroll to top on every route change ---
 const ScrollToTop = () => {
@@ -18,6 +19,7 @@ const ScrollToTop = () => {
   return null;
 };
 
+<main style={{ overflowX: 'hidden', width: '100%', display: 'flex', flexDirection: 'column' }}></main>
 function App() {
   return (
     <Router>
@@ -36,6 +38,8 @@ function App() {
           <Route path="/disclosure" element={<DisclosureBoard />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
+
+        <CommunityChatbot /> 
       </main>
     </Router>
   );
