@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import heroBg from '../assets/home/san-isidro.jpg'; 
+import agriPhoto from '../assets/activities/project/agrivillage.jpg';
 
 const Home = () => {
   const [showHotlines, setShowHotlines] = useState(false);
@@ -29,7 +30,7 @@ const Home = () => {
     backgroundColor: 'rgba(255, 255, 255, 0.15)', 
     color: 'white',
     border: '1px solid white', 
-    padding: '12px 30px',
+    padding: '15px 40px',
     fontSize: '0.85rem',
     fontWeight: '600',
     borderRadius: '12px', 
@@ -37,6 +38,7 @@ const Home = () => {
     textTransform: 'uppercase',
     letterSpacing: '1px',
     transition: 'all 0.3s ease',
+    marginBottom: '30px',
     outline: 'none'
   };
 
@@ -67,12 +69,11 @@ const Home = () => {
             <h1 style={{ fontSize: '3.5rem', margin: '0 0 10px 0', lineHeight: '1', fontWeight: "650" }}>
               Welcome to <br /> Barangay San Isidro
             </h1>
-            <h1 style={{ fontSize: '3.5rem', margin: '0 0 20px 0', lineHeight: '1', fontWeight: "650" }}>
+            <h1 style={{ fontSize: '3.5rem', margin: '0 0 30px 0', lineHeight: '1', fontWeight: "650" }}>
               Liliw, Laguna
             </h1>
-            <p style={{ fontSize: '1.1rem', marginBottom: '20px', maxWidth: '650px', opacity: '0.9', lineHeight: '1.6' }}>
-              A progressive community, dedicated to genuine service to <br />
-              enrich the lives of its residents through good governance.
+            <p style={{ fontSize: '1.1rem', marginBottom: '40px', maxWidth: '650px', opacity: '0.9', lineHeight: '1.6' }}>
+              Enriching the lives of our residents through good governance, genuine service, and a unified commitment to a progressive, innovative, and culturally proud San Isidro.
             </p>
             
             <div style={{ display: 'flex', gap: '15px' }}>
@@ -98,25 +99,38 @@ const Home = () => {
       </section>
 
       {/* 2. CONTENT SECTION: KNOW MORE */}
-      <section id="know-more" style={{ backgroundColor: '#002c02', padding: '100px 10%' }}>
+      <section id="know-more" style={{ backgroundColor: '#002c02', padding: '150px 10%' }}>
         <div style={{ textAlign: 'center', maxWidth: '1100px', margin: '0 auto' }}>
           <h2 style={sectionHeadingStyle1}>KNOW MORE</h2>
-          <p style={{ color: '#ffffff', fontSize: '1.15rem', lineHeight: '1.8', marginTop: '20px' }}>
-            Barangay San Isidro is a community built on the pillars of 
-            hard work and unity. Known as a vital part of Liliw, the <strong>"Tsinelas Capital,"</strong> we take 
-            pride in our local heritage while embracing the future through digital innovation.
-          </p>
-          <div style={{ marginTop: '40px', display: 'flex', gap: '20px' }}>
-             <div style={{ padding: '25px', borderLeft: '6px solid #ffd000', background: 'rgba(255,255,255,0.05)', borderRadius: '0 10px 10px 0', flex: 1 }}>
-                <strong style={{ color: '#ffd000', fontSize: '1.1rem' }}>Our Vision:</strong>
-                <p style={{ margin: '10px 0 0', color: '#e2e8f0' }}>To be a model of transparency and active youth participation in Laguna, fostering growth through technology and culture.</p>
-             </div>
+
+          <div style={{ marginTop: '40px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+            
+            {/* Paragraph 1 */}
+            <p style={{ margin: 0, color: '#e2e8f0', fontSize: '1.05rem', lineHeight: '1.7' }}>
+              Inspired by our patron saint, <strong>San Isidro Labrador</strong>, our barangay is built on collective action 
+              (<em>Bayanihan</em>) and honest labor. Just as San Isidro found holiness in cultivating the land, our 
+              community finds its true strength in dedication and shared growth. This industrious spirit perfectly mirrors 
+              our town's broader identity as the <strong>"Tsinelas Capital of the Philippines."</strong> The same meticulous 
+              hands that craft Liliw's famous footwear are the hands that build up our neighborhood—shaping a resilient community 
+              culture defined by perseverance, economic self-reliance, and deep artistic pride.
+            </p>
+
+            {/* Paragraph 2 */}
+            <p style={{ margin: 0, color: '#e2e8f0', fontSize: '1.05rem', lineHeight: '1.7' }}>
+              For us, this unified foundation means that genuine public service and transparent governance are the keys to 
+              cultivating a thriving, forward-thinking environment. From grassroots community feeding initiatives during challenging 
+              times to vibrant sports tournaments and grand cultural festivals, our unity is our primary harvest. Guided by the 
+              faithful example of San Isidro and the proud craftsmanship traditions of Liliw, we remain fiercely dedicated to 
+              fostering an inclusive barangay where our youth are actively empowered to lead, our families are safeguarded, and 
+              every resident's voice is structurally valued.
+            </p>
+
           </div>
         </div>
       </section>
 
       {/* 3. CONTENT SECTION: CALENDAR OF ACTIVITIES */}
-      <section id="calendar" style={{ backgroundColor: '#ffffff', padding: '100px 10%' }}>
+      <section id="calendar" style={{ backgroundColor: '#ffffff', padding: '150px 10%' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '50px' }}>
             <h2 style={sectionHeadingStyle2}>CALENDAR OF ACTIVITIES</h2>
@@ -132,7 +146,7 @@ const Home = () => {
       </section>
 
       {/* 4. QUICK LINKS GUIDE */}
-      <section id="quick-links" style={{ backgroundColor: '#001a01', padding: '100px 10%', position: 'relative' }}>
+      <section id="quick-links" style={{ backgroundColor: '#001a01', padding: '150px 10%', position: 'relative' }}>
         <div style={{ textAlign: 'center', maxWidth: '1100px', margin: '0 auto' }}>
           <h2 style={{ ...sectionHeadingStyle1, borderBottomColor: '#fdd835' }}>QUICK LINKS GUIDE</h2>
           
@@ -174,6 +188,23 @@ const Home = () => {
                   Visit Page
                 </a>
               </div>
+
+              <div style={hotlineItemStyle}>
+  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+    <strong>Meralco:</strong>
+    {/* First line of contact numbers */}
+    <span style={{ color: '#ffffff', fontSize: '1rem', marginTop: '4px' }}>
+      02-16-211 / 09175592824
+    </span>
+    {/* Second line of contact numbers dropping directly below */}
+    <span style={{ color: '#ffffff', fontSize: '1rem', marginTop: '2px', opacity: 0.9 }}>
+      Text Only: 09209716211 / 09175516211
+    </span>
+  </div>
+  <a href="https://www.facebook.com/meralco" target="_blank" rel="noreferrer" style={linkStyle}>
+    Visit Page
+  </a>
+</div>
               
               <div style={hotlineItemStyle}>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
@@ -205,6 +236,16 @@ const Home = () => {
                 </a>
               </div>
 
+              <div style={hotlineItemStyle}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                  <strong>Philippine Red Cross Laguna Chapter:</strong>
+                  <span style={{ color: '#ffffff', fontSize: '1rem', marginTop: '4px' }}>(049) 501-1114</span>
+                </div>
+                <a href="https://www.facebook.com/philredcrosslagunachapter" target="_blank" rel="noreferrer" style={linkStyle}>
+                  Visit Page
+                </a>
+              </div>
+
               <p style={{ fontSize: '0.8rem', marginTop: '20px', color: 'rgba(255,255,255,0.6)', fontStyle: 'italic', textAlign: 'center' }}>
                 Please use these numbers for urgent emergencies only.
               </p>
@@ -230,12 +271,12 @@ const Home = () => {
               <div style={{ padding: '15px 0', fontSize: '0.95rem', lineHeight: '1.5', color: '#e2e8f0' }}>
                 <strong>Barangay Health Workers (BHW):</strong>
                 <p style={{ margin: '5px 0 0', color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem' }}>
-                  For local checkups, basic medicine distribution, and maternal care schedules, please drop by or coordinate with our text updates directly through the San Isidro Barangay Hall health deck.
+                  For basic medicine distribution and medical assistance, please visit or coordinate with our SB Officials, or proceed directly to our Barangay Hall.
                 </p>
               </div>
 
               <p style={{ fontSize: '0.8rem', marginTop: '20px', color: 'rgba(255,255,255,0.6)', fontStyle: 'italic', textAlign: 'center' }}>
-                Our health response team operates regular checkups daily from 8:00 AM to 5:00 PM.
+                Please coordinate with our Barangay Health Committee for assistance
               </p>
             </div>
           </div>
@@ -243,7 +284,7 @@ const Home = () => {
       </section>
 
       {/* 5. VISION RE-EMPHASIS / INFO */}
-      <section style={{ backgroundColor: '#ffffff', padding: '100px 10%' }}>
+      <section style={{ backgroundColor: '#ffffff', padding: '150px 10%' }}>
         <div style={{ textAlign: 'center', maxWidth: '1100px', margin: '0 auto' }}>
           <h2 style={sectionHeadingStyle2}>COMMUNITY VALUES</h2>
           <p style={{ color: '#000000', fontSize: '1.15rem', lineHeight: '1.8', marginTop: '20px' }}>
@@ -256,6 +297,150 @@ const Home = () => {
                 <strong style={{ color: '#ffffff', fontSize: '1.1rem' }}>Our Vision:</strong>
                 <p style={{ margin: '10px 0 0', color: '#e2e8f0' }}>To be a model of transparency and active youth participation in Laguna, fostering growth through technology and culture.</p>
              </div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- LATEST COMMUNITY NEWS SECTION --- */}
+      <section style={{
+        backgroundColor: '#f8fafc', 
+        padding: 'clamp(50px, 8vh, 80px) 5%',
+        width: '100%',
+        boxSizing: 'border-box',
+      }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          
+          {/* Section Header */}
+          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+            <h2 style={{
+              fontSize: 'clamp(1.3rem, 3.5vw, 2.2rem)',
+              fontWeight: 'bold',
+              display: 'inline-block',
+              borderBottom: '4px solid #538b56',
+              lineHeight: '1.3',
+              color: '#002c02',
+              margin: 0,
+              paddingBottom: '8px'
+            }}>
+              LATEST NEWS & ANNOUNCEMENTS
+            </h2>
+            <p style={{ color: '#64748b', marginTop: '10px', fontSize: 'clamp(0.85rem, 2vw, 1rem)' }}>
+              Stay updated with the most recent events and projects in Barangay San Isidro
+            </p>
+          </div>
+
+          {/* News Layout Grid */}
+          <div style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '30px',
+            alignItems: 'stretch',
+            marginTop: '20px'
+          }}>
+            
+            {/* Left Column: Featured News Image */}
+            <div style={{
+              flex: '1 1 450px',
+              borderRadius: '24px',
+              overflow: 'hidden',
+              boxShadow: '0 10px 30px rgba(0, 0, 0, 0.08)',
+              border: '1px solid #e2e8f0',
+              minHeight: '320px',
+              position: 'relative'
+            }}>
+              <img 
+                src={agriPhoto} 
+                alt="Latest Barangay Event"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  display: 'block'
+                }}
+                onError={(e) => { e.target.src = 'https://via.placeholder.com/600x400?text=Barangay+News'; }}
+              />
+            </div>
+
+            {/* Right Column: Brief Text Details */}
+            <div style={{
+              flex: '1 1 400px',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              background: '#ffffff',
+              padding: 'clamp(20px, 4vw, 40px)',
+              borderRadius: '24px',
+              boxShadow: '0 10px 30px rgba(0, 0, 0, 0.04)',
+              border: '1px solid #e2e8f0',
+              boxSizing: 'border-box'
+            }}>
+              <span style={{
+                color: '#ffd000',
+                backgroundColor: '#002c02',
+                padding: '6px 14px',
+                borderRadius: '50px',
+                fontSize: '0.75rem',
+                fontWeight: '700',
+                textTransform: 'uppercase',
+                letterSpacing: '1px',
+                alignSelf: 'flex-start',
+                marginBottom: '16px'
+              }}>
+                Latest Project
+              </span>
+
+              <h3 style={{
+                color: '#002c02',
+                fontSize: 'clamp(1.2rem, 2.5vw, 1.6rem)',
+                fontWeight: 'bold',
+                margin: '0 0 12px 0',
+                lineHeight: '1.3'
+              }}>
+                Successful Agri-Village Launch & Distribution Drive
+              </h3>
+
+              <p style={{
+                color: '#475569',
+                fontSize: 'clamp(0.88rem, 1.8vw, 1rem)',
+                lineHeight: '1.6',
+                margin: '0 0 24px 0'
+              }}>
+                Barangay San Isidro recently rolled out its sustainable agricultural showcase initiative, highlighting local food production and empowering active youth involvement. Fresh seedlings, organic resources, and farming equipment provisions were distributed to help promote neighborhood food security.
+              </p>
+
+              <a 
+                href="/activities" 
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: '12px 28px',
+                  backgroundColor: '#002c02',
+                  color: '#ffd000',
+                  textDecoration: 'none',
+                  borderRadius: '12px',
+                  fontWeight: '700',
+                  fontSize: '0.9rem',
+                  alignSelf: 'flex-start',
+                  transition: 'all 0.2s ease',
+                  boxShadow: '0 4px 12px rgba(0, 44, 2, 0.15)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#0c4b00';
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = '#002c02';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                }}
+              >
+                Read More Activities
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '8px' }}>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
       </section>

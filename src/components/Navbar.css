@@ -27,7 +27,7 @@
 
 .logo-container span {
   color: #ffffff;
-  font-size: clamp(1rem, 3vw, 1.5rem);
+  font-size: clamp(1.5rem, 3vw, 1.5rem);
   font-weight: 700;
   letter-spacing: 1.5px;
   text-transform: uppercase;

@@ -18,19 +18,19 @@ const About = () => {
         <section style={{
           backgroundColor: '#002c02',
           color: 'white',
-          padding: 'clamp(50px, 8vh, 80px) 5%',
+          padding: 'clamp(150px, 8vh, 80px) 5%',
           width: '100%',
           boxSizing: 'border-box',
         }}>
-          <div style={{ maxWidth: '1100px', margin: '0 auto', textAlign: 'center' }}>
+          <div style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'center' }}>
             <h2 style={{ ...headingStyle, color: '#ffffff' }}>INTRODUCTION</h2>
             <p style={{
               fontSize: 'clamp(0.95rem, 2.5vw, 1.2rem)',
               lineHeight: '1.8',
               opacity: 0.9,
-              marginTop: '10px'
+              marginTop: '20px'
             }}>
-              Welcome to the heart of Liliw, Laguna. Barangay San Isidro stands as a
+              Welcome to Liliw, Laguna. Barangay San Isidro stands as a
               beacon of heritage and progress. As a key player in the Tsinelas Capital,
               our community is built on a foundation of unity, transparency, and a
               drive toward digital innovation.
@@ -41,7 +41,7 @@ const About = () => {
         {/* 2. GEOGRAPHY */}
         <section style={{
           backgroundColor: '#ffffff',
-          padding: 'clamp(50px, 8vh, 80px) 5%',
+          padding: 'clamp(150px, 8vh, 80px) 5%',
           width: '100%',
           boxSizing: 'border-box',
         }}>
@@ -70,9 +70,9 @@ const About = () => {
 
             {/* GOOGLE MAPS EMBED */}
             <div style={{
-              flex: '1 1 280px',
-              height: 'clamp(250px, 40vw, 400px)',
-              borderRadius: '20px',
+              flex: '1 1 300px',
+              height: 'clamp(300px, 40vw, 450px)',
+              borderRadius: '10px',
               overflow: 'hidden',
               boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
               border: '1px solid #e2e8f0'
@@ -95,7 +95,7 @@ const About = () => {
         <section style={{
           backgroundColor: '#001a01',
           color: 'white',
-          padding: 'clamp(50px, 8vh, 80px) 5%',
+          padding: 'clamp(150px, 8vh, 80px) 5%',
           width: '100%',
           boxSizing: 'border-box',
         }}>
@@ -109,8 +109,8 @@ const About = () => {
               opacity: 0.9
             }}>
               San Isidro is home to a vibrant community. Our population
-              is composed of dedicated professionals, skilled artisans, and a
-              dynamic youth sector committed to service.
+              is composed of dedicated professionals, local farmers, and
+              youth sector. The community continues to grow through agriculture and crop production, with residents actively contributing to local development and preserving traditions
             </p>
 
             <div style={{
@@ -130,7 +130,7 @@ const About = () => {
         <section style={{
           backgroundColor: '#ffffff',
           color: '#334155',
-          padding: 'clamp(50px, 8vh, 80px) 5%',
+          padding: 'clamp(150px, 8vh, 80px) 5%',
           width: '100%',
           boxSizing: 'border-box',
         }}>

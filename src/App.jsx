@@ -5,10 +5,10 @@ import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
 import People from './pages/People.jsx';
 import Activities from './pages/Activities.jsx';
-import DisclosureBoard from './pages/DisclosureBoard.jsx'; // Updated to lowercase
+import DisclosureBoard from './pages/DisclosureBoard.jsx';
 import Contact from './pages/Contact.jsx';
-import './App.css';
 import CommunityChatbot from './components/CommunityChatbot';
+import './App.css';
 
 // --- Helper: Scroll to top on every route change ---
 const ScrollToTop = () => {
@@ -19,16 +19,13 @@ const ScrollToTop = () => {
   return null;
 };
 
-<main style={{ overflowX: 'hidden', width: '100%', display: 'flex', flexDirection: 'column' }}></main>
 function App() {
   return (
     <Router>
-      <ScrollToTop /> {/* Ensures your phone view starts at the top */}
+      <ScrollToTop />
       <Navbar />
       
-      {/* Wrapping Routes in a 'main' tag with 'overflow-x: hidden' 
-        is the final 'safety belt' for mobile responsiveness.
-      */}
+      {/* Main content container */}
       <main style={{ overflowX: 'hidden', width: '100%' }}>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -38,9 +35,10 @@ function App() {
           <Route path="/disclosure" element={<DisclosureBoard />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
-
-        <CommunityChatbot /> 
       </main>
+
+      {/* Chatbot rendered outside 'main' to ensure fixed positioning works */}
+      <CommunityChatbot /> 
     </Router>
   );
 }

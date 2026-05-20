@@ -1,5 +1,8 @@
 import React from 'react';
 import skBudget2025 from '../assets/disclosureboard/sksanisidrobudget2025.pdf';
+import skreformact from '../assets/disclosureboard/skreformact.pdf';
+import sandiganngkabatan from '../assets/disclosureboard/sandiganngkabataan.pdf';
+
 
 const DisclosureBoard = () => {
   const brandGreen = '#002c02';
@@ -16,7 +19,7 @@ const DisclosureBoard = () => {
       title: "SK Reform Act (RA 10742) - IRR", 
       agency: "National", 
       year: "2024 Update", 
-      fileUrl: "https://www.officialgazette.gov.ph/downloads/2016/01jan/20160115-RA-10742-BSA.pdf" 
+      fileUrl: skreformact, 
     },
     { 
       id: 'n2', 
@@ -64,7 +67,7 @@ const DisclosureBoard = () => {
       desc: "How do we hold SK officials accountable? Here's a step-by-step guide!",
       source: "GoodGovPH",
       date: "March 21, 2026",
-      newsUrl: "https://drive.google.com/drive/u/0/folders/1kbC4GU7IlCHuh9ZAS_w_-BTL3DhYAGFy"
+      newsUrl: sandiganngkabatan
     }
   ];
 

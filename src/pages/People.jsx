@@ -184,58 +184,95 @@ const People = () => {
   );
 };
 
-// --- Grid wrapper: 2 cols on mobile, up to 4 on desktop ---
-const MemberGrid = ({ members, isDark }) => (
-  <div style={{
-    display: 'grid',
-    gridTemplateColumns: 'repeat(2, 1fr)',       /* 2 per row on mobile */
-    gap: 'clamp(12px, 2.5vw, 20px)',
-  }}
-  /* Override to 3–4 cols on wider screens via inline media won't work,
-     so we use a clamp on minmax via a style tag trick below */
-  >
-    {members.map((member, index) => (
-      <div key={index} style={{ display: 'flex', justifyContent: 'center' }}>
-        <OfficialCard {...member} isDark={isDark} />
-      </div>
-    ))}
-  </div>
-);
+// --- Updated Responsive Grid Wrapper ---
+const MemberGrid = ({ members, isDark }) => {
+  // Listen to screen width dynamically
+  const [isMobile, setIsMobile] = React.useState(
+    typeof window !== 'undefined' ? window.innerWidth < 768 : false
+  );
 
-// --- Official Card ---
+  React.useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return (
+    <div style={{
+      display: 'grid',
+      // FIX: 2 columns on mobile devices, automatically scales to 4 columns on desktop layouts!
+      gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)',
+      gap: isMobile ? '12px' : '24px',
+      width: '100%',
+      boxSizing: 'border-box',
+      marginTop: '20px'
+    }}>
+      {members.map((member, index) => (
+        <div key={index} style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+          <OfficialCard {...member} isDark={isDark} />
+        </div>
+      ))}
+    </div>
+  );
+};
+
+// --- Updated Card Scale Optimization ---
 const OfficialCard = ({ name, position, image, isDark, isLead }) => {
   const nameColor   = isDark ? '#002c02' : '#ffffff';
   const posColor    = isDark ? '#444444' : '#ffd000';
   const borderColor = isDark ? '#002c02' : '#ffd000';
 
+  const [isMobile, setIsMobile] = React.useState(
+    typeof window !== 'undefined' ? window.innerWidth < 768 : false
+  );
+
+  React.useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   /* Lead (captain / chairperson) card is slightly bigger */
-  const photoSize = isLead ? 'clamp(110px, 18vw, 160px)' : 'clamp(80px, 13vw, 120px)';
-  const cardWidth = isLead ? 'clamp(180px, 40vw, 260px)' : 'clamp(130px, 40vw, 200px)';
+  const photoSize = isLead 
+    ? 'clamp(110px, 18vw, 160px)' 
+    : (isMobile ? 'clamp(70px, 16vw, 100px)' : '110px'); // Slightly refined size for 4-in-a-row alignment
+  
+  const cardWidth = isLead 
+    ? 'clamp(180px, 40vw, 260px)' 
+    : '100%'; // Allow flex/grid boundaries to manage item width instead of hard capping
 
   return (
     <div
       style={{
         background: isDark ? '#ffbb00' : '#0c4b00',
-        padding: 'clamp(14px, 3vw, 22px)',
+        padding: isMobile ? '12px 8px' : '20px 14px',
         borderRadius: '20px',
         textAlign: 'center',
         width: cardWidth,
+        maxWidth: isLead ? '260px' : '240px', // Prevents stretching on massive desktop containers
         border: isDark ? '1px solid #eab308' : '1px solid #ffd000',
-        transition: 'transform 0.3s ease',
+        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
         cursor: 'default',
         boxSizing: 'border-box',
+        boxShadow: '0 4px 15px rgba(0,0,0,0.1)',
       }}
-      onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-8px)'}
-      onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = 'translateY(-6px)';
+        e.currentTarget.style.boxShadow = '0 8px 25px rgba(0,0,0,0.18)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = 'translateY(0)';
+        e.currentTarget.style.boxShadow = '0 4px 15px rgba(0,0,0,0.1)';
+      }}
     >
       <div style={{
         width: photoSize,
         height: photoSize,
         borderRadius: '50%',
         backgroundColor: '#ffffff',
-        margin: '0 auto 14px',
+        margin: '0 auto 12px',
         overflow: 'hidden',
-        border: `4px solid ${borderColor}`,
+        border: `3px solid ${borderColor}`, // Cleaner downscaling line thickness
       }}>
         <img
           src={image}
@@ -246,14 +283,14 @@ const OfficialCard = ({ name, position, image, isDark, isLead }) => {
       </div>
       <h4 style={{
         color: nameColor,
-        fontSize: isLead ? 'clamp(0.78rem, 2vw, 1.05rem)' : 'clamp(0.68rem, 1.8vw, 0.88rem)',
-        margin: '0 0 5px 0',
+        fontSize: isLead ? 'clamp(0.78rem, 2vw, 1.05rem)' : (isMobile ? '0.75rem' : '0.85rem'),
+        margin: '0 0 4px 0',
         fontWeight: 'bold',
-        lineHeight: '1.3',
+        lineHeight: '1.2',
       }}>{name}</h4>
       <p style={{
         color: posColor,
-        fontSize: isLead ? 'clamp(0.68rem, 1.6vw, 0.82rem)' : 'clamp(0.6rem, 1.5vw, 0.74rem)',
+        fontSize: isLead ? 'clamp(0.68rem, 1.6vw, 0.82rem)' : (isMobile ? '0.6rem' : '0.7rem'),
         fontWeight: '700',
         textTransform: 'uppercase',
         letterSpacing: '0.5px',

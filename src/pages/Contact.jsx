@@ -10,6 +10,10 @@ const Contact = () => {
       numbers: ["0906 360 4119", "0998 598 5647", "5035-904"]
     },
     { 
+      label: "Meralco Philippines", 
+      numbers: ["02-16-211", "09175592824", "Text Only: 09209716211 / 09175516211"]
+    },
+    { 
       label: "Liliw Bureau of Fire Protection", 
       numbers: ["0956 769 0379", "503-1756"]
     },
@@ -24,6 +28,10 @@ const Contact = () => {
     { 
       label: "Liliw Mayor's Office", 
       numbers: ["563-1001 local 103"]
+    },
+    { 
+      label: "Philippine Red Cross Laguna Chapter", 
+      numbers: ["(049) 501-1114"]
     },
   ];
 
@@ -109,7 +117,6 @@ const Contact = () => {
               {item.numbers.map((num, i) => (
                 <p key={i} style={{
                   fontSize: 'clamp(0.9rem, 2.5vw, 1.15rem)',
-                  fontWeight: 'bold',
                   color: '#0f172a',
                   margin: '4px 0',
                   lineHeight: '1.4',
