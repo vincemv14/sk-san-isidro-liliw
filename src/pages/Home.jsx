@@ -30,8 +30,8 @@ const Home = () => {
     backgroundColor: 'rgba(255, 255, 255, 0.15)', 
     color: 'white',
     border: '1px solid white', 
-    padding: '15px 40px',
-    fontSize: '0.85rem',
+    padding: '12px 25px',
+    fontSize: '0.8rem',
     fontWeight: '600',
     borderRadius: '12px', 
     cursor: 'pointer',
@@ -549,23 +549,33 @@ const modalOverlayStyle = {
 
 const hotlineBoxStyle = {
   backgroundColor: '#002c02',
-  padding: '40px',
+  padding: '20px', // Binawasan ang padding para mas compact
   borderRadius: '20px',
   border: '2px solid #fdd835',
   maxWidth: '450px',
   width: '90%',
+  maxHeight: '80vh', // Limitado sa 80% ng screen height
+  display: 'flex',
+  flexDirection: 'column', // Para maayos ang flow sa loob
   position: 'relative',
   color: 'white',
-  boxShadow: '0 20px 40px rgba(0,0,0,0.4)'
+  boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
+  margin: 'auto' // Para laging nasa gitna ng screen
+};
+
+// Bagong style para sa scrollable area ng content
+const hotlineContentStyle = {
+  overflowY: 'auto', // Dito magkakaroon ng scroll kung mahaba ang listahan
+  paddingRight: '10px'
 };
 
 const hotlineItemStyle = {
-  padding: '15px 0',
+  padding: '12px 0', // Bahagyang binawasan
   borderBottom: '1px solid rgba(255,255,255,0.1)',
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
-  fontSize: '1.1rem'
+  fontSize: '0.95rem' // Ginawang mas maliit para mas maraming kasya
 };
 
 const closeButtonStyle = {
