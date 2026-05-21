@@ -3,7 +3,7 @@ import React from 'react';
 const About = () => {
 
   const headingStyle = {
-    fontSize: 'clamp(1.5rem, 4vw, 2.5rem)',
+    fontSize: 'clamp(2.2rem, 4vw, 2.5rem)',
     fontWeight: 'bold',
     marginBottom: '25px',
     display: 'inline-block',

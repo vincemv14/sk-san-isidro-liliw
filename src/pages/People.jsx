@@ -27,7 +27,7 @@ import jhommelPhoto from '../assets/sb/jhommel1.png';
 const People = () => {
 
   const headingStyle = {
-    fontSize: 'clamp(1.3rem, 3.5vw, 2.2rem)',
+    fontSize: 'clamp(2.2rem, 3.5vw, 2.2rem)',
     fontWeight: 'bold',
     marginBottom: '40px',
     display: 'inline-block',
@@ -36,48 +36,55 @@ const People = () => {
   };
 
   const sbMembers = [
-    { name: "HON. DAISY S. OGANIA",       position: "Barangay Kagawad", image: daisyPhoto },
-    { name: "HON. SERGIO A. CAGAS",        position: "Barangay Kagawad", image: sergioPhoto },
-    { name: "HON. ELVIRA M. NOMA",         position: "Barangay Kagawad", image: elviePhoto },
-    { name: "HON. GARRY L. LAGRISOLA",     position: "Barangay Kagawad", image: garryPhoto },
-    { name: "HON. REGIDOR A. PINEDA JR.",  position: "Barangay Kagawad", image: jrPhoto },
-    { name: "HON. JAIME B. SALAZAR",       position: "Barangay Kagawad", image: jaimePhoto },
-    { name: "HON. ANGELITO M. MATIC",      position: "Barangay Kagawad", image: angelPhoto1 },
+    { 
+        name: "HON. DAISY S. OGANIA", 
+        position: "Barangay Kagawad", 
+        committee: "Committee Chair on Appropriation", 
+        image: daisyPhoto 
+    },
+    { name: "HON. SERGIO A. CAGAS",        position: "Barangay Kagawad",committee:"Committee Chair on Health", image: sergioPhoto },
+    { name: "HON. ELVIRA M. NOMA",         position: "Barangay Kagawad",committee:"Committee Chair on Women's and Family", image: elviePhoto },
+    { name: "HON. GARRY L. LAGRISOLA",     position: "Barangay Kagawad",committee:"Committee Chair on Agriculture", image: garryPhoto },
+    { name: "HON. REGIDOR A. PINEDA JR.",  position: "Barangay Kagawad",committee:"Committee Chair on Education", image: jrPhoto },
+    { name: "HON. JAIME B. SALAZAR",       position: "Barangay Kagawad",committee:"Committee Chair on Peace and Order", image: jaimePhoto },
+    { name: "HON. ANGELITO M. MATIC",      position: "Barangay Kagawad",committee:"Committee Chair on Infrastructure", image: angelPhoto1 },
     { name: "HON. LENDEL F. ALMARES",      position: "Barangay Secretary", image: lendelPhoto },
     { name: "HON. JHOMMEL M. MONTEVIRGEN", position: "Barangay Treasurer", image: jhommelPhoto },
   ];
 
   const skMembers = [
-    { name: "HON. VINCE MITRA VILLANUEVA",    position: "SK Member",    image: binsPhoto },
-    { name: "HON. ALTHEA MARIE POONIN",       position: "SK Member",    image: theaPhoto },
-    { name: "HON. JENNIFER B. PLATERO",       position: "SK Member",    image: efferPhoto },
-    { name: "HON. PAUL ANGELO B. GRINDULO",   position: "SK Member",    image: paulPhoto },
-    { name: "HON. SAMANTHA CLAIRE M. VASALLO",position: "SK Member",    image: samPhoto },
-    { name: "HON. ANGEL DIANNE TIQUIS",       position: "SK Member",    image: angelPhoto },
-    { name: "HON. NIDELINE MEI LABRIAGA",     position: "SK Member",    image: nidelinePhoto },
+    { name: "HON. VINCE M. VILLANUEVA",    position: "SK Member",committee:"Committee Chair on Social Inclusion and Equity",    image: binsPhoto },
+    { name: "HON. ALTHEA MARIE POONIN",       position: "SK Member",committee:"Committee Chair on Education",    image: theaPhoto },
+    { name: "HON. JENNIFER B. PLATERO",       position: "SK Member",committee:"Committee Chair on Women Empowerment",    image: efferPhoto },
+    { name: "HON. PAUL ANGELO B. GRINDULO",   position: "SK Member",committee:"Committee Chair on Social Protection and Security",    image: paulPhoto },
+    { name: "HON. SAMANTHA CLAIRE M. VASALLO",position: "SK Member",committee:"Committee Chair on Health",    image: samPhoto },
+    { name: "HON. ANGEL DIANNE M. TIQUIS",       position: "SK Member",committee:"Committee Chair on Environment",    image: angelPhoto },
+    { name: "HON. NIDELINE MEI N. LABRIAGA",     position: "SK Member",committee:"Committee Chair on Agriculture",    image: nidelinePhoto },
     { name: "HON. LORIE ANN A. SANTOS",       position: "SK Secretary", image: lorieannPhoto },
     { name: "HON. MAI MAI A. FRESCO",         position: "SK Treasurer", image: maiPhoto },
   ];
 
   const pastSB = [
-    { name: "HON. FELINO C. MERCADO", years: "2023 - PRESENT" },
-    { name: "HON. FELINO C. MERCADO", years: "2018 - 2023" },
-    { name: "HON. FELINO C. MERCADO", years: "2013 - 2018" },
-    { name: "HON. [NAME HERE]",       years: "2008 - 2013" },
-    { name: "HON. [NAME HERE]",       years: "2003 - 2008" },
-    { name: "HON. [NAME HERE]",       years: "1998 - 2003" },
-    { name: "HON. [NAME HERE]",       years: "1993 - 1998" },
+    { name: "HON. FELINO C. MERCADO", years: "2018 - PRESENT" },
+    { name: "HON. VALENTINO MONTESINES",       years: "2013 - 2018" },
+    { name: "HON. FELINO C. MERCADO", years: "2002 - 2013" },
+    { name: "HON. ANDRES SUMAYA",       years: "1994 - 2002" },
+    { name: "HON. ROMEO P. TORRES",       years: "1991 - 1994" },
+    { name: "HON. JOSE MONTESINES" },
+    { name: "HON. MARIQUITA S. MOJADO" },
+    { name: "HON. MAXIMO G. OGANIA" },
   ];
 
   const pastSK = [
     { name: "HON. GIAN LORBEN M. LAGRISOLA", years: "2023 - PRESENT" },
-    { name: "HON. MEZZA LUNA BRUL",          years: "2018 - 2023" },
-    { name: "HON. MA. RICA S. GRINDULO",     years: "2013 - 2018" },
-    { name: "HON. [NAME HERE]",              years: "2008 - 2013" },
-    { name: "HON. [NAME HERE]",              years: "2003 - 2008" },
-    { name: "HON. [NAME HERE]",              years: "1998 - 2003" },
-    { name: "HON. [NAME HERE]",              years: "1993 - 1998" },
-    { name: "HON. [NAME HERE]",              years: "1988 - 1993" },
+    { name: "HON. MEZZA LUNA BRUL", years: "2018 - 2023" },
+    { name: "HON. JOHN KENNETH NOMA", years: "2013 - 2018" },
+    { name: "HON. MA. RICA S. GRINDULO", years: "2008 - 2013" },
+    { name: "HON. MARIELEN MERCADO", years: "2003 - 2008" },
+    { name: "HON. VIVIAN M. LAGRISOLA", years: "1996 - 2002" },
+    { name: "HON. ROWENA NOMA CRUZ",years: "1993 - 1998" },
+    { name: "HON. OLIVER SUMAYA", years: "1988 - 1993" },
+    { name: "HON. LITO LUMANGAYA", years: "1988 - 1993" }
   ];
 
   return (
@@ -130,6 +137,7 @@ const People = () => {
               <OfficialCard
                 name="HON. GIAN LORBEN MITRA LAGRISOLA"
                 position="SK Chairperson"
+                committee="Committee Chair on Sports and Youth Development"
                 image={gianPhoto}
                 isDark={true}
                 isLead
@@ -148,8 +156,8 @@ const People = () => {
           width: '100%',
           boxSizing: 'border-box',
         }}>
-          <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-            <h2 style={{ ...headingStyle, color: '#002c02', borderBottomColor: '#538b56' }}>
+          <div style={{ maxWidth: '1200px', margin: '0 auto', textAlign: 'center' }}>
+            <h2 style={{ ...headingStyle, color: '#002c02', borderBottomColor: '#538b56',}}>
               HISTORY OF LEADERSHIP
             </h2>
             <div style={{
@@ -216,10 +224,9 @@ const MemberGrid = ({ members, isDark }) => {
   );
 };
 
-// --- Updated Card Scale Optimization ---
-const OfficialCard = ({ name, position, image, isDark, isLead }) => {
-  const nameColor   = isDark ? '#002c02' : '#ffffff';
-  const posColor    = isDark ? '#444444' : '#ffd000';
+const OfficialCard = ({ name, position, committee, image, isDark, isLead }) => {
+  const nameColor = isDark ? '#002c02' : '#ffffff';
+  const posColor = isDark ? '#444444' : '#ffd000';
   const borderColor = isDark ? '#002c02' : '#ffd000';
 
   const [isMobile, setIsMobile] = React.useState(
@@ -232,14 +239,12 @@ const OfficialCard = ({ name, position, image, isDark, isLead }) => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  /* Lead (captain / chairperson) card is slightly bigger */
+  // Responsive sizes
   const photoSize = isLead 
     ? 'clamp(110px, 18vw, 160px)' 
-    : (isMobile ? 'clamp(70px, 16vw, 100px)' : '110px'); // Slightly refined size for 4-in-a-row alignment
+    : (isMobile ? 'clamp(70px, 16vw, 100px)' : '110px');
   
-  const cardWidth = isLead 
-    ? 'clamp(180px, 40vw, 260px)' 
-    : '100%'; // Allow flex/grid boundaries to manage item width instead of hard capping
+  const cardWidth = isLead ? 'clamp(180px, 40vw, 260px)' : '100%';
 
   return (
     <div
@@ -249,7 +254,7 @@ const OfficialCard = ({ name, position, image, isDark, isLead }) => {
         borderRadius: '20px',
         textAlign: 'center',
         width: cardWidth,
-        maxWidth: isLead ? '260px' : '240px', // Prevents stretching on massive desktop containers
+        maxWidth: isLead ? '260px' : '240px',
         border: isDark ? '1px solid #eab308' : '1px solid #ffd000',
         transition: 'transform 0.3s ease, box-shadow 0.3s ease',
         cursor: 'default',
@@ -272,7 +277,7 @@ const OfficialCard = ({ name, position, image, isDark, isLead }) => {
         backgroundColor: '#ffffff',
         margin: '0 auto 12px',
         overflow: 'hidden',
-        border: `3px solid ${borderColor}`, // Cleaner downscaling line thickness
+        border: `3px solid ${borderColor}`,
       }}>
         <img
           src={image}
@@ -281,6 +286,7 @@ const OfficialCard = ({ name, position, image, isDark, isLead }) => {
           onError={(e) => { e.target.src = 'https://via.placeholder.com/150?text=No+Photo'; }}
         />
       </div>
+
       <h4 style={{
         color: nameColor,
         fontSize: isLead ? 'clamp(0.78rem, 2vw, 1.05rem)' : (isMobile ? '0.75rem' : '0.85rem'),
@@ -288,6 +294,7 @@ const OfficialCard = ({ name, position, image, isDark, isLead }) => {
         fontWeight: 'bold',
         lineHeight: '1.2',
       }}>{name}</h4>
+
       <p style={{
         color: posColor,
         fontSize: isLead ? 'clamp(0.68rem, 1.6vw, 0.82rem)' : (isMobile ? '0.6rem' : '0.7rem'),
@@ -296,6 +303,20 @@ const OfficialCard = ({ name, position, image, isDark, isLead }) => {
         letterSpacing: '0.5px',
         margin: 0,
       }}>{position}</p>
+
+      {/* COMMITTEE FIELD */}
+      {committee && (
+        <p style={{
+          color: isDark ? '#555' : '#e0e0e0',
+          fontSize: isLead ? '0.75rem' : '0.65rem',
+          fontStyle: 'italic',
+          marginTop: '6px',
+          lineHeight: '1.1',
+          margin: 0
+        }}>
+          {committee}
+        </p>
+      )}
     </div>
   );
 };

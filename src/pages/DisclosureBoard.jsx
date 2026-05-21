@@ -2,7 +2,12 @@ import React from 'react';
 import skBudget2025 from '../assets/disclosureboard/sksanisidrobudget2025.pdf';
 import skreformact from '../assets/disclosureboard/skreformact.pdf';
 import sandiganngkabatan from '../assets/disclosureboard/sandiganngkabataan.pdf';
-
+import cbydp from '../assets/disclosureboard/cbydp.pdf';
+import abyip from '../assets/disclosureboard/abyip.pdf';
+import abp from '../assets/disclosureboard/abp.pdf';
+import reso from '../assets/disclosureboard/reso.pdf';
+import taxordinance from '../assets/disclosureboard/taxordinance.pdf';
+import sanisidrofees from '../assets/disclosureboard/sanisidrofees.pdf';
 
 const DisclosureBoard = () => {
   const brandGreen = '#002c02';
@@ -10,7 +15,12 @@ const DisclosureBoard = () => {
 
   const localDocuments = [
     { id: 1, title: "SK San Isidro - Official Budget Expenses 2025", category: "Expenses", date: "1st - 4th Quarter 2025", fileUrl: skBudget2025 },
-    { id: 2, title: "SK Resolution No. 05 - Youth Portal", category: "Resolutions", date: "May 2026", fileUrl: "LINK_TO_YOUR_GOOGLE_DRIVE_PDF" },
+    { id: 2, title: "Comprehensive Barangay Youth Development Plan (CBYDP)", category: "3-year Strategic Plan", date: "2024-2026", fileUrl: cbydp },
+    { id: 3, title: "Annual Barangay Youth Investment Program (ABYIP)", category: "2026", date: "2026", fileUrl: abyip },
+    { id: 4, title: "Annual Budget Proposal", category: "Budget Proposal", date: "2026", fileUrl: abp },
+    { id: 5, title: "SK RESOLUSYON BLG. 003", category: "Resolution", date: "October 14, 2025", fileUrl: reso },
+    { id: 5, title: "BARANGAY RESOLUSYON BLG. 11 SERIES 2024 TAX ORDINANCES", category: "BRGY TAX ORDINANCES", date: "August 18, 2024 APPROVED JULY 14, 2025", fileUrl: taxordinance },
+    { id: 5, title: "MUNICIPAL RESOLUSYON BLG. 12 SERIES 2025 FEES AND CHARGES", category: "MUNICIPAL APPROVAL FOR IMPOSIGN FEES AND CHARGES", date: "August 18, 2024 APPROVED JULY 14, 2025", fileUrl: sanisidrofees }
   ];
 
   const nationalFiles = [
@@ -45,6 +55,15 @@ const DisclosureBoard = () => {
   ];
 
   const nationalNews = [
+    
+    { 
+      id: 'news4', 
+      title: "Barangay and Sangguniang Kabataan Elections (BSKE)", 
+      desc: "Summary of Important Dates for the BSKE 2026",
+      source: "COMELEC",
+      date: "January 30, 2026",
+      newsUrl: "https://www.facebook.com/photo/?fbid=1369122368586925&set=a.224420856390421"
+    },
     { 
       id: 'news1', 
       title: "National Youth Commission Sangguniang Kabataan Web Portal (NYC-SKWP)", 
@@ -69,6 +88,7 @@ const DisclosureBoard = () => {
       date: "March 21, 2026",
       newsUrl: sandiganngkabatan
     }
+    
   ];
 
   const openLink = (url) => {
@@ -106,7 +126,7 @@ const DisclosureBoard = () => {
         boxSizing: 'border-box',
       }}>
         <h1 style={{
-          fontSize: 'clamp(1.5rem, 5vw, 3rem)',
+          fontSize: 'clamp(1.8rem, 5vw, 3rem)',
           color: brandGold,
           fontWeight: '800',
           margin: '0 0 15px',
@@ -117,7 +137,7 @@ const DisclosureBoard = () => {
           opacity: 0.8,
           maxWidth: '800px',
           margin: '0 auto',
-          fontSize: 'clamp(0.88rem, 2.5vw, 1rem)',
+          fontSize: 'clamp(0.9rem, 2.5vw, 1rem)',
           lineHeight: '1.7',
         }}>
           Bridging the gap between Local Governance and National Policy. Stay informed with official
@@ -133,7 +153,7 @@ const DisclosureBoard = () => {
       }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <SectionHeader1
-            title="Barangay San Isidro Files"
+            title="BARANGAY SAN ISIDRO FILES"
             subtitle="Local transparency and accountability documents."
           />
           <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
@@ -160,7 +180,7 @@ const DisclosureBoard = () => {
       }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <SectionHeader2
-            title="National Government Files"
+            title="NATIONAL GOVERNMENT FILES"
             subtitle="Important circulars and laws from DILG, NYC, and COA."
           />
           <div style={{
@@ -233,7 +253,7 @@ const DisclosureBoard = () => {
       }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <SectionHeader1
-            title="SK News Nationwide"
+            title="SK NEWS NATIONWIDE"
             subtitle="Latest headlines from the National SK Federation."
           />
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(16px, 3vw, 25px)' }}>
@@ -361,7 +381,7 @@ const DocRow = ({ title, sub, date, onView, onDownload }) => (
 const SectionHeader1 = ({ title, subtitle }) => (
   <div style={{ marginBottom: 'clamp(24px, 4vw, 40px)', textAlign: 'center' }}>
     <h2 style={{
-      fontSize: 'clamp(1.3rem, 4vw, 2rem)',
+      fontSize: 'clamp(2.2rem, 4vw, 2rem)',
       color: '#002c02',
       margin: '0 0 6px',
       fontWeight: 'bold',
@@ -381,7 +401,7 @@ const SectionHeader1 = ({ title, subtitle }) => (
 const SectionHeader2 = ({ title, subtitle }) => (
   <div style={{ marginBottom: 'clamp(24px, 4vw, 40px)', textAlign: 'center' }}>
     <h2 style={{
-      fontSize: 'clamp(1.3rem, 4vw, 2rem)',
+      fontSize: 'clamp(2.2rem, 4vw, 2rem)',
       color: '#ffffff',
       margin: '0 0 6px',
       fontWeight: 'bold',

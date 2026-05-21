@@ -68,6 +68,14 @@ const Navbar = () => {
             <span className="chevron-icon"></span>
           </NavLink>
         </li>
+
+        {/* ADD THIS NEW BLOCK HERE */}
+        <li>
+          <NavLink to="/request-services" onClick={closeMenu} className={({ isActive }) => isActive ? "nav-item active-link" : "nav-item"}>
+            <span className="link-text">Request Services</span>
+            <span className="chevron-icon"></span>
+          </NavLink>
+        </li>
       </ul>
     </nav>
   );

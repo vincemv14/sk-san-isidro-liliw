@@ -53,7 +53,7 @@ const Contact = () => {
         boxSizing: 'border-box',
       }}>
         <h1 style={{
-          fontSize: 'clamp(1.6rem, 5vw, 3rem)',
+          fontSize: 'clamp(1.8rem, 5vw, 3rem)',
           color: brandGold,
           fontWeight: '800',
           margin: '0 0 15px',
@@ -64,7 +64,7 @@ const Contact = () => {
           opacity: 0.8,
           maxWidth: '700px',
           margin: '0 auto',
-          fontSize: 'clamp(0.88rem, 2.5vw, 1rem)',
+          fontSize: 'clamp(0.9rem, 2.5vw, 1rem)',
           lineHeight: '1.7',
         }}>
           We are here to serve. Reach out for emergencies, inquiries about youth programs, or community concerns.
@@ -78,7 +78,7 @@ const Contact = () => {
         boxSizing: 'border-box',
       }}>
         <h2 style={{
-          fontSize: 'clamp(1.3rem, 4vw, 2rem)',
+          fontSize: 'clamp(2.2rem, 4vw, 2rem)',
           color: brandGreen,
           textAlign: 'center',
           marginBottom: 'clamp(24px, 4vw, 40px)',
@@ -147,7 +147,7 @@ const Contact = () => {
         boxSizing: 'border-box',
       }}>
         <h2 style={{
-          fontSize: 'clamp(1.3rem, 4vw, 2rem)',
+          fontSize: 'clamp(2.2rem, 4vw, 2rem)',
           color: brandGreen,
           textAlign: 'center',
           marginBottom: 'clamp(24px, 4vw, 40px)',
@@ -208,7 +208,7 @@ const Contact = () => {
         boxSizing: 'border-box',
       }}>
         <h2 style={{
-          fontSize: 'clamp(1.3rem, 4vw, 2rem)',
+          fontSize: 'clamp(2.2rem, 4vw, 2rem)',
           color: brandGreen,
           textAlign: 'center',
           marginBottom: 'clamp(24px, 4vw, 40px)',

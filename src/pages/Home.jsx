@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import heroBg from '../assets/home/san-isidro.jpg'; 
 import agriPhoto from '../assets/activities/project/agrivillage.jpg';
+import AnimatedHeader from "../components/AnimatedHeader";
 
-const Home = () => {
-  const [showHotlines, setShowHotlines] = useState(false);
-  const [showHealth, setShowHealth] = useState(false); // FIXED: Corrected state setter assignment
-  const heroHeight = "80vh"; 
 
-  // --- Styles ---
+// --- Styles ---
   const sectionHeadingStyle1 = {
     color: '#ffffff',
     fontSize: '2.2rem',
@@ -26,6 +23,13 @@ const Home = () => {
     borderBottom: '4px solid #538b56'
   };
 
+
+const Home = () => {
+  const [showHotlines, setShowHotlines] = useState(false);
+  const [showHealth, setShowHealth] = useState(false); // FIXED: Corrected state setter assignment
+  const heroHeight = "80vh"; 
+
+  
   const glassButtonStyle = {
     backgroundColor: 'rgba(255, 255, 255, 0.15)', 
     color: 'white',
@@ -101,28 +105,32 @@ const Home = () => {
       {/* 2. CONTENT SECTION: KNOW MORE */}
       <section id="know-more" style={{ backgroundColor: '#002c02', padding: '150px 10%' }}>
         <div style={{ textAlign: 'center', maxWidth: '1100px', margin: '0 auto' }}>
+          <AnimatedHeader />
           <h2 style={sectionHeadingStyle1}>KNOW MORE</h2>
+          <AnimatedHeader />
 
           <div style={{ marginTop: '40px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
             
             {/* Paragraph 1 */}
             <p style={{ margin: 0, color: '#e2e8f0', fontSize: '1.05rem', lineHeight: '1.7' }}>
-              Inspired by our patron saint, <strong>San Isidro Labrador</strong>, our barangay is built on collective action 
-              (<em>Bayanihan</em>) and honest labor. Just as San Isidro found holiness in cultivating the land, our 
-              community finds its true strength in dedication and shared growth. This industrious spirit perfectly mirrors 
-              our town's broader identity as the <strong>"Tsinelas Capital of the Philippines."</strong> The same meticulous 
-              hands that craft Liliw's famous footwear are the hands that build up our neighborhood—shaping a resilient community 
-              culture defined by perseverance, economic self-reliance, and deep artistic pride.
+              Inspired by our patron saint, <strong>San Isidro Labrador</strong>, our barangay is built on 
+              collective action (<em>Bayanihan</em>) and honest labor. Just as San Isidro found holiness in 
+              cultivating the land, our community finds its true strength in dedication and shared growth. 
+              This industrious spirit perfectly mirrors our town's broader identity as the 
+              <strong> "Tsinelas Capital of the Philippines."</strong> The same meticulous hands that 
+              craft Liliw's famous footwear are the hands that build up our neighborhood—shaping a resilient 
+              community culture defined by perseverance, economic self-reliance, and deep artistic pride.
             </p>
 
             {/* Paragraph 2 */}
             <p style={{ margin: 0, color: '#e2e8f0', fontSize: '1.05rem', lineHeight: '1.7' }}>
-              For us, this unified foundation means that genuine public service and transparent governance are the keys to 
-              cultivating a thriving, forward-thinking environment. From grassroots community feeding initiatives during challenging 
-              times to vibrant sports tournaments and grand cultural festivals, our unity is our primary harvest. Guided by the 
-              faithful example of San Isidro and the proud craftsmanship traditions of Liliw, we remain fiercely dedicated to 
-              fostering an inclusive barangay where our youth are actively empowered to lead, our families are safeguarded, and 
-              every resident's voice is structurally valued.
+              For us, this unified foundation means that genuine public service and transparent governance 
+              are the keys to cultivating a thriving, forward-thinking environment. From grassroots 
+              community feeding initiatives during challenging times to vibrant sports tournaments and 
+              grand cultural festivals, our unity is our primary harvest. Guided by the faithful example 
+              of San Isidro and the proud craftsmanship traditions of Liliw, we remain fiercely dedicated 
+              to fostering an inclusive barangay where our youth are actively empowered to lead, our 
+              families are safeguarded, and every resident's voice is structurally valued.
             </p>
 
           </div>
@@ -130,17 +138,22 @@ const Home = () => {
       </section>
 
       {/* 3. CONTENT SECTION: CALENDAR OF ACTIVITIES */}
-      <section id="calendar" style={{ backgroundColor: '#ffffff', padding: '150px 10%' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+      <section id="calendar" style={{ backgroundColor: '#f9f9f9', padding: '100px 10%' }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+            <AnimatedHeader />
             <h2 style={sectionHeadingStyle2}>CALENDAR OF ACTIVITIES</h2>
           </div>
           
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '25px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '20px' }}>
             <EventCard date="April 29 - May 03, 2026" title="22nd Tsinelas Festival" desc="Join us as we celebrate the 22nd Liliw Tsinelas Festival with local art exhibits." />
             <EventCard date="May 14, 2026 | 7:00 PM" title="Sayawan sa San Isidro 2026" desc="Quarterly meeting to discuss local projects and budget transparency." />
             <EventCard date="MAY 15, 2026 | 4:00 PM" title="Sagala 2026" desc="A workshop for young developers to sharpen their technical skills." />
             <EventCard date="May 16, 2026 | 2:00 PM" title="Sangguniang Kabataan Assembly" desc="Quarterly meeting to discuss local projects and budget transparency." />
+            <EventCard date="September 28 - October 05, 2026" title="Filing of Certificates of Candidacy" desc="Aspiring SK and SB Officials Filing of Candidacy for BSKE 2026" />
+            <EventCard date="October 22 - 31, 2026" title="BSKE 2026 Campaign Period" desc="2-Weeks Campaign Period for BSKE 2026" />
+            <EventCard date="November 02, 2026" title="BSKE 2026 Election Day" desc="Voting Hours 7:00 am - 3:00 pm" />
+            <EventCard date="December 02, 2026" title="SOCE Filing" desc="Last Day to file Statement of Contributions and Expenditures (SOCE)" />
           </div>
         </div>
       </section>
@@ -173,38 +186,55 @@ const Home = () => {
         </div>
 
         {/* --- EMERGENCY HOTLINES MODAL --- */}
-        {showHotlines && (
-          <div style={modalOverlayStyle} onClick={() => setShowHotlines(false)}>
-            <div style={hotlineBoxStyle} onClick={(e) => e.stopPropagation()}>
-              <button onClick={() => setShowHotlines(false)} style={closeButtonStyle}>×</button>
-              <h3 style={{ color: '#fdd835', marginBottom: '20px', fontSize: '1.5rem' }}>🚨 EMERGENCY HOTLINES</h3>
-              
-              <div style={hotlineItemStyle}>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                  <strong>Office of the Municipal Mayor:</strong>
-                  <span style={{ color: '#ffffff', fontSize: '1rem', marginTop: '4px' }}>563-1001 local 103</span>
-                </div>
-                <a href="https://www.facebook.com/MunicipalityofLiliw" target="_blank" rel="noreferrer" style={linkStyle}>
-                  Visit Page
-                </a>
-              </div>
+{showHotlines && (
+  <div 
+    style={{
+      position: 'fixed',
+      top: 0, left: 0,
+      width: '100%', height: '100%',
+      backgroundColor: 'rgba(0,0,0,0.85)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '10px',
+      zIndex: 9999
+    }} 
+    onClick={() => setShowHotlines(false)}
+  >
+    <div 
+      style={{
+        backgroundColor: '#002c02',
+        color: '#fff',
+        border: '1px solid #ffd000',
+        borderRadius: '16px',
+        width: '100%',
+        maxWidth: '500px',
+        maxHeight: '80vh', // Forces the height limit
+        display: 'flex',
+        flexDirection: 'column',
+        padding: '20px',
+        position: 'relative'
+      }} 
+      onClick={(e) => e.stopPropagation()}
+    >
+      {/* Header Area */}
+      <button onClick={() => setShowHotlines(false)} style={{ position: 'absolute', top: '10px', right: '15px', background: 'none', border: 'none', color: '#fff', fontSize: '24px', cursor: 'pointer' }}>×</button>
+      <h3 style={{ color: '#fdd835', textAlign: 'center', margin: '0 0 20px 0', fontSize: '1.5rem' }}>🚨 EMERGENCY HOTLINES</h3>
+      
+      {/* Scrollable List Area */}
+      <div style={{ flex: 1, overflowY: 'auto', paddingRight: '10px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px', borderBottom: '1px solid #333', paddingBottom: '10px' }}>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <strong style={{ display: 'block' }}>Office of the Municipal Mayor:</strong>
+            <span style={{ fontSize: '0.9rem', wordBreak: 'break-all' }}>563-1001 local 103</span>
+          </div>
+          <a href="https://www.facebook.com/MunicipalityofLiliw" target="_blank" rel="noreferrer" style={{ color: '#ffd000', marginLeft: '10px', whiteSpace: 'nowrap' }}>Visit Page</a>
+        </div>
+        {/* Repeat this structure for other hotline items */}
+      </div>
 
-              <div style={hotlineItemStyle}>
-  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-    <strong>Meralco:</strong>
-    {/* First line of contact numbers */}
-    <span style={{ color: '#ffffff', fontSize: '1rem', marginTop: '4px' }}>
-      02-16-211 / 09175592824
-    </span>
-    {/* Second line of contact numbers dropping directly below */}
-    <span style={{ color: '#ffffff', fontSize: '1rem', marginTop: '2px', opacity: 0.9 }}>
-      Text Only: 09209716211 / 09175516211
-    </span>
-  </div>
-  <a href="https://www.facebook.com/meralco" target="_blank" rel="noreferrer" style={linkStyle}>
-    Visit Page
-  </a>
-</div>
+      <p style={{ textAlign: 'center', fontSize: '0.75rem', marginTop: '15px', fontStyle: 'italic' }}>Please use these numbers for urgent emergencies only.</p>
+    
               
               <div style={hotlineItemStyle}>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
@@ -258,7 +288,7 @@ const Home = () => {
           <div style={modalOverlayStyle} onClick={() => setShowHealth(false)}>
             <div style={hotlineBoxStyle} onClick={(e) => e.stopPropagation()}>
               <button onClick={() => setShowHealth(false)} style={closeButtonStyle}>×</button>
-              <h3 style={{ color: '#fdd835', marginBottom: '20px', fontSize: '1.5rem' }}>🏥 HEALTH SERVICES</h3>
+              <h3 style={{ color: '#fdd835', marginBottom: '20px', fontSize: '1.5rem'}}>🏥 HEALTH SERVICES</h3>
               
               <div style={hotlineItemStyle}>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
@@ -452,21 +482,41 @@ const Home = () => {
 
 // --- Reusable Components ---
 
-const EventCard = ({ date, title, desc }) => (
-  <div style={{ 
-    background: '#002c02', 
-    padding: '30px', 
-    borderRadius: '20px', 
-    transition: 'transform 0.3s ease'
-  }}
-  onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-5px)'}
-  onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
-  >
-    <span style={{ color: '#ffd000', fontWeight: '800', fontSize: '0.85rem' }}>{date}</span>
-    <h3 style={{ margin: '15px 0', color: 'white', fontSize: '1.3rem' }}>{title}</h3>
-    <p style={{ fontSize: '1rem', color: '#e2e8f0', lineHeight: '1.5' }}>{desc}</p>
-  </div>
-);
+const EventCard = ({ date, title, desc }) => {
+  // I-split natin ang date para makuha ang Month at Day kung gusto mo ng ganitong effect
+  return (
+    <div style={{
+      display: 'flex',
+      background: '#ffffff',
+      borderLeft: '6px solid #064e3b',
+      borderRadius: '8px',
+      padding: '15px',
+      boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+      alignItems: 'center',
+      gap: '20px'
+    }}>
+      {/* Date Box */}
+      <div style={{
+        background: '#064e3b',
+        color: '#fdd835',
+        padding: '10px',
+        borderRadius: '6px',
+        textAlign: 'center',
+        minWidth: '80px',
+        fontWeight: 'bold',
+        fontSize: '0.8rem'
+      }}>
+        {date}
+      </div>
+      
+      {/* Event Details */}
+      <div>
+        <h3 style={{ margin: '0 0 5px 0', fontSize: '1.1rem', color: '#064e3b' }}>{title}</h3>
+        <p style={{ margin: 0, fontSize: '0.9rem', color: '#555' }}>{desc}</p>
+      </div>
+    </div>
+  );
+};
 
 const QuickLinkCard = ({ icon, title, desc, link, onClick }) => (
   <div style={quickLinkCardStyle}
@@ -551,7 +601,7 @@ const hotlineBoxStyle = {
   backgroundColor: '#002c02',
   padding: '20px', // Binawasan ang padding para mas compact
   borderRadius: '20px',
-  border: '2px solid #fdd835',
+  border: '1px solid #fdd835',
   maxWidth: '450px',
   width: '90%',
   maxHeight: '80vh', // Limitado sa 80% ng screen height

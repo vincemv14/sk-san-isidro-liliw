@@ -49,7 +49,7 @@ import magnaPhoto from '../assets/activities/awards/magna.jpg';
 import gawadPhoto from '../assets/activities/awards/gawad.jpg';
 import schoolsuppliesPhoto from '../assets/activities/upcoming/schoolsupplies.jpg';
 
-const SectionTitle = ({ title, isDark }) => <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', marginBottom: '25px', color: isDark ? '#ffd000' : '#002c02', fontWeight: '800' }}>{title}</h2>;
+const SectionTitle = ({ title, isDark }) => <h2 style={{ fontSize: 'clamp(2.2rem, 3vw, 2rem)', marginBottom: '25px', color: isDark ? '#ffd000' : '#002c02', fontWeight: '800' }}>{title}</h2>;
 
 const Activities = () => {
   const eventsRef = useRef(null);
@@ -471,7 +471,7 @@ const Activities = () => {
         alignItems: 'center', // Ensures block elements align to the center cross-axis
       }}>
         <h1 style={{ 
-          fontSize: 'clamp(1.3rem, 4vw, 2.5rem)', 
+          fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', 
           color: brandGold, 
           marginBottom: '25px', 
           fontWeight: '800',
@@ -501,7 +501,7 @@ const Activities = () => {
 
       {/* 2. EVENTS */}
 <section ref={eventsRef} style={sectionStyle}>
-  <SectionTitle title="Community Events" />
+  <SectionTitle title="COMMUNITY EVENTS" />
 
   <CardGrid>
     {eventsData
@@ -528,7 +528,7 @@ const Activities = () => {
     backgroundColor: '#f9fafb',
   }}
 >
-  <SectionTitle title="Projects" />
+  <SectionTitle title="PROJECTS" />
 
   <CardGrid>
     {projectsData
@@ -549,7 +549,7 @@ const Activities = () => {
 
 {/* 4. SEMINARS */}
 <section ref={seminarsRef} style={sectionStyle}>
-  <SectionTitle title="Seminars & Education" />
+  <SectionTitle title="SEMINARS & EDUCATION" />
 
   <CardGrid>
     {seminarsData
@@ -577,7 +577,7 @@ const Activities = () => {
     color: 'white',
   }}
 >
-  <SectionTitle title="Achievements & Awards" isDark />
+  <SectionTitle title="ACHIEVEMENTS & AWARDS" isDark />
 
   <CardGrid>
     {achievementsData
@@ -599,7 +599,7 @@ const Activities = () => {
 
 {/* 6. UPCOMING */}
 <section ref={upcomingRef} style={sectionStyle}>
-  <SectionTitle title="Upcoming Programs" />
+  <SectionTitle title="UPCOMING PROGRAMS" />
   <CardGrid>
     {upcomingData.map((item, idx) => (
       <ActivityCard key={idx} {...item} />
@@ -793,7 +793,7 @@ const NavButton = ({ label, onClick }) => (
       fontWeight: '700',
       cursor: 'pointer',
       transition: '0.3s',
-      fontSize: 'clamp(0.7rem, 1.8vw, 0.85rem)',
+      fontSize: 'clamp(1rem, 1.8vw, 0.85rem)',
     }}
     onMouseEnter={(e) => {
       e.target.style.backgroundColor = '#ffd000';

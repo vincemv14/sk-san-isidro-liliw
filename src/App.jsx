@@ -9,6 +9,7 @@ import DisclosureBoard from './pages/DisclosureBoard.jsx';
 import Contact from './pages/Contact.jsx';
 import CommunityChatbot from './components/CommunityChatbot';
 import './App.css';
+import RequestServices from './pages/RequestServices';
 
 // --- Helper: Scroll to top on every route change ---
 const ScrollToTop = () => {
@@ -34,6 +35,7 @@ function App() {
           <Route path="/activities" element={<Activities />} />
           <Route path="/disclosure" element={<DisclosureBoard />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/request-services" element={<RequestServices />} />
         </Routes>
       </main>
 
