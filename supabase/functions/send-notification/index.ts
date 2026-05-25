@@ -46,7 +46,10 @@ Deno.serve(async (req) => {
     });
 
   } catch (error) {
-    return new Response(JSON.stringify({ error: error.message }), {
+    // Check if error is an instance of Error to safely access .message
+    const message = error instanceof Error ? error.message : "An unknown error occurred";
+    
+    return new Response(JSON.stringify({ success: false, error: message }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 500,
     });

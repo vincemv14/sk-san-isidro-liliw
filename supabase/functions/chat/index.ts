@@ -223,9 +223,12 @@ const reply = data.choices[0].message.content;
     });
 
   } catch (error) {
-    return new Response(JSON.stringify({ error: error.message }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 500,
-    });
-  }
+  // Safely extract the message by checking if the error is an instance of Error
+  const errorMessage = error instanceof Error ? error.message : "An unknown error occurred";
+  
+  return new Response(JSON.stringify({ success: false, error: errorMessage }), {
+    headers: { ...corsHeaders, "Content-Type": "application/json" },
+    status: 500,
+  });
+}
 });
