@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
+    "@supabase/supabase-js": "^2.106.1",
     "@tailwindcss/postcss": "^4.3.0",
+    "flowise-embed-react": "^3.1.6",
     "framer-motion": "^12.39.0",
     "fuse.js": "^7.3.0",
     "react": "^19.2.6",

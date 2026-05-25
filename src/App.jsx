@@ -7,16 +7,14 @@ import People from './pages/People.jsx';
 import Activities from './pages/Activities.jsx';
 import DisclosureBoard from './pages/DisclosureBoard.jsx';
 import Contact from './pages/Contact.jsx';
-import CommunityChatbot from './components/CommunityChatbot';
-import './App.css';
 import RequestServices from './pages/RequestServices';
+import FlowiseChatbot from './components/FlowiseChatbot.jsx'; // ← new
+import ClearanceForm from './components/ClearanceForm';
+import './App.css';
 
-// --- Helper: Scroll to top on every route change ---
 const ScrollToTop = () => {
   const { pathname } = useLocation();
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
   return null;
 };
 
@@ -25,8 +23,6 @@ function App() {
     <Router>
       <ScrollToTop />
       <Navbar />
-      
-      {/* Main content container */}
       <main style={{ overflowX: 'hidden', width: '100%' }}>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -39,8 +35,8 @@ function App() {
         </Routes>
       </main>
 
-      {/* Chatbot rendered outside 'main' to ensure fixed positioning works */}
-      <CommunityChatbot /> 
+      <FlowiseChatbot /> {/* ✅ Custom component, full control */}
+
     </Router>
   );
 }

@@ -165,19 +165,19 @@ const Home = () => {
           
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px', marginTop: '40px' }}>
             <QuickLinkCard 
-              icon="📞" 
-              title="Emergency Hotlines" 
-              desc="Immediate access to PNP, BFP, and Local Rescue teams." 
-              onClick={() => setShowHotlines(true)} 
-            />
+  icon="/images/call.png" 
+  title="Emergency Hotlines" 
+  desc="Immediate access to PNP, BFP, and Local Rescue teams." 
+  onClick={() => setShowHotlines(true)} 
+/>
             <QuickLinkCard 
-              icon="📋" 
+              icon="/images/agreement.png"
               title="Disclosure Board" 
               desc="View Barangay budgets, projects, and transparency reports." 
               link="/disclosure" 
             />
             <QuickLinkCard 
-              icon="🏥" 
+              icon="/images/safety.png" 
               title="Health Services" 
               desc="Information on health centers and emergency ID solutions." 
               onClick={() => setShowHealth(true)}  
@@ -219,7 +219,7 @@ const Home = () => {
     >
       {/* Header Area */}
       <button onClick={() => setShowHotlines(false)} style={{ position: 'absolute', top: '10px', right: '15px', background: 'none', border: 'none', color: '#fff', fontSize: '24px', cursor: 'pointer' }}>×</button>
-      <h3 style={{ color: '#fdd835', textAlign: 'center', margin: '0 0 20px 0', fontSize: '1.5rem' }}>🚨 EMERGENCY HOTLINES</h3>
+      <h3 style={{ color: '#fdd835', textAlign: 'center', margin: '0 0 20px 0', fontSize: '1.5rem' }}>EMERGENCY HOTLINES</h3>
       
       {/* Scrollable List Area */}
       <div style={{ flex: 1, overflowY: 'auto', paddingRight: '10px' }}>
@@ -228,18 +228,14 @@ const Home = () => {
             <strong style={{ display: 'block' }}>Office of the Municipal Mayor:</strong>
             <span style={{ fontSize: '0.9rem', wordBreak: 'break-all' }}>563-1001 local 103</span>
           </div>
-          <a href="https://www.facebook.com/MunicipalityofLiliw" target="_blank" rel="noreferrer" style={{ color: '#ffd000', marginLeft: '10px', whiteSpace: 'nowrap' }}>Visit Page</a>
+          <a href="https://www.facebook.com/MunicipalityofLiliw" target="_blank" rel="noreferrer" style={{ color: '#ffd000', marginLeft: '5px', whiteSpace: 'nowrap' }}>Visit Page</a>
         </div>
         {/* Repeat this structure for other hotline items */}
       </div>
-
-      <p style={{ textAlign: 'center', fontSize: '0.75rem', marginTop: '15px', fontStyle: 'italic' }}>Please use these numbers for urgent emergencies only.</p>
-    
-              
               <div style={hotlineItemStyle}>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                   <strong>BFP Liliw:</strong>
-                  <span style={{ color: '#ffffff', fontSize: '1rem', marginTop: '4px' }}>(049) 503-1756 / 0956-769-0379</span>
+                  <span style={{ color: '#ffffff', fontSize: '1rem', marginTop: '2px' }}>(049) 503-1756 / 0956-769-0379</span>
                 </div>
                 <a href="https://www.facebook.com/liliw.lagunabfp" target="_blank" rel="noreferrer" style={linkStyle}>
                   Visit Page
@@ -288,7 +284,7 @@ const Home = () => {
           <div style={modalOverlayStyle} onClick={() => setShowHealth(false)}>
             <div style={hotlineBoxStyle} onClick={(e) => e.stopPropagation()}>
               <button onClick={() => setShowHealth(false)} style={closeButtonStyle}>×</button>
-              <h3 style={{ color: '#fdd835', marginBottom: '20px', fontSize: '1.5rem'}}>🏥 HEALTH SERVICES</h3>
+              <h3 style={{ color: '#fdd835', marginBottom: '20px', fontSize: '1.5rem', textAlign: 'center',}}>HEALTH SERVICES</h3>
               
               <div style={hotlineItemStyle}>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
@@ -518,24 +514,41 @@ const EventCard = ({ date, title, desc }) => {
   );
 };
 
-const QuickLinkCard = ({ icon, title, desc, link, onClick }) => (
-  <div style={quickLinkCardStyle}
-    onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-5px)'}
-    onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
-  >
-    <div style={{ fontSize: '2.5rem', marginBottom: '15px' }}>{icon}</div>
-    <h3 style={{ color: '#fdd835', fontSize: '1.2rem', marginBottom: '10px' }}>{title}</h3>
-    <p style={{ color: '#cbd5e1', fontSize: '0.85rem', marginBottom: '20px' }}>{desc}</p>
-    
-    {onClick ? (
-      <button onClick={onClick} style={actionButtonStyle}>VIEW LIST</button>
-    ) : (
-      <a href={link} style={{ textDecoration: 'none' }}>
-        <button style={actionButtonStyle}>OPEN</button>
-      </a>
-    )}
-  </div>
-);
+const QuickLinkCard = ({ icon, title, desc, link, onClick }) => {
+  // Check if the icon is a file path (starts with / or .)
+  const isImage = typeof icon === 'string' && (icon.startsWith('/') || icon.startsWith('.'));
+
+  return (
+    <div 
+      style={{ ...quickLinkCardStyle, transition: 'transform 0.2s ease' }}
+      onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-5px)'}
+      onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+    >
+      <div style={{ marginBottom: '15px' }}>
+        {isImage ? (
+          <img 
+            src={icon} 
+            alt={title} 
+            style={{ width: '45px', height: '45px', objectFit: 'contain' }} 
+          />
+        ) : (
+          <div style={{ fontSize: '2.5rem' }}>{icon}</div>
+        )}
+      </div>
+      
+      <h3 style={{ color: '#fdd835', fontSize: '1.2rem', marginBottom: '10px' }}>{title}</h3>
+      <p style={{ color: '#cbd5e1', fontSize: '0.85rem', marginBottom: '20px' }}>{desc}</p>
+      
+      {onClick ? (
+        <button onClick={onClick} style={actionButtonStyle}>VIEW LIST</button>
+      ) : (
+        <a href={link} style={{ textDecoration: 'none' }}>
+          <button style={actionButtonStyle}>OPEN</button>
+        </a>
+      )}
+    </div>
+  );
+};
 
 const Footer = () => (
   <footer style={{ backgroundColor: '#002c02', padding: '60px 10%', color: '#ffffff' }}>
@@ -601,7 +614,7 @@ const hotlineBoxStyle = {
   backgroundColor: '#002c02',
   padding: '20px', // Binawasan ang padding para mas compact
   borderRadius: '20px',
-  border: '1px solid #fdd835',
+  border: '0.5px solid #fdd835',
   maxWidth: '450px',
   width: '90%',
   maxHeight: '80vh', // Limitado sa 80% ng screen height
