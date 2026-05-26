@@ -161,57 +161,8 @@ h2 {
 .carousel-container::-webkit-scrollbar { display: none; }
 .carousel-container > * { flex-shrink: 0; }
 
-/* --- RequestServices Hover Styles --- */
-.service-card {
-  background-color: var(--bg-light); 
-  padding: 30px;
-  border-radius: 16px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-  transition: all 0.3s ease;
-  border: 1px solid #eee;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  min-height: 250px; 
-  max-width: 400px;
-}
-
-/* ADD THESE NEW RULES HERE */
-.service-card h3 {
-  font-size: clamp(0.5rem, 1.5vw, 1.4rem);
-  margin: 15px 0 10px;
-  transition: 0.3s;
-}
-
-.service-card p {
-  font-size: clamp(0.5rem, 1vw, 1rem);
-  transition: 0.3s;
-}
-/* END OF ADDITION */
-
-.service-card:hover {
-  background-color: var(--primary-green) !important;
-  transform: translateY(-5px);
-}
-
-.service-card:hover h3, 
-.service-card:hover p {
-  color: var(--accent-yellow) !important;
-}
-
-.service-card:hover .icon-svg {
-  stroke: #ffffff !important;
-}
-
-.service-card:hover .icon-wrapper img {
-  filter: brightness(0) invert(1);
-}
-
 /* ==============================
-   FLOWISE CHATBOT WRAPPER
-   Controls the floating position
+   CHATBOT WRAPPER
    ============================== */
 .chatbot-wrapper {
   position: fixed !important;
@@ -220,6 +171,5 @@ h2 {
   z-index: 9999 !important;
   width: auto !important;
   max-width: none !important;
-  /* Prevent any parent overflow from clipping it */
   pointer-events: auto !important;
 }

@@ -1,83 +1,91 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { supabase } from '../supabaseClient';
 import logo from '../assets/sk-logo.jpg';
 import './Navbar.css';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  useEffect(() => {
+    const checkAuth = async () => {
+      const { data } = await supabase.auth.getSession();
+      setIsLoggedIn(!!data.session);
+    };
+    checkAuth();
 
-  const closeMenu = () => {
-    setIsOpen(false);
-  };
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      setIsLoggedIn(!!session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const toggleMenu = () => setIsOpen(!isOpen);
+  const closeMenu  = () => setIsOpen(false);
 
   return (
-    <nav className="navbar">
-      <div className="nav-logo">
-        <Link to="/" className="logo-container" onClick={closeMenu}>
-          <img src={logo} alt="SK Logo" className="logo-img" />
-          <span>SK SAN ISIDRO</span>
+    <>
+      {/* ✅ Top bar — Admin Login lives here, separate from main nav */}
+      <div style={{
+        backgroundColor: '#001a01',
+        padding: '6px 5%',
+        display: 'flex',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+      }}>
+        <Link
+          to="/admin-login"
+          onClick={closeMenu}
+          style={{
+            color: '#aaa',
+            fontSize: '0.75rem',
+            textDecoration: 'none',
+            border: '1px solid #444',
+            padding: '4px 12px',
+            borderRadius: '4px',
+            letterSpacing: '0.5px',
+            transition: 'all 0.2s',
+          }}
+          onMouseEnter={e => { e.currentTarget.style.color = '#ffd000'; e.currentTarget.style.borderColor = '#ffd000'; }}
+          onMouseLeave={e => { e.currentTarget.style.color = '#aaa';    e.currentTarget.style.borderColor = '#444'; }}
+        >
+          Admin Login
         </Link>
       </div>
 
-      {/* Hamburger Icon */}
-      <div className="mobile-icon" onClick={toggleMenu}>
-        <div className={isOpen ? "line open" : "line"}></div>
-        <div className={isOpen ? "line open" : "line"}></div>
-        <div className={isOpen ? "line open" : "line"}></div>
-      </div>
+      {/* ✅ Main navbar — clean, no Admin Login crowding it */}
+      <nav className="navbar">
+        <div className="nav-logo">
+          <Link to="/" className="logo-container" onClick={closeMenu}>
+            <img src={logo} alt="SK Logo" className="logo-img" />
+            <span>SK SAN ISIDRO</span>
+          </Link>
+        </div>
 
-      {/* Navigation Links Menu */}
-      <ul className={isOpen ? "nav-links active" : "nav-links"}>
-        <li>
-          <NavLink to="/" end onClick={closeMenu} className={({ isActive }) => isActive ? "nav-item active-link" : "nav-item"}>
-            <span className="link-text">Home</span>
-            <span className="chevron-icon"></span>
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/about" onClick={closeMenu} className={({ isActive }) => isActive ? "nav-item active-link" : "nav-item"}>
-            <span className="link-text">About</span>
-            <span className="chevron-icon"></span>
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/people" onClick={closeMenu} className={({ isActive }) => isActive ? "nav-item active-link" : "nav-item"}>
-            <span className="link-text">People</span>
-            <span className="chevron-icon"></span>
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/activities" onClick={closeMenu} className={({ isActive }) => isActive ? "nav-item active-link" : "nav-item"}>
-            <span className="link-text">Activities</span>
-            <span className="chevron-icon"></span>
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/disclosure" onClick={closeMenu} className={({ isActive }) => isActive ? "nav-item active-link" : "nav-item"}>
-            <span className="link-text">Disclosure Board</span>
-            <span className="chevron-icon"></span>
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/contact" onClick={closeMenu} className={({ isActive }) => isActive ? "nav-item active-link" : "nav-item"}>
-            <span className="link-text">Contact</span>
-            <span className="chevron-icon"></span>
-          </NavLink>
-        </li>
+        <div className="mobile-icon" onClick={toggleMenu}>
+          <div className={isOpen ? "line open" : "line"}></div>
+          <div className={isOpen ? "line open" : "line"}></div>
+          <div className={isOpen ? "line open" : "line"}></div>
+        </div>
 
-        {/* ADD THIS NEW BLOCK HERE */}
-        <li>
-          <NavLink to="/request-services" onClick={closeMenu} className={({ isActive }) => isActive ? "nav-item active-link" : "nav-item"}>
-            <span className="link-text">Request Services</span>
-            <span className="chevron-icon"></span>
-          </NavLink>
-        </li>
-      </ul>
-    </nav>
+        <ul className={isOpen ? "nav-links active" : "nav-links"}>
+          <li><NavLink to="/"            end onClick={closeMenu} className={({ isActive }) => isActive ? "nav-item active-link" : "nav-item"}>Home</NavLink></li>
+          <li><NavLink to="/about"           onClick={closeMenu} className={({ isActive }) => isActive ? "nav-item active-link" : "nav-item"}>About</NavLink></li>
+          <li><NavLink to="/people"          onClick={closeMenu} className={({ isActive }) => isActive ? "nav-item active-link" : "nav-item"}>People</NavLink></li>
+          <li><NavLink to="/activities"      onClick={closeMenu} className={({ isActive }) => isActive ? "nav-item active-link" : "nav-item"}>Activities</NavLink></li>
+          <li><NavLink to="/disclosure"      onClick={closeMenu} className={({ isActive }) => isActive ? "nav-item active-link" : "nav-item"}>Disclosure Board</NavLink></li>
+          <li><NavLink to="/contact"         onClick={closeMenu} className={({ isActive }) => isActive ? "nav-item active-link" : "nav-item"}>Contact</NavLink></li>
+          <li><NavLink to="/request-services" onClick={closeMenu} className={({ isActive }) => isActive ? "nav-item active-link" : "nav-item"}>Request Services</NavLink></li>
+
+          {/* ✅ Show Admin Dashboard link in mobile menu only when logged in */}
+          {isLoggedIn && (
+            <li><NavLink to="/admin-dashboard" onClick={closeMenu} className={({ isActive }) => isActive ? "nav-item active-link" : "nav-item"}>Dashboard</NavLink></li>
+          )}
+        </ul>
+      </nav>
+    </>
   );
 };
 

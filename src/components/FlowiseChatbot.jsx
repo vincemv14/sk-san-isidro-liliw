@@ -18,7 +18,6 @@ export default function FlowiseChatbot() {
 
   const sendMessage = async () => {
     if (!input.trim()) return;
-
     const userMessage = { role: "user", content: input };
     const updatedMessages = [...messages, userMessage];
     setMessages(updatedMessages);
@@ -34,74 +33,240 @@ export default function FlowiseChatbot() {
         },
         body: JSON.stringify({ messages: updatedMessages }),
       });
-
       const data = await res.json();
       setMessages([...updatedMessages, { role: "assistant", content: data.reply }]);
     } catch {
       setMessages([...updatedMessages, { role: "assistant", content: "Sorry, may error. Subukan ulit." }]);
     }
-
     setLoading(false);
   };
 
   return (
     <>
-      {/* Chat Toggle Button */}
-      <button
-        onClick={() => setOpen(!open)}
-        style={{
-          position: "fixed", bottom: "24px", right: "24px", zIndex: 1000,
-          background: "#006400", color: "#fff", border: "none",
-          borderRadius: "50%", width: "56px", height: "56px",
-          fontSize: "24px", cursor: "pointer",
-          boxShadow: "0 4px 12px rgba(0,0,0,0.3)"
-        }}
-      >
-        {open ? "✕" : <img src="/kuyaisidro.png" style={{ width: "40px", height: "40px", borderRadius: "50%", objectFit: "cover" }} />}
+      <style>{`
+        .chatbot-window {
+          position: fixed;
+          /* Default: desktop */
+          bottom: 90px;
+          right: 24px;
+          width: 360px;
+          height: 500px;
+          z-index: 9999;
+        }
+
+        /* Tablet */
+        @media (max-width: 768px) {
+          .chatbot-window {
+            width: calc(100vw - 32px);
+            right: 16px;
+            bottom: 80px;
+            height: 420px;
+          }
+        }
+
+        /* Galaxy Fold and very small screens */
+        @media (max-width: 320px) {
+          .chatbot-window {
+            width: calc(100vw - 24px);
+            right: 12px;
+            bottom: 72px;
+            height: 380px;
+          }
+          .chatbot-toggle {
+            width: 46px !important;
+            height: 46px !important;
+            bottom: 14px !important;
+            right: 12px !important;
+          }
+        }
+
+        .chatbot-msg {
+          padding: 10px 13px;
+          border-radius: 14px;
+          font-size: clamp(0.78rem, 2.5vw, 0.875rem);
+          line-height: 1.55;
+          white-space: pre-wrap;
+          max-width: 82%;
+          word-break: break-word;
+        }
+
+        .chatbot-input {
+          flex: 1;
+          min-width: 0;
+          padding: 10px 12px;
+          border-radius: 10px;
+          border: 1.5px solid #d1d5db;
+          font-size: clamp(0.78rem, 2.5vw, 0.875rem);
+          outline: none;
+          background: #f9fafb;
+          transition: border 0.2s;
+          box-sizing: border-box;
+        }
+        .chatbot-input:focus { border-color: #006400; background: #fff; }
+
+        .chatbot-send {
+          background: #006400;
+          color: #fff;
+          border: none;
+          border-radius: 10px;
+          padding: 10px 14px;
+          cursor: pointer;
+          font-size: 15px;
+          flex-shrink: 0;
+          transition: background 0.2s;
+        }
+        .chatbot-send:hover:not(:disabled) { background: #004d00; }
+        .chatbot-send:disabled { background: #9ca3af; cursor: not-allowed; }
+
+        .typing-dot {
+          width: 7px; height: 7px;
+          background: #006400;
+          border-radius: 50%;
+          display: inline-block;
+          animation: bounce 1.2s infinite ease-in-out;
+        }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes bounce {
+          0%, 80%, 100% { transform: scale(0.7); opacity: 0.5; }
+          40%            { transform: scale(1.1); opacity: 1; }
+        }
+
+        .chatbot-toggle {
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          z-index: 9999;
+          background: #006400;
+          color: #fff;
+          border: none;
+          border-radius: 50%;
+          width: 54px;
+          height: 54px;
+          cursor: pointer;
+          box-shadow: 0 6px 20px rgba(0,100,0,0.4);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: transform 0.2s, box-shadow 0.2s;
+          overflow: hidden;
+        }
+        .chatbot-toggle:hover {
+          transform: scale(1.08);
+          box-shadow: 0 8px 24px rgba(0,100,0,0.5);
+        }
+      `}</style>
+
+      {/* ✅ Toggle Button */}
+      <button className="chatbot-toggle" onClick={() => setOpen(!open)} title="Chat with Kuya Isidro">
+        {open
+          ? <span style={{ fontSize: '20px', fontWeight: 'bold' }}>✕</span>
+          : <img src="/kuyaisidro.png" style={{ width: '42px', height: '42px', borderRadius: '50%', objectFit: 'cover' }} alt="Kuya Isidro" />
+        }
       </button>
 
-      {/* Chat Window */}
+      {/* ✅ Chat Window */}
       {open && (
-        <div style={{
-          position: "fixed", bottom: "90px", right: "24px", zIndex: 1000,
-          width: "340px", height: "480px", background: "#fff",
-          borderRadius: "16px", boxShadow: "0 8px 32px rgba(0,0,0,0.2)",
-          display: "flex", flexDirection: "column", overflow: "hidden",
-          border: "1px solid #7070703b"
+        <div className="chatbot-window" style={{
+          background: '#fff',
+          borderRadius: '18px',
+          boxShadow: '0 12px 40px rgba(0,0,0,0.18)',
+          display: 'flex',
+          flexDirection: 'column',
+          overflow: 'hidden',
+          border: '1px solid #e5e7eb',
         }}>
+
           {/* Header */}
           <div style={{
-  background: "#006400", color: "#fff",
-  padding: "16px", fontWeight: "bold",
-  display: "flex", alignItems: "center", gap: "10px"
-}}>
-  <img src="/kuyaisidro.png" style={{ width: "36px", height: "36px", borderRadius: "50%", objectFit: "cover", border: "2px solid #fff" }} />
-  Kuya Isidro Chatbot
-</div>
+            background: 'linear-gradient(135deg, #006400 0%, #004d00 100%)',
+            padding: '14px 16px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+            flexShrink: 0,
+          }}>
+            <div style={{ position: 'relative', flexShrink: 0 }}>
+              <img
+                src="/kuyaisidro.png"
+                style={{ width: '38px', height: '38px', borderRadius: '50%', objectFit: 'cover', border: '2px solid rgba(255,255,255,0.6)' }}
+                alt="Kuya Isidro"
+              />
+              {/* Online dot */}
+              <span style={{
+                position: 'absolute', bottom: '1px', right: '1px',
+                width: '10px', height: '10px',
+                background: '#4ade80', borderRadius: '50%',
+                border: '2px solid #006400'
+              }} />
+            </div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <p style={{ color: '#fff', fontWeight: '700', margin: 0, fontSize: 'clamp(0.85rem, 2.5vw, 0.95rem)', lineHeight: 1.2 }}>
+                Kuya Isidro Chatbot
+              </p>
+              <p style={{ color: 'rgba(255,255,255,0.75)', margin: 0, fontSize: '0.72rem' }}>
+                Barangay San Isidro · Online
+              </p>
+            </div>
+            <button
+              onClick={() => setOpen(false)}
+              style={{ background: 'rgba(255,255,255,0.15)', border: 'none', color: '#fff', borderRadius: '8px', width: '28px', height: '28px', cursor: 'pointer', fontSize: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}
+            >✕</button>
+          </div>
+
           {/* Messages */}
           <div style={{
-            flex: 1, overflowY: "auto", padding: "12px",
-            display: "flex", flexDirection: "column", gap: "10px"
+            flex: 1,
+            overflowY: 'auto',
+            padding: '14px 12px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '10px',
+            background: '#f8fafc',
           }}>
             {messages.map((msg, i) => (
               <div key={i} style={{
-                alignSelf: msg.role === "user" ? "flex-end" : "flex-start",
-                background: msg.role === "user" ? "#006400" : "#f1f5f9",
-                color: msg.role === "user" ? "#fff" : "#1a202c",
-                padding: "10px 14px", borderRadius: "12px",
-                maxWidth: "80%", fontSize: "0.875rem", lineHeight: "1.5",
-                whiteSpace: "pre-wrap"
+                display: 'flex',
+                flexDirection: msg.role === 'user' ? 'row-reverse' : 'row',
+                alignItems: 'flex-end',
+                gap: '7px',
               }}>
-                {msg.content}
+                {/* Avatar — only for assistant */}
+                {msg.role === 'assistant' && (
+                  <img
+                    src="/kuyaisidro.png"
+                    style={{ width: '26px', height: '26px', borderRadius: '50%', objectFit: 'cover', flexShrink: 0, marginBottom: '2px' }}
+                    alt="Kuya Isidro"
+                  />
+                )}
+                <div
+                  className="chatbot-msg"
+                  style={{
+                    background: msg.role === 'user'
+                      ? 'linear-gradient(135deg, #006400, #004d00)'
+                      : '#ffffff',
+                    color: msg.role === 'user' ? '#fff' : '#1a202c',
+                    boxShadow: msg.role === 'user'
+                      ? '0 2px 8px rgba(0,100,0,0.2)'
+                      : '0 1px 4px rgba(0,0,0,0.08)',
+                    borderBottomRightRadius: msg.role === 'user' ? '4px' : '14px',
+                    borderBottomLeftRadius:  msg.role === 'user' ? '14px' : '4px',
+                  }}
+                >
+                  {msg.content}
+                </div>
               </div>
             ))}
+
+            {/* Typing indicator */}
             {loading && (
-              <div style={{
-                alignSelf: "flex-start", background: "#f1f5f9",
-                padding: "10px 14px", borderRadius: "12px",
-                fontSize: "0.875rem", color: "#666"
-              }}>
-                ⏳ Typing...
+              <div style={{ display: 'flex', alignItems: 'flex-end', gap: '7px' }}>
+                <img src="/kuyaisidro.png" style={{ width: '26px', height: '26px', borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }} alt="" />
+                <div style={{ background: '#fff', padding: '12px 16px', borderRadius: '14px', borderBottomLeftRadius: '4px', boxShadow: '0 1px 4px rgba(0,0,0,0.08)', display: 'flex', gap: '4px', alignItems: 'center' }}>
+                  <span className="typing-dot" />
+                  <span className="typing-dot" />
+                  <span className="typing-dot" />
+                </div>
               </div>
             )}
             <div ref={bottomRef} />
@@ -109,34 +274,25 @@ export default function FlowiseChatbot() {
 
           {/* Input */}
           <div style={{
-            padding: "12px", borderTop: "1px solid #e2e8f0",
-            display: "flex", gap: "8px"
+            padding: '10px 12px',
+            borderTop: '1px solid #e5e7eb',
+            display: 'flex',
+            gap: '8px',
+            background: '#fff',
+            flexShrink: 0,
           }}>
             <input
+              className="chatbot-input"
               value={input}
               onChange={e => setInput(e.target.value)}
-              onKeyDown={e => e.key === "Enter" && !loading && sendMessage()}
+              onKeyDown={e => e.key === 'Enter' && !loading && sendMessage()}
               placeholder="Mag-type ng tanong..."
-              style={{
-                flex: 1, padding: "10px", borderRadius: "8px",
-                border: "1px solid #cbd5e0", fontSize: "0.875rem",
-                outline: "none"
-              }}
             />
-            <button
-              onClick={sendMessage}
-              disabled={loading}
-              style={{
-                background: loading ? "#ccc" : "#006400",
-                color: "#fff", border: "none",
-                borderRadius: "8px", padding: "10px 14px",
-                cursor: loading ? "not-allowed" : "pointer",
-                fontWeight: "bold", fontSize: "16px"
-              }}
-            >
+            <button className="chatbot-send" onClick={sendMessage} disabled={loading}>
               ➤
             </button>
           </div>
+
         </div>
       )}
     </>

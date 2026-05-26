@@ -80,9 +80,9 @@ const People = () => {
     { name: "HON. MEZZA LUNA BRUL", years: "2018 - 2023" },
     { name: "HON. JOHN KENNETH NOMA", years: "2013 - 2018" },
     { name: "HON. MA. RICA S. GRINDULO", years: "2008 - 2013" },
-    { name: "HON. MARIELEN MERCADO", years: "2003 - 2008" },
+    { name: "HON. MARIELEN MERCADO", years: "2002 - 2008" },
     { name: "HON. VIVIAN M. LAGRISOLA", years: "1996 - 2002" },
-    { name: "HON. ROWENA NOMA CRUZ",years: "1993 - 1998" },
+    { name: "HON. ROWENA NOMA CRUZ",years: "1993 - 1996" },
     { name: "HON. OLIVER SUMAYA", years: "1988 - 1993" },
     { name: "HON. LITO LUMANGAYA", years: "1988 - 1993" }
   ];

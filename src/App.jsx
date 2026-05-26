@@ -8,8 +8,10 @@ import Activities from './pages/Activities.jsx';
 import DisclosureBoard from './pages/DisclosureBoard.jsx';
 import Contact from './pages/Contact.jsx';
 import RequestServices from './pages/RequestServices';
-import FlowiseChatbot from './components/FlowiseChatbot.jsx'; // ← new
+import FlowiseChatbot from './components/FlowiseChatbot';
 import ClearanceForm from './components/ClearanceForm';
+import AdminLogin     from './pages/AdminLogin.jsx';
+import AdminDashboard from './pages/AdminDashboard.jsx';
 import './App.css';
 
 const ScrollToTop = () => {
@@ -32,6 +34,8 @@ function App() {
           <Route path="/disclosure" element={<DisclosureBoard />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/request-services" element={<RequestServices />} />
+          <Route path="/admin-login"           element={<AdminLogin />} />
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
         </Routes>
       </main>
 
