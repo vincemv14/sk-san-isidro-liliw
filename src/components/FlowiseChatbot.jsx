@@ -161,7 +161,7 @@ export default function FlowiseChatbot() {
       <button className="chatbot-toggle" onClick={() => setOpen(!open)} title="Chat with Kuya Isidro">
         {open
           ? <span style={{ fontSize: '20px', fontWeight: 'bold' }}>✕</span>
-          : <img src="/kuyaisidro.png" style={{ width: '42px', height: '42px', borderRadius: '50%', objectFit: 'cover' }} alt="Kuya Isidro" />
+          : <img src="/kuya.png" style={{ width: '42px', height: '42px', borderRadius: '50%', objectFit: 'cover' }} alt="Kuya Isidro" />
         }
       </button>
 
@@ -188,7 +188,7 @@ export default function FlowiseChatbot() {
           }}>
             <div style={{ position: 'relative', flexShrink: 0 }}>
               <img
-                src="/kuyaisidro.png"
+                src="/kuya.png"
                 style={{ width: '38px', height: '38px', borderRadius: '50%', objectFit: 'cover', border: '2px solid rgba(255,255,255,0.6)' }}
                 alt="Kuya Isidro"
               />
@@ -234,7 +234,7 @@ export default function FlowiseChatbot() {
                 {/* Avatar — only for assistant */}
                 {msg.role === 'assistant' && (
                   <img
-                    src="/kuyaisidro.png"
+                    src="/kuya.png"
                     style={{ width: '26px', height: '26px', borderRadius: '50%', objectFit: 'cover', flexShrink: 0, marginBottom: '2px' }}
                     alt="Kuya Isidro"
                   />
@@ -261,7 +261,7 @@ export default function FlowiseChatbot() {
             {/* Typing indicator */}
             {loading && (
               <div style={{ display: 'flex', alignItems: 'flex-end', gap: '7px' }}>
-                <img src="/kuyaisidro.png" style={{ width: '26px', height: '26px', borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }} alt="" />
+                <img src="/kuya.png" style={{ width: '26px', height: '26px', borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }} alt="" />
                 <div style={{ background: '#fff', padding: '12px 16px', borderRadius: '14px', borderBottomLeftRadius: '4px', boxShadow: '0 1px 4px rgba(0,0,0,0.08)', display: 'flex', gap: '4px', alignItems: 'center' }}>
                   <span className="typing-dot" />
                   <span className="typing-dot" />
