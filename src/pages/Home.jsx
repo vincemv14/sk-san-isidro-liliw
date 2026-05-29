@@ -563,7 +563,7 @@ const Home = () => {
       <section className="section values-section" ref={valRef}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div style={fadeStyle(valVisible, 'up', 0)}>
-            <div className="section-tag">Our Foundation</div>
+            <div className="section-tag" style={{ justifyContent: 'center' }}>Our Foundation</div>
             <h2 className="section-h2">Community Values</h2>
           </div>
 

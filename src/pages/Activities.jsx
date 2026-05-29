@@ -197,22 +197,25 @@ const globalCSS = `
   .card-body {
     padding: clamp(14px, 2.5vw, 20px);
     display: flex; flex-direction: column; flex: 1;
+    text-align: center;
   }
   .card-date {
     font-size: 0.72rem; font-weight: 700;
     text-transform: uppercase; letter-spacing: 0.07em;
     margin-bottom: 7px; flex-shrink: 0;
+    text-align: center;
   }
   .card-date.light { color: #64748b; }
   .card-date.dark  { color: #FFD000; }
 
   .card-title {
-    font-size: clamp(0.88rem, 1.8vw, 1rem);
+    font-size: clamp(1.2rem, 1.8vw, 1.1rem);
     font-weight: 700; line-height: 1.3;
-    margin-bottom: 8px;
+    margin-bottom: 2px;
     display: -webkit-box; -webkit-line-clamp: 2;
     -webkit-box-orient: vertical; overflow: hidden;
     min-height: 2.6em;
+    text-align: center;
   }
   .card-title.light { color: #001f01; }
   .card-title.dark  { color: #ffffff; }
