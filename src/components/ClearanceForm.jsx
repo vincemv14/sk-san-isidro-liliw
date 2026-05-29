@@ -126,7 +126,7 @@ export default function ClearanceForm({ onSuccess }) {
   return (
     <>
       {successCode && (
-        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.85)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 99999, padding: '20px' }}>
+        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0, 0, 0, 0.85)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 99999, padding: '20px' }}>
           <div style={{ background: '#002c02', border: '1px solid #fdd835', borderRadius: '20px', padding: '36px 32px', maxWidth: '440px', width: '100%', textAlign: 'center' }}>
             <div style={{ width: '64px', height: '64px', background: '#ffd000', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px', fontSize: '32px', color: '#002c02', fontWeight: 'bold' }}>✓</div>
             <h2 style={{ color: '#ffd000', margin: '0 0 10px', fontSize: '1.4rem' }}>Request Submitted!</h2>
