@@ -58,8 +58,9 @@ import gawadPhoto           from '../assets/activities/awards/gawad.jpg';
 
 // ── Upcoming imports ─────────────────────────────────────────────────────────
 import schoolsuppliesPhoto from '../assets/activities/upcoming/schoolsupplies.jpg';
+import launchingPhoto from '../assets/activities/upcoming/launching.jpg';
 
-// ─── Scroll Animation Hook (same as Home / About / People) ───────────────────
+// ─── Scroll Animation Hook ───────────────────────────────────────────────────
 const useFadeIn = (delay = 0) => {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
@@ -142,7 +143,7 @@ const globalCSS = `
   .act-section.dark-bg   { background: #001401; }
 
   /* ── Section heading group ── */
-  .act-section-head { margin-bottom: 40px; }
+  .act-section-head { margin-bottom: 40px; text-align: center; }
   .section-tag {
     display: inline-flex; align-items: center; gap: 8px;
     font-size: 11px; font-weight: 700;
@@ -159,15 +160,20 @@ const globalCSS = `
   .section-h2.dark-text  { color: #001f01; }
   .section-h2.light-text { color: #ffffff; }
 
-  /* ── Card grid ── */
+  /* ── Card grid — always 3 columns, centered ── */
   .card-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(272px, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 340px));
     gap: clamp(14px, 2.5vw, 22px);
+    justify-content: center;
     width: 100%;
   }
-  @media (max-width: 600px) { .card-grid { grid-template-columns: 1fr 1fr; gap: 10px; } }
-  @media (max-width: 400px) { .card-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 900px) {
+    .card-grid { grid-template-columns: repeat(2, minmax(0, 340px)); }
+  }
+  @media (max-width: 560px) {
+    .card-grid { grid-template-columns: 1fr; }
+  }
 
   /* ── Activity card ── */
   .act-card {
@@ -357,6 +363,7 @@ const achievementsData = [
 
 const upcomingData = [
   { title: "School Supplies Donation Drive 2026", date: "Tentative: May 17, 2026", desc: "Building camaraderie through sports. Registration for Sitio representatives will open soon!", img: schoolsuppliesPhoto, fbLink: "https://www.facebook.com/sksanisidroliliw/posts/pfbid0eUioYn6rjNYuBKDpigAinsPEoPU9KWgQonpq5hLBAhBGgT539b2EoSphRRhas9Ycl" },
+  { title: "Launching of SK San Isidro Official Website", date: "May 30, 2026", desc: "Building our SK San Isidro Official Website for transparency, showcasing our projects and easier requesting of services", img: launchingPhoto, fbLink: "https://www.facebook.com/photo/?fbid=1285268070461645&set=a.153869373601526" },
 ];
 
 const INITIAL = 3;
@@ -404,7 +411,7 @@ const Activities = () => {
 
       {/* ── 1. EVENTS ─────────────────────────────────────────────────── */}
       <section ref={eventsRef} className="act-section white-bg">
-        <div style={{ maxWidth: '1300px', margin: '0 auto' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div className="act-section-head" ref={evRef} style={fadeStyle(evVis, 'up', 0)}>
             <div className="section-tag" style={{ justifyContent: 'center', display: 'flex' }}>Activities</div>
             <h2 className="section-h2 dark-text">Community Events</h2>
@@ -426,7 +433,7 @@ const Activities = () => {
 
       {/* ── 2. PROJECTS ───────────────────────────────────────────────── */}
       <section ref={projectsRef} className="act-section light-bg">
-        <div style={{ maxWidth: '1300px', margin: '0 auto' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div className="act-section-head" ref={prRef} style={fadeStyle(prVis, 'up', 0)}>
             <div className="section-tag" style={{ justifyContent: 'center', display: 'flex' }}>Initiatives</div>
             <h2 className="section-h2 dark-text">Projects</h2>
@@ -438,7 +445,7 @@ const Activities = () => {
           </div>
           {projectsLimit < projectsData.length && (
             <div className="load-more-wrap">
-              <button className="load-more-btn on-light" onClick={() => setProjectsLimit(p => p + 5)}>
+              <button className="load-more-btn on-light" onClick={() => setProjectsLimit(p => p + 3)}>
                 Load More
               </button>
             </div>
@@ -448,7 +455,7 @@ const Activities = () => {
 
       {/* ── 3. SEMINARS ───────────────────────────────────────────────── */}
       <section ref={seminarsRef} className="act-section white-bg">
-        <div style={{ maxWidth: '1300px', margin: '0 auto' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div className="act-section-head" ref={semRef} style={fadeStyle(semVis, 'up', 0)}>
             <div className="section-tag" style={{ justifyContent: 'center', display: 'flex' }}>Learning</div>
             <h2 className="section-h2 dark-text">Seminars &amp; Education</h2>
@@ -460,7 +467,7 @@ const Activities = () => {
           </div>
           {seminarsLimit < seminarsData.length && (
             <div className="load-more-wrap">
-              <button className="load-more-btn on-light" onClick={() => setSeminarsLimit(p => p + 5)}>
+              <button className="load-more-btn on-light" onClick={() => setSeminarsLimit(p => p + 3)}>
                 Load More
               </button>
             </div>
@@ -470,7 +477,7 @@ const Activities = () => {
 
       {/* ── 4. ACHIEVEMENTS ───────────────────────────────────────────── */}
       <section ref={achievementsRef} className="act-section dark-bg">
-        <div style={{ maxWidth: '1300px', margin: '0 auto' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div className="act-section-head" ref={achRef} style={fadeStyle(achVis, 'up', 0)}>
             <div className="section-tag light" style={{ justifyContent: 'center', display: 'flex' }}>Recognition</div>
             <h2 className="section-h2 light-text">Achievements &amp; Awards</h2>
@@ -482,7 +489,7 @@ const Activities = () => {
           </div>
           {achievementsLimit < achievementsData.length && (
             <div className="load-more-wrap">
-              <button className="load-more-btn on-dark" onClick={() => setAchievementsLimit(p => p + 5)}>
+              <button className="load-more-btn on-dark" onClick={() => setAchievementsLimit(p => p + 3)}>
                 Load More
               </button>
             </div>
@@ -492,7 +499,7 @@ const Activities = () => {
 
       {/* ── 5. UPCOMING ───────────────────────────────────────────────── */}
       <section ref={upcomingRef} className="act-section light-bg">
-        <div style={{ maxWidth: '1300px', margin: '0 auto' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div className="act-section-head" ref={upRef} style={fadeStyle(upVis, 'up', 0)}>
             <div className="section-tag" style={{ justifyContent: 'center', display: 'flex' }}>Coming Soon</div>
             <h2 className="section-h2 dark-text">Upcoming Programs</h2>
