@@ -74,17 +74,25 @@ const globalCSS = `
   .hero-badge svg { width: 12px; height: 12px; }
   .hero-h1 {
     font-family: 'Playfair Display', serif;
-    /* Scales from 2.5rem (mobile) to 4.5rem (desktop) */
+    /* Scales from 2.5rem to 4.5rem */
     font-size: clamp(2.5rem, 8vw, 4.5rem); 
     color: #fff; 
     line-height: 1.1; 
     font-weight: 700;
     margin-bottom: 20px; 
     max-width: 700px;
+    /* Prevents the header block itself from breaking mid-word */
+    word-wrap: break-word;
   }
-  .hero-h1 span { color: #FFD000; }
+
+  .hero-h1 span { 
+    color: #FFD000;
+    /* This forces "BARANGAY SAN ISIDRO" to stay on one line */
+    white-space: nowrap; 
+  }
+
   .hero-p {
-    /* Scales from 1rem (mobile) to 1.25rem (desktop) */
+    /* Scales from 1rem to 1.25rem */
     font-size: clamp(1rem, 2.5vw, 1.25rem); 
     color: rgba(255,255,255,0.8); 
     line-height: 1.6;

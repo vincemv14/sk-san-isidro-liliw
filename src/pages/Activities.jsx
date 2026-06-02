@@ -100,7 +100,7 @@ const globalCSS = `
   /* ── Sticky hero/nav ── */
   .act-hero {
     background: #001401;
-    padding: clamp(32px, 5vw, 56px) clamp(20px, 6%, 8%);
+    padding:  clamp(64px, 9vw, 120px) clamp(20px, 7%, 10%) clamp(52px, 7vw, 90px);
     text-align: center;
     position: sticky; top: 0; z-index: 99;
     box-shadow: 0 4px 20px rgba(0,0,0,0.35);
