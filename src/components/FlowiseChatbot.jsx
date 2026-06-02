@@ -46,7 +46,6 @@ export default function FlowiseChatbot() {
       <style>{`
         .chatbot-window {
           position: fixed;
-          /* Default: desktop */
           bottom: 90px;
           right: 24px;
           width: 360px;
@@ -54,7 +53,6 @@ export default function FlowiseChatbot() {
           z-index: 9999;
         }
 
-        /* Tablet */
         @media (max-width: 768px) {
           .chatbot-window {
             width: calc(100vw - 32px);
@@ -64,7 +62,6 @@ export default function FlowiseChatbot() {
           }
         }
 
-        /* Galaxy Fold and very small screens */
         @media (max-width: 320px) {
           .chatbot-window {
             width: calc(100vw - 24px);
@@ -92,7 +89,6 @@ export default function FlowiseChatbot() {
 
         .chatbot-input {
           flex: 1;
-          min-width: 0;
           padding: 10px 12px;
           border-radius: 10px;
           border: 1.5px solid #d1d5db;
@@ -101,6 +97,12 @@ export default function FlowiseChatbot() {
           background: #f9fafb;
           transition: border 0.2s;
           box-sizing: border-box;
+          font-family: inherit;
+          resize: none;
+          min-height: 40px;
+          max-height: 100px;
+          overflow-y: auto;
+          line-height: 1.4;
         }
         .chatbot-input:focus { border-color: #006400; background: #fff; }
 
@@ -114,6 +116,7 @@ export default function FlowiseChatbot() {
           font-size: 15px;
           flex-shrink: 0;
           transition: background 0.2s;
+          margin-bottom: 2px;
         }
         .chatbot-send:hover:not(:disabled) { background: #004d00; }
         .chatbot-send:disabled { background: #9ca3af; cursor: not-allowed; }
@@ -129,7 +132,7 @@ export default function FlowiseChatbot() {
         .typing-dot:nth-child(3) { animation-delay: 0.4s; }
         @keyframes bounce {
           0%, 80%, 100% { transform: scale(0.7); opacity: 0.5; }
-          40%            { transform: scale(1.1); opacity: 1; }
+          40%           { transform: scale(1.1); opacity: 1; }
         }
 
         .chatbot-toggle {
@@ -157,7 +160,6 @@ export default function FlowiseChatbot() {
         }
       `}</style>
 
-      {/* ✅ Toggle Button */}
       <button className="chatbot-toggle" onClick={() => setOpen(!open)} title="Chat with Kuya Isidro">
         {open
           ? <span style={{ fontSize: '20px', fontWeight: 'bold' }}>✕</span>
@@ -165,7 +167,6 @@ export default function FlowiseChatbot() {
         }
       </button>
 
-      {/* ✅ Chat Window */}
       {open && (
         <div className="chatbot-window" style={{
           background: '#fff',
@@ -177,7 +178,6 @@ export default function FlowiseChatbot() {
           border: '1px solid #e5e7eb',
         }}>
 
-          {/* Header */}
           <div style={{
             background: 'linear-gradient(135deg, #006400 0%, #004d00 100%)',
             padding: '14px 16px',
@@ -192,7 +192,6 @@ export default function FlowiseChatbot() {
                 style={{ width: '38px', height: '38px', borderRadius: '50%', objectFit: 'cover', border: '2px solid rgba(255,255,255,0.6)' }}
                 alt="Kuya Isidro"
               />
-              {/* Online dot */}
               <span style={{
                 position: 'absolute', bottom: '1px', right: '1px',
                 width: '10px', height: '10px',
@@ -214,7 +213,6 @@ export default function FlowiseChatbot() {
             >✕</button>
           </div>
 
-          {/* Messages */}
           <div style={{
             flex: 1,
             overflowY: 'auto',
@@ -231,7 +229,6 @@ export default function FlowiseChatbot() {
                 alignItems: 'flex-end',
                 gap: '7px',
               }}>
-                {/* Avatar — only for assistant */}
                 {msg.role === 'assistant' && (
                   <img
                     src="/kuya.png"
@@ -258,7 +255,6 @@ export default function FlowiseChatbot() {
               </div>
             ))}
 
-            {/* Typing indicator */}
             {loading && (
               <div style={{ display: 'flex', alignItems: 'flex-end', gap: '7px' }}>
                 <img src="/kuya.png" style={{ width: '26px', height: '26px', borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }} alt="" />
@@ -272,7 +268,6 @@ export default function FlowiseChatbot() {
             <div ref={bottomRef} />
           </div>
 
-          {/* Input */}
           <div style={{
             padding: '10px 12px',
             borderTop: '1px solid #e5e7eb',
@@ -280,12 +275,18 @@ export default function FlowiseChatbot() {
             gap: '8px',
             background: '#fff',
             flexShrink: 0,
+            alignItems: 'flex-end',
           }}>
-            <input
+            <textarea
               className="chatbot-input"
               value={input}
               onChange={e => setInput(e.target.value)}
-              onKeyDown={e => e.key === 'Enter' && !loading && sendMessage()}
+              onKeyDown={e => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                  e.preventDefault();
+                  if (!loading) sendMessage();
+                }
+              }}
               placeholder="Mag-type ng tanong..."
             />
             <button className="chatbot-send" onClick={sendMessage} disabled={loading}>

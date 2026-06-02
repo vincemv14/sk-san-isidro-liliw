@@ -173,3 +173,36 @@ h2 {
   max-width: none !important;
   pointer-events: auto !important;
 }
+
+/* Add this to your Navbar.css or App.css */
+.people-page {
+  padding-top: 100px; /* Adjust this value to match your header's actual total height */
+}
+
+.home-container {
+  padding-top: 100px; /* Adjust this value to match your header's actual total height */
+}
+
+.about-page {
+  padding-top: 100px; /* Adjust this value to match your header's actual total height */
+}
+
+.contact-page {
+  padding-top: 100px; /* Adjust this value to match your header's actual total height */
+}
+
+.disclosure-page {
+  padding-top: 100px; /* Adjust this value to match your header's actual total height */
+}
+
+.activities-page {
+  padding-top: 100px; /* Adjust this value to match your header's actual total height */
+}
+
+.rs-page {
+  padding-top: 100px; /* Adjust this value to match your header's actual total height */
+}
+
+.admin-page {
+  padding-top: 100px; /* Adjust this value to match your header's actual total height */
+}

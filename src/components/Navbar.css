@@ -1,3 +1,20 @@
+/* --- Auto-Hiding Wrapper --- */
+.navbar-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: transform 0.3s ease-in-out;
+}
+
+.navbar-header.visible {
+  transform: translateY(0);
+}
+
+.navbar-header.hidden {
+  transform: translateY(-100%);
+}
+
 /* --- Base Desktop Layout --- */
 .navbar {
   display: flex;
@@ -5,9 +22,6 @@
   align-items: center;
   padding: 10px 5%;
   background: linear-gradient(90deg, #002c02 0%, #538b56 100%);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   border-bottom: 4px solid #ffd000;
 }
@@ -27,16 +41,17 @@
 
 .logo-container span {
   color: #ffffff;
-  font-size: 1.2rem; /* Slightly reduced to save space */
+  font-size: 1.4rem; /* Increased from 1.2rem */
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
+  white-space: nowrap; /* Ensures text stays on one line */
 }
 
 .nav-links {
   display: flex;
   list-style: none;
-  gap: 15px; /* Reduced gap for better fit */
+  gap: 20px; /* Increased from 15px */
   margin: 0;
   padding: 0;
 }
@@ -45,10 +60,10 @@
   color: #ffffff;
   text-decoration: none;
   font-weight: 500;
-  font-size: 0.8rem; /* Slightly reduced font size for desktop */
+  font-size: 1rem; /* Increased from 0.8rem */
   text-transform: uppercase;
   transition: color 0.3s ease;
-  white-space: nowrap; /* Prevents text from wrapping */
+  white-space: nowrap;
 }
 
 .nav-item:hover {
@@ -60,28 +75,18 @@
   font-weight: 700;
 }
 
-/* Admin Link Specific Styling */
-.admin-link {
-
-  font-weight: bold;
-}
-
-.chevron-icon { display: none; }
-
-/* --- Responsive Adjustments for Tablet/Laptop --- */
+/* --- Responsive Adjustments --- */
 @media screen and (max-width: 1100px) {
   .nav-links { gap: 10px; }
-  .nav-item { font-size: 0.75rem; }
-  .logo-container span { font-size: 1rem; }
+  .nav-item { font-size: 0.85rem; }
+  .logo-container span { font-size: 1.1rem; }
 }
 
-/* --- Hamburger Icon Button Layout --- */
 .mobile-icon {
   display: none;
   flex-direction: column;
   gap: 6px;
   cursor: pointer;
-  z-index: 1001;
 }
 
 .line {
@@ -98,7 +103,7 @@
 
 /* --- Mobile View Overrides (Max 768px) --- */
 @media screen and (max-width: 768px) {
-  .mobile-icon { display: flex; z-index: 10000 !important; }
+  .mobile-icon { display: flex; z-index: 10000; }
 
   .nav-links {
     position: fixed;
@@ -113,7 +118,7 @@
     padding-top: 70px;
     transition: left 0.3s ease-in-out;
     box-shadow: 5px 0 15px rgba(0, 0, 0, 0.4);
-    z-index: 9999 !important;
+    z-index: 9999;
   }
 
   .nav-links.active { left: 0; }
@@ -133,14 +138,5 @@
   .nav-links .nav-item.active-link {
     background-color: #ffd000 !important;
     color: #002c02 !important;
-  }
-
-  .chevron-icon {
-    display: block;
-    width: 8px;
-    height: 8px;
-    border-top: 2px solid rgba(255, 255, 255, 0.7);
-    border-right: 2px solid rgba(255, 255, 255, 0.7);
-    transform: rotate(45deg);
   }
 }

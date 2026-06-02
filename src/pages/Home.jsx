@@ -74,15 +74,22 @@ const globalCSS = `
   .hero-badge svg { width: 12px; height: 12px; }
   .hero-h1 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 6vw, 4rem);
-    color: #fff; line-height: 1.12; font-weight: 700;
-    margin-bottom: 20px; max-width: 700px;
+    /* Scales from 2.5rem (mobile) to 4.5rem (desktop) */
+    font-size: clamp(2.5rem, 8vw, 4.5rem); 
+    color: #fff; 
+    line-height: 1.1; 
+    font-weight: 700;
+    margin-bottom: 20px; 
+    max-width: 700px;
   }
   .hero-h1 span { color: #FFD000; }
   .hero-p {
-    font-size: clamp(0.9rem, 2vw, 1.05rem);
-    color: rgba(255,255,255,0.8); line-height: 1.75;
-    max-width: 580px; margin-bottom: 36px;
+    /* Scales from 1rem (mobile) to 1.25rem (desktop) */
+    font-size: clamp(1rem, 2.5vw, 1.25rem); 
+    color: rgba(255,255,255,0.8); 
+    line-height: 1.6;
+    max-width: 580px; 
+    margin-bottom: 36px;
   }
   .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
   .btn-gold {

@@ -7,6 +7,9 @@ import './Navbar.css';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // New states for auto-hiding
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -19,15 +22,33 @@ const Navbar = () => {
       setIsLoggedIn(!!session);
     });
 
-    return () => subscription.unsubscribe();
-  }, []);
+    // Scroll listener
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      // Show if scrolling up or at the very top, hide if scrolling down
+      if (currentScrollY > lastScrollY && currentScrollY > 50) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      subscription.unsubscribe();
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [lastScrollY]);
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu  = () => setIsOpen(false);
 
   return (
-    <>
-      {/* ✅ Top bar — Admin Login lives here, separate from main nav */}
+    // Wrap both in a container that handles the visibility class
+    <div className={`navbar-header ${isVisible ? 'visible' : 'hidden'}`}>
+      
+      {/* ✅ Top bar */}
       <div style={{
         backgroundColor: '#001a01',
         padding: '6px 5%',
@@ -55,7 +76,7 @@ const Navbar = () => {
         </Link>
       </div>
 
-      {/* ✅ Main navbar — clean, no Admin Login crowding it */}
+      {/* ✅ Main navbar */}
       <nav className="navbar">
         <div className="nav-logo">
           <Link to="/" className="logo-container" onClick={closeMenu}>
@@ -71,21 +92,19 @@ const Navbar = () => {
         </div>
 
         <ul className={isOpen ? "nav-links active" : "nav-links"}>
-          <li><NavLink to="/"            end onClick={closeMenu} className={({ isActive }) => isActive ? "nav-item active-link" : "nav-item"}>Home</NavLink></li>
-          <li><NavLink to="/about"           onClick={closeMenu} className={({ isActive }) => isActive ? "nav-item active-link" : "nav-item"}>About</NavLink></li>
-          <li><NavLink to="/people"          onClick={closeMenu} className={({ isActive }) => isActive ? "nav-item active-link" : "nav-item"}>People</NavLink></li>
-          <li><NavLink to="/activities"      onClick={closeMenu} className={({ isActive }) => isActive ? "nav-item active-link" : "nav-item"}>Activities</NavLink></li>
-          <li><NavLink to="/disclosure"      onClick={closeMenu} className={({ isActive }) => isActive ? "nav-item active-link" : "nav-item"}>Disclosure Board</NavLink></li>
-          <li><NavLink to="/contact"         onClick={closeMenu} className={({ isActive }) => isActive ? "nav-item active-link" : "nav-item"}>Contact</NavLink></li>
+          <li><NavLink to="/" end onClick={closeMenu} className={({ isActive }) => isActive ? "nav-item active-link" : "nav-item"}>Home</NavLink></li>
+          <li><NavLink to="/about" onClick={closeMenu} className={({ isActive }) => isActive ? "nav-item active-link" : "nav-item"}>About</NavLink></li>
+          <li><NavLink to="/people" onClick={closeMenu} className={({ isActive }) => isActive ? "nav-item active-link" : "nav-item"}>People</NavLink></li>
+          <li><NavLink to="/activities" onClick={closeMenu} className={({ isActive }) => isActive ? "nav-item active-link" : "nav-item"}>Activities</NavLink></li>
+          <li><NavLink to="/disclosure" onClick={closeMenu} className={({ isActive }) => isActive ? "nav-item active-link" : "nav-item"}>Disclosure Board</NavLink></li>
+          <li><NavLink to="/contact" onClick={closeMenu} className={({ isActive }) => isActive ? "nav-item active-link" : "nav-item"}>Contact</NavLink></li>
           <li><NavLink to="/request-services" onClick={closeMenu} className={({ isActive }) => isActive ? "nav-item active-link" : "nav-item"}>Request Services</NavLink></li>
-
-          {/* ✅ Show Admin Dashboard link in mobile menu only when logged in */}
           {isLoggedIn && (
             <li><NavLink to="/admin-dashboard" onClick={closeMenu} className={({ isActive }) => isActive ? "nav-item active-link" : "nav-item"}>Dashboard</NavLink></li>
           )}
         </ul>
       </nav>
-    </>
+    </div>
   );
 };
 

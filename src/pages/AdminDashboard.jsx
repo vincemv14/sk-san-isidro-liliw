@@ -44,7 +44,12 @@ const globalCSS = `
   .nav-btn-logout:hover { background: '#991b1b'; }
 
   /* ── Content wrapper ── */
-  .admin-content { max-width: 1300px; margin: 0 auto; padding: clamp(16px, 3vw, 28px) clamp(12px, 3vw, 24px); }
+  .admin-content { 
+    max-width: 1300px; 
+    margin: 0 auto; 
+    /* Slightly reduce side padding for mobile */
+    padding: 20px clamp(10px, 3vw, 24px); 
+  }
 
   /* ── Stats ── */
   .stats-grid {
@@ -85,22 +90,28 @@ const globalCSS = `
 
   /* ── Request cards ── */
   .requests-list { display: flex; flex-direction: column; gap: 12px; }
-  .request-card {
+ .request-card {
     background: #fff; border-radius: 13px;
     border: 1px solid #e8eef0;
-    padding: 18px 20px;
+    padding: 18px;
     display: grid;
-    grid-template-columns: 1.4fr 1.2fr 0.9fr 0.9fr 1.1fr;
-    gap: 14px; align-items: center;
+    /* Use 'auto' or '1fr' to allow better wrapping */
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr; 
+    gap: 12px;
+    align-items: start; /* Changed from 'center' to prevent squash */
     box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    transition: box-shadow 0.2s, border-color 0.2s;
   }
-  .request-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.08); border-color: #c8dbc8; }
+
+  /* Break to 2 columns on tablets */
   @media (max-width: 860px) {
     .request-card { grid-template-columns: 1fr 1fr; }
   }
+
+  /* Break to 1 column on phones - This prevents the overlapping */
   @media (max-width: 520px) {
-    .request-card { grid-template-columns: 1fr; }
+    .request-card { grid-template-columns: 1fr; gap: 16px; }
+    /* Ensure long names or codes don't break the container */
+    .rc-name, .rc-ref, .rc-service { word-break: break-word; }
   }
 
   .rc-field-label { font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 3px; }
@@ -202,7 +213,7 @@ export default function AdminDashboard() {
 
   const handleLogout = () => {
     sessionStorage.removeItem('bsi_admin_auth');
-    navigate('/admin');
+    navigate('/');
   };
 
   const formatDate = (d) =>
