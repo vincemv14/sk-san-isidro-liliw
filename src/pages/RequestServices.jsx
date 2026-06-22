@@ -201,7 +201,7 @@ const globalCSS = `
     font-size: clamp(1.3rem, 3vw, 1.8rem);
     color: #001f01; font-weight: 700; margin-bottom: 6px;
   }
-  .form-card-sub { font-size: clamp(0.82rem, 1.8vw, 0.92rem); color: #64748b; margin-bottom: 28px; line-height: 1.6; text-align: center}
+  .form-card-sub { font-size: clamp(0.82rem, 1.8vw, 0.92rem); font-weight: bold; color: #000000; margin-bottom: 28px; line-height: 1.6; text-align: center}
 
   /* ── Track input ── */
   .track-form { display: flex; gap: 10px; max-width: 640px; margin: 0 auto 28px; }
@@ -418,6 +418,14 @@ function TrackRequestSection() {
     });
   };
 
+  // ── NEW: format birthday as readable date ──
+  const formatBirthday = (dateStr) => {
+    if (!dateStr) return '—';
+    return new Date(dateStr).toLocaleDateString('en-PH', {
+      year: 'numeric', month: 'long', day: 'numeric',
+    });
+  };
+
   const [trackRef, trackVis] = useFadeIn(0);
 
   return (
@@ -454,8 +462,8 @@ function TrackRequestSection() {
                 <span
                   className="status-badge"
                   style={{
-                    background: statusColors[request.status]?.bg || '#eee',
-                    color:      statusColors[request.status]?.color || '#333',
+                    background:  statusColors[request.status]?.bg     || '#eee',
+                    color:       statusColors[request.status]?.color  || '#333',
                     borderColor: statusColors[request.status]?.border || '#ccc',
                   }}
                 >
@@ -465,12 +473,22 @@ function TrackRequestSection() {
             </div>
 
             <div className="track-result-body">
-              <div className="track-info-grid">
+
+              {/* ── Personal Info header ── */}
+              <div style={{
+                fontSize: '0.7rem', fontWeight: '700', color: '#2d7a32',
+                textTransform: 'uppercase', letterSpacing: '0.08em',
+                marginBottom: '10px', paddingBottom: '6px',
+                borderBottom: '1.5px solid #e2e8f0',
+              }}>
+                Personal Information
+              </div>
+
+              <div className="track-info-grid" style={{ marginBottom: '20px' }}>
                 {[
                   { label: 'Full Name',      value: request.resident_name },
-                  { label: 'Service Type',   value: request.clearance_type },
-                  { label: 'Quantity',       value: request.quantity },
-                  { label: 'Total Fee',      value: `₱${request.total_price?.toFixed(2)}` },
+                  { label: 'Age',            value: request.age },
+                  { label: 'Birthday',       value: formatBirthday(request.birthday) },
                   { label: 'Contact Number', value: request.contact_number },
                   { label: 'Date Submitted', value: formatDate(request.created_at) },
                 ].map((row) => (
@@ -481,6 +499,31 @@ function TrackRequestSection() {
                 ))}
               </div>
 
+              {/* ── Request Details header ── */}
+              <div style={{
+                fontSize: '0.7rem', fontWeight: '700', color: '#2d7a32',
+                textTransform: 'uppercase', letterSpacing: '0.08em',
+                marginBottom: '10px', paddingBottom: '6px',
+                borderBottom: '1.5px solid #e2e8f0',
+              }}>
+                Request Details
+              </div>
+
+              <div className="track-info-grid" style={{ marginBottom: '20px' }}>
+                {[
+                  { label: 'Service Type', value: request.clearance_type },
+                  { label: 'Purpose',      value: request.purpose },
+                  { label: 'Quantity',     value: request.quantity },
+                  { label: 'Total Fee',    value: `₱${request.total_price?.toFixed(2)}` },
+                ].map((row) => (
+                  <div key={row.label}>
+                    <div className="track-info-label">{row.label}</div>
+                    <div className="track-info-value">{row.value || '—'}</div>
+                  </div>
+                ))}
+              </div>
+
+              {/* ── Progress tracker ── */}
               {request.status !== 'Rejected' && (
                 <>
                   <div className="track-progress-label">Request Progress</div>
@@ -522,6 +565,7 @@ function TrackRequestSection() {
                 </>
               )}
 
+              {/* ── Status alerts ── */}
               {request.status === 'Rejected' && (
                 <div className="track-alert" style={{ background: '#ffebee', border: '1px solid #ef9a9a', color: '#b71c1c' }}>
                   <strong>Your request was not approved.</strong> Please visit the Barangay Hall for more information.
@@ -537,6 +581,7 @@ function TrackRequestSection() {
                   <strong>Your document is ready for pickup!</strong> Please visit the Barangay Hall.
                 </div>
               )}
+
             </div>
           </div>
         )}

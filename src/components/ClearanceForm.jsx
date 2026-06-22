@@ -6,6 +6,9 @@ export default function ClearanceForm({ onSuccess }) {
     {
       title: "Clearances & Applications",
       items: [
+        { name: "Barangay Clearance", price: 50 },
+        { name: "Barangay Indigency", price: 0 },
+        { name: "First Time Job Seeker Certificate", price: 0 },
         { name: "Sari-Sari Store Clearance", price: 100 },
         { name: "Driver's License Application", price: 50 },
         { name: "Loan Application", price: 50 },
@@ -48,10 +51,37 @@ export default function ClearanceForm({ onSuccess }) {
 
   const defaultType = serviceCategories[0].items[0].name;
 
-  const [formData, setFormData] = useState({ name: '', type: defaultType, qty: 1, phone: '' });
+  // ── Added age, birthday, purpose to state ──
+  const [formData, setFormData] = useState({
+    name: '',
+    age: '',
+    birthday: '',
+    purpose: '',
+    type: defaultType,
+    qty: 1,
+    phone: '',
+  });
   const [loading, setLoading] = useState(false);
   const [successCode, setSuccessCode] = useState(null);
   const [copied, setCopied] = useState(false);
+
+  const inputStyle = {
+    width: '100%',
+    padding: '12px',
+    borderRadius: '8px',
+    border: '1px solid #cbd5e0',
+    boxSizing: 'border-box',
+    fontSize: '0.95rem',
+    fontFamily: 'inherit',
+  };
+
+  const labelStyle = {
+    display: 'block',
+    fontSize: '0.85rem',
+    fontWeight: '600',
+    color: '#4a5568',
+    marginBottom: '6px',
+  };
 
   const handleCopy = () => {
     navigator.clipboard.writeText(successCode).then(() => {
@@ -78,10 +108,13 @@ export default function ClearanceForm({ onSuccess }) {
     const { data, error } = await supabase
       .from('clearance_requests')
       .insert([{
-        resident_name: formData.name,
+        resident_name:  formData.name,
+        age:            parseInt(formData.age),   // ← new
+        birthday:       formData.birthday,         // ← new
+        purpose:        formData.purpose,          // ← new
         clearance_type: formData.type,
-        quantity: formData.qty,
-        total_price: totalPrice,
+        quantity:       formData.qty,
+        total_price:    totalPrice,
         contact_number: formData.phone,
       }])
       .select('reference_code');
@@ -104,11 +137,14 @@ export default function ClearanceForm({ onSuccess }) {
             Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
           },
           body: JSON.stringify({
-            resident_name: formData.name,
+            resident_name:  formData.name,
+            age:            formData.age,
+            birthday:       formData.birthday,
+            purpose:        formData.purpose,
             clearance_type: formData.type,
-            quantity: formData.qty,
+            quantity:       formData.qty,
             contact_number: formData.phone,
-            total_price: totalPrice,
+            total_price:    totalPrice,
             reference_code: generatedCode,
           }),
         }
@@ -118,15 +154,16 @@ export default function ClearanceForm({ onSuccess }) {
     }
 
     setLoading(false);
-    setFormData({ name: '', type: defaultType, qty: 1, phone: '' });
+    setFormData({ name: '', age: '', birthday: '', purpose: '', type: defaultType, qty: 1, phone: '' });
     setSuccessCode(generatedCode);
     if (onSuccess) onSuccess(generatedCode);
   };
 
   return (
     <>
+      {/* ── Success Modal ── */}
       {successCode && (
-        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0, 0, 0, 0.85)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 99999, padding: '20px' }}>
+        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.85)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 99999, padding: '20px' }}>
           <div style={{ background: '#002c02', border: '1px solid #fdd835', borderRadius: '20px', padding: '36px 32px', maxWidth: '440px', width: '100%', textAlign: 'center' }}>
             <div style={{ width: '64px', height: '64px', background: '#ffd000', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px', fontSize: '32px', color: '#002c02', fontWeight: 'bold' }}>✓</div>
             <h2 style={{ color: '#ffd000', margin: '0 0 10px', fontSize: '1.4rem' }}>Request Submitted!</h2>
@@ -135,43 +172,120 @@ export default function ClearanceForm({ onSuccess }) {
               <p style={{ color: '#ffd000', fontFamily: 'monospace', fontSize: '1.5rem', fontWeight: 'bold', letterSpacing: '3px', margin: 0 }}>{successCode}</p>
             </div>
             <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', marginTop: '20px' }}>
-              <button onClick={handleCopy} style={{ padding: '11px 24px', background: '#ffd000', color: '#002c02', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>{copied ? '✓ Copied!' : 'Copy Code'}</button>
-              <button onClick={handleClose} style={{ padding: '11px 24px', background: 'transparent', color: '#fff', border: '1px solid rgba(255,255,255,0.3)', borderRadius: '8px', cursor: 'pointer' }}>Close</button>
+              <button onClick={handleCopy} style={{ padding: '11px 24px', background: '#ffd000', color: '#002c02', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>
+                {copied ? '✓ Copied!' : 'Copy Code'}
+              </button>
+              <button onClick={handleClose} style={{ padding: '11px 24px', background: 'transparent', color: '#fff', border: '1px solid rgba(255,255,255,0.3)', borderRadius: '8px', cursor: 'pointer' }}>
+                Close
+              </button>
             </div>
           </div>
         </div>
       )}
 
-      <div style={{ maxWidth: '500px', margin: '40px auto', padding: '30px', background: '#ffffff', borderRadius: '16px', border: '1px solid #cecece', boxShadow: '0 10px 25px rgba(0, 0, 0, 0.16)' }}>
+      {/* ── Form ── */}
+      <div style={{ maxWidth: '500px', margin: '40px auto', padding: '30px', background: '#ffffff', borderRadius: '16px', border: '1px solid #cecece', boxShadow: '0 10px 25px rgba(0,0,0,0.16)' }}>
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           <h2 style={{ textAlign: 'center', color: '#002c02', margin: 0 }}>Request Service</h2>
+
+          {/* Full Name */}
           <div>
-            <label style={{ fontSize: '0.85rem', fontWeight: '600', color: '#4a5568' }}>Full Name</label>
-            <input required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e0', boxSizing: 'border-box' }} />
+            <label style={labelStyle}>Full Name</label>
+            <input
+              required
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              style={inputStyle}
+            />
           </div>
+
+          {/* Age + Birthday side by side */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+            <div>
+              <label style={labelStyle}>Age</label>
+              <input
+                required
+                type="number"
+                min={1}
+                max={120}
+                value={formData.age}
+                onChange={(e) => setFormData({ ...formData, age: e.target.value })}
+                style={inputStyle}
+              />
+            </div>
+            <div>
+              <label style={labelStyle}>Birthday</label>
+              <input
+                required
+                type="date"
+                value={formData.birthday}
+                onChange={(e) => setFormData({ ...formData, birthday: e.target.value })}
+                style={inputStyle}
+              />
+            </div>
+          </div>
+
+          {/* Purpose */}
           <div>
-            <label style={{ fontSize: '0.85rem', fontWeight: '600', color: '#4a5568' }}>Service Type</label>
-            <select value={formData.type} onChange={(e) => setFormData({ ...formData, type: e.target.value })} style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e0' }}>
+            <label style={labelStyle}>Purpose</label>
+            <textarea
+              required
+              rows={3}
+              placeholder="State the purpose of your request…"
+              value={formData.purpose}
+              onChange={(e) => setFormData({ ...formData, purpose: e.target.value })}
+              style={{ ...inputStyle, resize: 'vertical', lineHeight: '1.5' }}
+            />
+          </div>
+
+          {/* Service Type */}
+          <div>
+            <label style={labelStyle}>Service Type</label>
+            <select
+              value={formData.type}
+              onChange={(e) => setFormData({ ...formData, type: e.target.value })}
+              style={inputStyle}
+            >
               {serviceCategories.map((cat) => (
                 <optgroup key={cat.title} label={cat.title}>
                   {cat.items.map((item) => (
-                    <option key={item.name} value={item.name}>{item.name} - ₱{item.price}</option>
+                    <option key={item.name} value={item.name}>
+                      {item.name} — ₱{item.price}
+                    </option>
                   ))}
                 </optgroup>
               ))}
             </select>
           </div>
+
+          {/* Quantity + Phone */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
             <div>
-              <label style={{ fontSize: '0.85rem', fontWeight: '600', color: '#4a5568' }}>Quantity</label>
-              <input type="number" value={formData.qty} min={1} onChange={(e) => setFormData({ ...formData, qty: parseInt(e.target.value) })} style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e0', boxSizing: 'border-box' }} />
+              <label style={labelStyle}>Quantity</label>
+              <input
+                type="number"
+                value={formData.qty}
+                min={1}
+                onChange={(e) => setFormData({ ...formData, qty: parseInt(e.target.value) })}
+                style={inputStyle}
+              />
             </div>
             <div>
-              <label style={{ fontSize: '0.85rem', fontWeight: '600', color: '#4a5568' }}>Phone</label>
-              <input required value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e0', boxSizing: 'border-box' }} />
+              <label style={labelStyle}>Phone</label>
+              <input
+                required
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                style={inputStyle}
+              />
             </div>
           </div>
-          <button type="submit" disabled={loading} style={{ padding: '14px', background: '#006400', color: '#fff', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: loading ? 'not-allowed' : 'pointer' }}>
+
+          <button
+            type="submit"
+            disabled={loading}
+            style={{ padding: '14px', background: '#006400', color: '#fff', border: 'none', borderRadius: '8px', fontWeight: 'bold', fontSize: '0.95rem', cursor: loading ? 'not-allowed' : 'pointer', opacity: loading ? 0.7 : 1 }}
+          >
             {loading ? 'Submitting...' : 'SUBMIT REQUEST'}
           </button>
         </form>

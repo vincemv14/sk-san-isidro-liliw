@@ -252,8 +252,8 @@ const sbMembers = [
   { name: "HON. REGIDOR A. PINEDA JR.",   position: "Barangay Kagawad",   committee: "Committee Chair on Education",           image: jrPhoto     },
   { name: "HON. JAIME B. SALAZAR",        position: "Barangay Kagawad",   committee: "Committee Chair on Peace and Order",     image: jaimePhoto  },
   { name: "HON. ANGELITO M. MATIC",       position: "Barangay Kagawad",   committee: "Committee Chair on Infrastructure",      image: angelPhoto1 },
-  { name: "HON. LENDEL F. ALMARES",       position: "Barangay Secretary",                                                      image: lendelPhoto },
-  { name: "HON. JHOMMEL M. MONTEVIRGEN",  position: "Barangay Treasurer",                                                      image: jhommelPhoto},
+  { name: "LENDEL F. ALMARES",       position: "Barangay Secretary",                                                      image: lendelPhoto },
+  { name: "JHOMMEL M. MONTEVIRGEN",  position: "Barangay Treasurer",                                                      image: jhommelPhoto},
 ];
 
 const skMembers = [
@@ -264,8 +264,8 @@ const skMembers = [
   { name: "HON. SAMANTHA CLAIRE M. VASALLO",  position: "SK Member", committee: "Committee Chair on Health",                       image: samPhoto      },
   { name: "HON. ANGEL DIANNE M. TIQUIS",      position: "SK Member", committee: "Committee Chair on Environment",                  image: angelPhoto    },
   { name: "HON. NIDELINE MEI N. LABRIAGA",    position: "SK Member", committee: "Committee Chair on Agriculture",                  image: nidelinePhoto },
-  { name: "HON. LORIE ANN A. SANTOS",         position: "SK Secretary",                                                            image: lorieannPhoto },
-  { name: "HON. MAI MAI A. FRESCO",           position: "SK Treasurer",                                                            image: maiPhoto      },
+  { name: "LORIE ANN A. SANTOS",         position: "SK Secretary",                                                            image: lorieannPhoto },
+  { name: "MAI MAI A. FRESCO",           position: "SK Treasurer",                                                            image: maiPhoto      },
 ];
 
 const pastSB = [
