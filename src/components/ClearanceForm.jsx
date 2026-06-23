@@ -51,19 +51,19 @@ export default function ClearanceForm({ onSuccess }) {
 
   const defaultType = serviceCategories[0].items[0].name;
 
-  // ── Added age, birthday, purpose to state ──
   const [formData, setFormData] = useState({
-    name: '',
-    age: '',
+    name:     '',
+    age:      '',
     birthday: '',
-    purpose: '',
-    type: defaultType,
-    qty: 1,
-    phone: '',
+    purpose:  '',
+    email:    '',   // ← NEW
+    type:     defaultType,
+    qty:      1,
+    phone:    '',
   });
-  const [loading, setLoading] = useState(false);
+  const [loading,     setLoading]     = useState(false);
   const [successCode, setSuccessCode] = useState(null);
-  const [copied, setCopied] = useState(false);
+  const [copied,      setCopied]      = useState(false);
 
   const inputStyle = {
     width: '100%',
@@ -109,9 +109,10 @@ export default function ClearanceForm({ onSuccess }) {
       .from('clearance_requests')
       .insert([{
         resident_name:  formData.name,
-        age:            parseInt(formData.age),   // ← new
-        birthday:       formData.birthday,         // ← new
-        purpose:        formData.purpose,          // ← new
+        age:            parseInt(formData.age),
+        birthday:       formData.birthday,
+        purpose:        formData.purpose,
+        email:          formData.email,   // ← NEW
         clearance_type: formData.type,
         quantity:       formData.qty,
         total_price:    totalPrice,
@@ -141,6 +142,7 @@ export default function ClearanceForm({ onSuccess }) {
             age:            formData.age,
             birthday:       formData.birthday,
             purpose:        formData.purpose,
+            email:          formData.email,   // ← NEW
             clearance_type: formData.type,
             quantity:       formData.qty,
             contact_number: formData.phone,
@@ -154,7 +156,7 @@ export default function ClearanceForm({ onSuccess }) {
     }
 
     setLoading(false);
-    setFormData({ name: '', age: '', birthday: '', purpose: '', type: defaultType, qty: 1, phone: '' });
+    setFormData({ name: '', age: '', birthday: '', purpose: '', email: '', type: defaultType, qty: 1, phone: '' });
     setSuccessCode(generatedCode);
     if (onSuccess) onSuccess(generatedCode);
   };
@@ -167,10 +169,22 @@ export default function ClearanceForm({ onSuccess }) {
           <div style={{ background: '#002c02', border: '1px solid #fdd835', borderRadius: '20px', padding: '36px 32px', maxWidth: '440px', width: '100%', textAlign: 'center' }}>
             <div style={{ width: '64px', height: '64px', background: '#ffd000', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px', fontSize: '32px', color: '#002c02', fontWeight: 'bold' }}>✓</div>
             <h2 style={{ color: '#ffd000', margin: '0 0 10px', fontSize: '1.4rem' }}>Request Submitted!</h2>
+
+            {/* ── Email notice ── */}
+            <p style={{ color: 'rgba(255,255,255,.75)', fontSize: '.85rem', margin: '0 0 16px', lineHeight: 1.6 }}>
+              A confirmation has been sent to<br />
+              <strong style={{ color: '#ffd000' }}>{formData.email || 'your email'}</strong>
+            </p>
+
             <div style={{ background: 'rgba(255,255,255,0.08)', border: '1.5px dashed #ffd000', borderRadius: '10px', padding: '16px', marginBottom: '8px' }}>
               <p style={{ color: '#aaa', fontSize: '0.75rem', margin: '0 0 6px', letterSpacing: '1px' }}>YOUR REFERENCE CODE</p>
               <p style={{ color: '#ffd000', fontFamily: 'monospace', fontSize: '1.5rem', fontWeight: 'bold', letterSpacing: '3px', margin: 0 }}>{successCode}</p>
             </div>
+
+            <p style={{ color: 'rgba(255,255,255,.45)', fontSize: '.75rem', margin: '10px 0 0', lineHeight: 1.5 }}>
+              You'll also receive an email whenever your request status is updated.
+            </p>
+
             <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', marginTop: '20px' }}>
               <button onClick={handleCopy} style={{ padding: '11px 24px', background: '#ffd000', color: '#002c02', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>
                 {copied ? '✓ Copied!' : 'Copy Code'}
@@ -199,7 +213,7 @@ export default function ClearanceForm({ onSuccess }) {
             />
           </div>
 
-          {/* Age + Birthday side by side */}
+          {/* Age + Birthday */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
             <div>
               <label style={labelStyle}>Age</label>
@@ -236,6 +250,24 @@ export default function ClearanceForm({ onSuccess }) {
               onChange={(e) => setFormData({ ...formData, purpose: e.target.value })}
               style={{ ...inputStyle, resize: 'vertical', lineHeight: '1.5' }}
             />
+          </div>
+
+          {/* Email Address ← NEW */}
+          <div>
+            <label style={labelStyle}>
+              Email Address <span style={{ color: '#e53e3e' }}>*</span>
+            </label>
+            <input
+              required
+              type="email"
+              placeholder="yourname@email.com"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              style={inputStyle}
+            />
+            <p style={{ margin: '5px 0 0', fontSize: '0.75rem', color: '#718096' }}>
+              📧 Confirmation and status updates will be sent here.
+            </p>
           </div>
 
           {/* Service Type */}

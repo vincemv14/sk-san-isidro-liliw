@@ -2,22 +2,20 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 
-const STATUSES = ['Pending', 'Processing', 'Ready for Pickup', 'Completed', 'Rejected'];
+const STATUSES = ['Pending', 'Processing', 'Ready for Pick Up', 'Completed', 'Rejected'];
 
 const statusColors = {
-  'Pending':           { bg: '#fff8e1', color: '#795548', border: '#ffe082' },
-  'Processing':        { bg: '#e3f2fd', color: '#1565c0', border: '#90caf9' },
-  'Ready for Pickup':  { bg: '#f3e5f5', color: '#6a1b9a', border: '#ce93d8' },
-  'Completed':         { bg: '#e8f5e9', color: '#2e7d32', border: '#a5d6a7' },
-  'Rejected':          { bg: '#ffebee', color: '#b71c1c', border: '#ef9a9a' },
+  'Pending':            { bg: '#fff8e1', color: '#795548', border: '#ffe082' },
+  'Processing':         { bg: '#e3f2fd', color: '#1565c0', border: '#90caf9' },
+  'Ready for Pick Up':  { bg: '#f3e5f5', color: '#6a1b9a', border: '#ce93d8' },
+  'Completed':          { bg: '#e8f5e9', color: '#2e7d32', border: '#a5d6a7' },
+  'Rejected':           { bg: '#ffebee', color: '#b71c1c', border: '#ef9a9a' },
 };
 
 const globalCSS = `
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   .admin-page { font-family: 'DM Sans', Arial, sans-serif; background: #f1f5f9; min-height: 100vh; }
-
-  /* ── Top nav ── */
   .admin-nav {
     background: #001401; height: 60px;
     padding: 0 clamp(16px, 4vw, 40px);
@@ -41,17 +39,7 @@ const globalCSS = `
     font-size: 0.8rem; font-family: 'DM Sans', sans-serif; font-weight: 600;
     transition: background 0.2s;
   }
-  .nav-btn-logout:hover { background: '#991b1b'; }
-
-  /* ── Content wrapper ── */
-  .admin-content { 
-    max-width: 1300px; 
-    margin: 0 auto; 
-    /* Slightly reduce side padding for mobile */
-    padding: 20px clamp(10px, 3vw, 24px); 
-  }
-
-  /* ── Stats ── */
+  .admin-content { max-width: 1300px; margin: 0 auto; padding: 20px clamp(10px, 3vw, 24px); }
   .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
@@ -67,53 +55,31 @@ const globalCSS = `
   .stat-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
   .stat-num   { font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 700; margin-bottom: 4px; }
   .stat-label { font-size: 0.72rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.06em; }
-
-  /* ── Controls ── */
   .controls-row { display: flex; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; }
   .search-input {
     flex: 1; min-width: 200px; padding: 10px 14px;
     border-radius: 9px; border: 1.5px solid #e2e8f0;
     font-size: 0.88rem; outline: none;
-    font-family: 'DM Sans', sans-serif;
-    transition: border-color 0.2s;
-    background: #fff;
+    font-family: 'DM Sans', sans-serif; transition: border-color 0.2s; background: #fff;
   }
   .search-input:focus { border-color: #064e3b; }
   .filter-select {
     padding: 10px 14px; border-radius: 9px;
     border: 1.5px solid #e2e8f0; font-size: 0.88rem;
     background: #fff; cursor: pointer; outline: none;
-    font-family: 'DM Sans', sans-serif;
-    transition: border-color 0.2s;
+    font-family: 'DM Sans', sans-serif; transition: border-color 0.2s;
   }
   .filter-select:focus { border-color: #064e3b; }
-
-  /* ── Request cards ── */
   .requests-list { display: flex; flex-direction: column; gap: 12px; }
- .request-card {
-    background: #fff; border-radius: 13px;
-    border: 1px solid #e8eef0;
-    padding: 18px;
-    display: grid;
-    /* Use 'auto' or '1fr' to allow better wrapping */
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr; 
-    gap: 12px;
-    align-items: start; /* Changed from 'center' to prevent squash */
+  .request-card {
+    background: #fff; border-radius: 13px; border: 1px solid #e8eef0;
+    padding: 18px; display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 12px; align-items: start;
     box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   }
-
-  /* Break to 2 columns on tablets */
-  @media (max-width: 860px) {
-    .request-card { grid-template-columns: 1fr 1fr; }
-  }
-
-  /* Break to 1 column on phones - This prevents the overlapping */
-  @media (max-width: 520px) {
-    .request-card { grid-template-columns: 1fr; gap: 16px; }
-    /* Ensure long names or codes don't break the container */
-    .rc-name, .rc-ref, .rc-service { word-break: break-word; }
-  }
-
+  @media (max-width: 860px) { .request-card { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .request-card { grid-template-columns: 1fr; gap: 16px; } }
   .rc-field-label { font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 3px; }
   .rc-name        { font-weight: 700; color: #1e293b; font-size: 0.95rem; margin-bottom: 3px; }
   .rc-ref         { font-family: monospace; font-size: 0.78rem; color: #64748b; margin-bottom: 2px; }
@@ -121,14 +87,13 @@ const globalCSS = `
   .rc-service     { font-size: 0.88rem; color: #1e293b; font-weight: 500; margin-bottom: 3px; }
   .rc-fee         { font-size: 0.78rem; color: #64748b; }
   .rc-contact     { font-size: 0.88rem; color: #334155; }
+  .rc-email       { font-size: 0.78rem; color: #64748b; margin-top: 2px; }
   .status-badge   { display: inline-block; padding: 4px 12px; border-radius: 100px; font-size: 0.76rem; font-weight: 700; border: 1px solid; }
-
   .status-select {
     width: 100%; padding: 9px 11px; border-radius: 8px;
     border: 1.5px solid #e2e8f0; font-size: 0.84rem;
     background: #f8fafc; cursor: pointer; outline: none;
-    font-family: 'DM Sans', sans-serif; margin-bottom: 8px;
-    transition: border-color 0.2s;
+    font-family: 'DM Sans', sans-serif; margin-bottom: 8px; transition: border-color 0.2s;
   }
   .status-select:focus { border-color: #064e3b; }
   .save-btn {
@@ -139,8 +104,11 @@ const globalCSS = `
   }
   .save-btn:hover:not(:disabled) { transform: translateY(-1px); }
   .save-btn:disabled { opacity: 0.65; cursor: not-allowed; }
-
-  /* ── Empty / loading states ── */
+  .no-email-badge {
+    display: inline-block; font-size: 0.68rem; color: #b45309;
+    background: #fef3c7; border: 1px solid #fde68a;
+    border-radius: 4px; padding: 2px 7px; margin-top: 4px;
+  }
   .empty-state {
     text-align: center; padding: 60px 20px;
     background: #fff; border-radius: 13px;
@@ -148,8 +116,6 @@ const globalCSS = `
   }
   .empty-icon { font-size: 2.4rem; margin-bottom: 10px; }
   .empty-text { font-size: 0.92rem; }
-
-  /* ── Footer hint ── */
   .admin-footer { text-align: center; color: #cbd5e1; font-size: 0.76rem; margin-top: 28px; padding-bottom: 20px; }
 `;
 
@@ -163,15 +129,16 @@ export default function AdminDashboard() {
   const [saving,       setSaving]       = useState({});
   const [saved,        setSaved]        = useState({});
   const [localStatus,  setLocalStatus]  = useState({});
+  const [notifyStatus, setNotifyStatus] = useState({}); // tracks email send result per row
 
-  // ── Auth guard ────────────────────────────────────────────────────────
+  // ── Auth guard ──────────────────────────────────────────────────────────
   useEffect(() => {
     if (sessionStorage.getItem('bsi_admin_auth') !== 'true') {
       navigate('/admin');
     }
   }, [navigate]);
 
-  // ── Fetch ─────────────────────────────────────────────────────────────
+  // ── Fetch ───────────────────────────────────────────────────────────────
   const fetchRequests = useCallback(async () => {
     setLoading(true);
     const { data, error } = await supabase
@@ -190,24 +157,81 @@ export default function AdminDashboard() {
 
   useEffect(() => { fetchRequests(); }, [fetchRequests]);
 
-  // ── Handlers ──────────────────────────────────────────────────────────
+  // ── Status change ───────────────────────────────────────────────────────
   const handleStatusChange = (id, newStatus) => {
     setLocalStatus(prev => ({ ...prev, [id]: newStatus }));
     setSaved(prev => ({ ...prev, [id]: false }));
+    setNotifyStatus(prev => ({ ...prev, [id]: null }));
   };
 
+  // ── Save + notify ───────────────────────────────────────────────────────
   const handleSave = async (id) => {
     setSaving(prev => ({ ...prev, [id]: true }));
+    setNotifyStatus(prev => ({ ...prev, [id]: null }));
+
+    const newStatus = localStatus[id];
+
+    // Step 1: Update status in Supabase
     const { error } = await supabase
       .from('clearance_requests')
-      .update({ status: localStatus[id] })
+      .update({ status: newStatus })
       .eq('id', id);
 
-    if (!error) {
-      setSaved(prev => ({ ...prev, [id]: true }));
-      setRequests(prev => prev.map(r => r.id === id ? { ...r, status: localStatus[id] } : r));
-      setTimeout(() => setSaved(prev => ({ ...prev, [id]: false })), 2500);
+    if (error) {
+      alert('Failed to update status: ' + error.message);
+      setSaving(prev => ({ ...prev, [id]: false }));
+      return;
     }
+
+    // Step 2: Update local UI
+    setSaved(prev => ({ ...prev, [id]: true }));
+    setRequests(prev =>
+      prev.map(r => r.id === id ? { ...r, status: newStatus } : r)
+    );
+    setTimeout(() => setSaved(prev => ({ ...prev, [id]: false })), 2500);
+
+    // Step 3: Send email notification to requestor
+    const req = requests.find(r => r.id === id);
+
+    console.log('📧 Notify check — req.email:', req?.email, '| newStatus:', newStatus);
+
+    if (req?.email) {
+      try {
+        const notifyRes = await fetch(
+          'https://rldwnflgixgoqszinxur.supabase.co/functions/v1/notify-status-change',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+            },
+            body: JSON.stringify({
+              type:       'UPDATE',
+              record:     { ...req, status: newStatus },
+              old_record: { ...req },
+            }),
+          }
+        );
+
+        const notifyData = await notifyRes.json();
+        console.log('📧 Notify response:', notifyData);
+
+        if (notifyRes.ok && notifyData.success) {
+          setNotifyStatus(prev => ({ ...prev, [id]: 'sent' }));
+        } else {
+          setNotifyStatus(prev => ({ ...prev, [id]: 'failed' }));
+          console.error('Notify failed:', notifyData);
+        }
+      } catch (notifyErr) {
+        console.error('Status notification error:', notifyErr);
+        setNotifyStatus(prev => ({ ...prev, [id]: 'failed' }));
+      }
+    } else {
+      // No email on record
+      setNotifyStatus(prev => ({ ...prev, [id]: 'no-email' }));
+      console.warn('⚠️ No email found for request:', id);
+    }
+
     setSaving(prev => ({ ...prev, [id]: false }));
   };
 
@@ -219,7 +243,7 @@ export default function AdminDashboard() {
   const formatDate = (d) =>
     d ? new Date(d).toLocaleDateString('en-PH', { month: 'short', day: 'numeric', year: 'numeric' }) : '—';
 
-  // ── Filtered list ─────────────────────────────────────────────────────
+  // ── Filtered ────────────────────────────────────────────────────────────
   const filtered = requests.filter(r => {
     const matchStatus = filterStatus === 'All' || r.status === filterStatus || (!r.status && filterStatus === 'Pending');
     const q = search.toLowerCase();
@@ -231,7 +255,7 @@ export default function AdminDashboard() {
     return matchStatus && matchSearch;
   });
 
-  // ── Stats ─────────────────────────────────────────────────────────────
+  // ── Stats ───────────────────────────────────────────────────────────────
   const stats = STATUSES.reduce((acc, s) => {
     acc[s] = requests.filter(r => (r.status || 'Pending') === s).length;
     return acc;
@@ -239,19 +263,19 @@ export default function AdminDashboard() {
   stats['All'] = requests.length;
 
   const statConfig = [
-    { label: 'Total',      key: 'All',             color: '#001f01' },
-    { label: 'Pending',    key: 'Pending',          color: '#795548' },
-    { label: 'Processing', key: 'Processing',       color: '#1565c0' },
-    { label: 'Ready',      key: 'Ready for Pickup', color: '#6a1b9a' },
-    { label: 'Completed',  key: 'Completed',        color: '#2e7d32' },
-    { label: 'Rejected',   key: 'Rejected',         color: '#b71c1c' },
+    { label: 'Total',      key: 'All',              color: '#001f01' },
+    { label: 'Pending',    key: 'Pending',           color: '#795548' },
+    { label: 'Processing', key: 'Processing',        color: '#1565c0' },
+    { label: 'Ready',      key: 'Ready for Pick Up', color: '#6a1b9a' },
+    { label: 'Completed',  key: 'Completed',         color: '#2e7d32' },
+    { label: 'Rejected',   key: 'Rejected',          color: '#b71c1c' },
   ];
 
   return (
     <div className="admin-page">
       <style>{globalCSS}</style>
 
-      {/* ── TOP NAV ──────────────────────────────────────────────────── */}
+      {/* ── NAV ── */}
       <nav className="admin-nav">
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <span className="admin-nav-brand">Barangay San Isidro</span>
@@ -280,12 +304,10 @@ export default function AdminDashboard() {
 
       <div className="admin-content">
 
-        {/* ── STATS ──────────────────────────────────────────────────── */}
+        {/* ── STATS ── */}
         <div className="stats-grid">
           {statConfig.map(s => (
-            <div
-              key={s.key}
-              className="stat-card"
+            <div key={s.key} className="stat-card"
               onClick={() => setFilterStatus(s.key)}
               style={{ borderColor: filterStatus === s.key ? s.color : 'transparent' }}
             >
@@ -295,17 +317,13 @@ export default function AdminDashboard() {
           ))}
         </div>
 
-        {/* ── CONTROLS ───────────────────────────────────────────────── */}
+        {/* ── CONTROLS ── */}
         <div className="controls-row">
-          <input
-            className="search-input"
-            value={search}
+          <input className="search-input" value={search}
             onChange={e => setSearch(e.target.value)}
             placeholder="🔍  Search by name, reference code, service…"
           />
-          <select
-            className="filter-select"
-            value={filterStatus}
+          <select className="filter-select" value={filterStatus}
             onChange={e => setFilterStatus(e.target.value)}
           >
             <option value="All">All Statuses</option>
@@ -313,7 +331,7 @@ export default function AdminDashboard() {
           </select>
         </div>
 
-        {/* ── REQUESTS ───────────────────────────────────────────────── */}
+        {/* ── REQUESTS ── */}
         {loading ? (
           <div className="empty-state">
             <div className="empty-icon">⏳</div>
@@ -327,9 +345,11 @@ export default function AdminDashboard() {
         ) : (
           <div className="requests-list">
             {filtered.map((req) => {
-              const sc = statusColors[req.status || 'Pending'];
+              const sc       = statusColors[req.status || 'Pending'];
               const isSaving = saving[req.id];
               const isSaved  = saved[req.id];
+              const notify   = notifyStatus[req.id];
+
               return (
                 <div key={req.id} className="request-card">
 
@@ -338,6 +358,11 @@ export default function AdminDashboard() {
                     <div className="rc-name">{req.resident_name}</div>
                     <div className="rc-ref">{req.reference_code}</div>
                     <div className="rc-date">{formatDate(req.created_at)}</div>
+                    {/* Show email or warning */}
+                    {req.email
+                      ? <div className="rc-email">📧 {req.email}</div>
+                      : <span className="no-email-badge">⚠️ No email</span>
+                    }
                   </div>
 
                   {/* Service */}
@@ -353,28 +378,26 @@ export default function AdminDashboard() {
                     <div className="rc-contact">{req.contact_number}</div>
                   </div>
 
-                  {/* Current status badge */}
+                  {/* Status badge */}
                   <div>
                     <div className="rc-field-label">Status</div>
-                    <span
-                      className="status-badge"
+                    <span className="status-badge"
                       style={{ background: sc?.bg, color: sc?.color, borderColor: sc?.border }}
                     >
                       {req.status || 'Pending'}
                     </span>
                   </div>
 
-                  {/* Selector + Save */}
+                  {/* Selector + Save + Notify result */}
                   <div>
-                    <select
-                      className="status-select"
+                    <select className="status-select"
                       value={localStatus[req.id] || req.status || 'Pending'}
                       onChange={e => handleStatusChange(req.id, e.target.value)}
                     >
                       {STATUSES.map(s => <option key={s} value={s}>{s}</option>)}
                     </select>
-                    <button
-                      className="save-btn"
+
+                    <button className="save-btn"
                       onClick={() => handleSave(req.id)}
                       disabled={isSaving}
                       style={{
@@ -384,6 +407,11 @@ export default function AdminDashboard() {
                     >
                       {isSaving ? 'Saving…' : isSaved ? '✓ Saved!' : 'Update Status'}
                     </button>
+
+                    {/* Email notification feedback */}
+                    {notify === 'sent'     && <div style={{ fontSize: '.72rem', color: '#2e7d32', marginTop: '5px' }}>📧 Email sent to requestor</div>}
+                    {notify === 'failed'   && <div style={{ fontSize: '.72rem', color: '#b71c1c', marginTop: '5px' }}>⚠️ Email failed — check logs</div>}
+                    {notify === 'no-email' && <div style={{ fontSize: '.72rem', color: '#b45309', marginTop: '5px' }}>⚠️ No email on this request</div>}
                   </div>
 
                 </div>
