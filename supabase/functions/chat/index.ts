@@ -194,7 +194,7 @@ Deno.serve(async (req) => {
         "Authorization": `Bearer ${Deno.env.get("GROQ_API_KEY")}`,
       },
       body: JSON.stringify({
-        model: "llama-3.3-70b-versatile",
+        model: "qwen/qwen3-27b",   // ← updated from llama-3.3-70b-versatile
         messages: [
           { role: "system", content: SYSTEM_PROMPT },
           ...messages,
@@ -205,17 +205,17 @@ Deno.serve(async (req) => {
     });
 
     const data = await response.json();
-console.log("Groq response:", JSON.stringify(data));
+    console.log("Groq response:", JSON.stringify(data));
 
-if (!data.choices || data.choices.length === 0) {
-  const errorMsg = data.error?.message ?? JSON.stringify(data);
-  return new Response(JSON.stringify({ reply: errorMsg }), {
-    headers: { ...corsHeaders, "Content-Type": "application/json" },
-    status: 200,
-  });
-}
+    if (!data.choices || data.choices.length === 0) {
+      const errorMsg = data.error?.message ?? JSON.stringify(data);
+      return new Response(JSON.stringify({ reply: errorMsg }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 200,
+      });
+    }
 
-const reply = data.choices[0].message.content;
+    const reply = data.choices[0].message.content;
 
     return new Response(JSON.stringify({ reply }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -223,12 +223,10 @@ const reply = data.choices[0].message.content;
     });
 
   } catch (error) {
-  // Safely extract the message by checking if the error is an instance of Error
-  const errorMessage = error instanceof Error ? error.message : "An unknown error occurred";
-  
-  return new Response(JSON.stringify({ success: false, error: errorMessage }), {
-    headers: { ...corsHeaders, "Content-Type": "application/json" },
-    status: 500,
-  });
-}
+    const errorMessage = error instanceof Error ? error.message : "An unknown error occurred";
+    return new Response(JSON.stringify({ success: false, error: errorMessage }), {
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+      status: 500,
+    });
+  }
 });
