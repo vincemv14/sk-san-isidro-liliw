@@ -1,16 +1,43 @@
-# React + Vite
+SK San Isidro Digital Portal
+The SK San Isidro Digital Portal is a web-based platform designed to bridge the gap between Barangay San Isidro and its residents. By transitioning from manual, paper-based workflows to a centralized digital hub, the platform enhances transparency, streamlines administrative services, and empowers youth-led governance.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🚀 Key Features
+Centralized Community Hub: A responsive homepage providing a single point of access for barangay history, news, and upcoming community events.
 
-Currently, two official plugins are available:
+Administrative Transparency: An integrated Public Disclosure Board for SK and national news, ensuring verifiable data for all constituents.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Digital Request & Tracking System: A simplified portal allowing residents to submit service requests and monitor their status in real-time.
 
-## React Compiler
+"Kuya Isidro" AI Chatbot: An LLM-powered support system providing 24/7 autonomous assistance to residents.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Mobile-First Design: A fully responsive architecture ensuring seamless accessibility across all devices.
 
-## Expanding the ESLint configuration
+🛠 Tech Stack
+Frontend: React.js.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Backend & Database: Supabase (PostgreSQL) for secure, relational data management and authentication.
+
+API & Integration:
+
+Groq AI: Powers the "Kuya Isidro" chatbot logic.
+
+Brevo API: Integrated for automated email notification pipelines.
+
+Deployment: Vercel.
+
+🏗 System Architecture
+Modular Component Design: Utilizes React to build reusable components, ensuring the platform can grow with future barangay needs.
+
+Secure Data Layer: Implements Role-Based Access Control (RBAC) to protect sensitive resident information within the PostgreSQL database.
+
+Asynchronous Processing: Employs efficient API orchestration to handle real-time request tracking and chatbot queries without blocking the main UI thread.
+
+💡 Technical Challenges & Solutions
+Data Integrity vs. Transparency: To ensure resident data remained secure while providing public transparency, a role-based administrative dashboard was designed to strictly separate public information from sensitive backend records.
+
+User Accessibility: To keep the data-heavy portal performant on low-bandwidth mobile devices, lazy loading and optimized state management were implemented to ensure the site remains fast and reliable for all community members.
+
+🌐 Live Demo
+Visit the portal here: sk-san-isidro-liliw.vercel.app
+
+Documentation maintained by the project development team.
